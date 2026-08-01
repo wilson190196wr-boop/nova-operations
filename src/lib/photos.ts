@@ -1,19 +1,19 @@
 /**
  * Photos du site.
  *
- * Les fichiers livrés dans `public/photos/` sont des images d'attente
- * (dégradés générés). Pour mettre une vraie photo : remplacez le fichier en
- * gardant le même nom, ou changez `src` ci-dessous. Respectez le ratio indiqué,
- * le cadrage est calculé dessus.
+ * Les fichiers `.png` de `public/photos/` sont des images d'attente (dégradés
+ * générés). Pour publier une vraie photo : déposez-la dans `public/photos/`,
+ * pointez `src` dessus, décrivez-la dans `alt` et passez `placeholder` à false.
+ * Respectez le ratio indiqué, le cadrage est calculé dessus.
  *
- * `alt` est lu par les lecteurs d'écran et par Google : décrivez ce qu'on voit,
- * pas ce que ça évoque. Mettez-le à jour en même temps que la photo.
+ * `alt` est lu par les lecteurs d'écran et indexé par Google : décrivez ce
+ * qu'on voit, pas ce que ça évoque. Mettez-le à jour avec la photo.
  */
 
 export type Photo = {
   src: string;
   alt: string;
-  /** Légende affichée sous ou sur la photo. Optionnelle. */
+  /** Légende affichée sur ou sous la photo. Optionnelle. */
   caption?: string;
   width: number;
   height: number;
@@ -21,29 +21,29 @@ export type Photo = {
   placeholder?: boolean;
 };
 
-/** Accueil — section « Sur le terrain ». Ratio 4:3 pour la principale, 4:5 pour les deux autres. */
-export const terrainPhotos: { lead: Photo; secondary: [Photo, Photo] } = {
+/** Accueil — section « Au contact des équipes ». Ratio 4:3 pour la principale, 4:5 pour les deux autres. */
+export const officePhotos: { lead: Photo; secondary: [Photo, Photo] } = {
   lead: {
-    src: "/photos/terrain-atelier.png",
-    alt: "Atelier de production : un opérateur devant son poste de travail",
-    caption: "Le diagnostic commence au poste de travail, pas en salle de réunion.",
+    src: "/photos/bureaux-espace-travail.png",
+    alt: "Espace de travail ouvert : deux collaborateurs échangent devant un écran",
+    caption: "Nous travaillons depuis vos bureaux, avec les équipes qui tiennent les processus.",
     width: 1600,
     height: 1200,
     placeholder: true,
   },
   secondary: [
     {
-      src: "/photos/terrain-chantier.png",
-      alt: "Conducteur de travaux consultant un planning sur chantier",
-      caption: "Sur chantier",
+      src: "/photos/bureaux-revue.png",
+      alt: "Revue de processus autour d'une table de réunion, documents étalés",
+      caption: "Revue de processus",
       width: 900,
       height: 1125,
       placeholder: true,
     },
     {
-      src: "/photos/terrain-pilotage.png",
-      alt: "Comité de pilotage autour d'un tableau d'indicateurs",
-      caption: "En comité de pilotage",
+      src: "/photos/bureaux-pilotage.png",
+      alt: "Comité de pilotage devant un écran d'indicateurs",
+      caption: "Comité de pilotage",
       width: 900,
       height: 1125,
       placeholder: true,
@@ -53,11 +53,10 @@ export const terrainPhotos: { lead: Photo; secondary: [Photo, Photo] } = {
 
 /** À propos — portrait du fondateur. Ratio 4:5, cadrage buste. */
 export const founderPhoto: Photo = {
-  src: "/photos/portrait-fondateur.png",
+  src: "/photos/portrait-fondateur.jpg",
   alt: "Portrait de Wilson Rault, fondateur de NOVA Operations",
-  width: 1000,
-  height: 1250,
-  placeholder: true,
+  width: 1600,
+  height: 2000,
 };
 
 export const founder = {

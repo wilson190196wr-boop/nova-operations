@@ -52,10 +52,10 @@ remplacez le fichier en gardant le même nom, puis mettez à jour `alt` et
 
 | Fichier | Ratio | Emplacement |
 | --- | --- | --- |
-| `terrain-atelier.png` | 4:3 | Accueil — photo principale « Sur le terrain » |
-| `terrain-chantier.png` | 4:5 | Accueil — vignette chantier |
-| `terrain-pilotage.png` | 4:5 | Accueil — vignette comité de pilotage |
-| `portrait-fondateur.png` | 4:5 | À propos — portrait, cadrage buste |
+| `bureaux-espace-travail.png` | 4:3 | Accueil — photo principale « Au contact des équipes » |
+| `bureaux-revue.png` | 4:5 | Accueil — vignette revue de processus |
+| `bureaux-pilotage.png` | 4:5 | Accueil — vignette comité de pilotage |
+| `portrait-fondateur.jpg` | 4:5 | À propos — portrait, cadrage buste ✅ |
 
 Le texte alternatif n'est pas décoratif : il est lu par les lecteurs d'écran et
 indexé. Décrivez ce qu'on voit, pas ce que la photo évoque.

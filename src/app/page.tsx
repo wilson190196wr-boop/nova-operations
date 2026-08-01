@@ -3,7 +3,7 @@ import { Reveal } from "@/components/reveal";
 import { Button, Container, Eyebrow, SectionHead, CTABand } from "@/components/ui";
 import { MaturityBars, MaturityRadar } from "@/components/maturity-radar";
 import { PhotoFrame } from "@/components/photo-frame";
-import { terrainPhotos } from "@/lib/photos";
+import { officePhotos } from "@/lib/photos";
 import { articles, cases, differentiators, offers, pillars, promises, sectors } from "@/lib/content";
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
       <TrustStrip />
       <Problem />
       <Positioning />
-      <Terrain />
+      <Workplace />
       <Offers />
       <Method />
       <Results />
@@ -279,23 +279,23 @@ function Positioning() {
   );
 }
 
-/* ---------------------------------------------------------------- Terrain */
+/* -------------------------------------------------------------- Workplace */
 
-function Terrain() {
-  const { lead, secondary } = terrainPhotos;
+function Workplace() {
+  const { lead, secondary } = officePhotos;
 
   return (
     <section className="border-b border-line bg-mist py-24 lg:py-32">
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-8">
           <SectionHead
-            eyebrow="Sur le terrain"
-            title="On ne trouve pas les heures perdues depuis une salle de réunion."
-            intro="Nos missions se passent à l'atelier, sur le chantier, au bureau d'études — là où les processus se heurtent au réel. C'est la seule façon de voir ce qu'aucun tableau de bord ne montre."
+            eyebrow="Au contact des équipes"
+            title="Nous nous installons chez vous, pas dans une salle de projet."
+            intro="Une mission NOVA se passe dans vos bureaux, aux côtés des personnes qui exécutent les processus tous les jours. Ce sont elles qui savent où le temps se perd — encore faut-il aller le leur demander."
           />
           <Reveal delay={120}>
             <Button href="/cas-clients" variant="ghost">
-              Voir nos interventions
+              Voir nos missions
             </Button>
           </Reveal>
         </div>
