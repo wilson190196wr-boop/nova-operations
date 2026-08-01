@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Reveal } from "@/components/reveal";
 import { Button, Container, Eyebrow, SectionHead, CTABand } from "@/components/ui";
 import { MaturityBars, MaturityRadar } from "@/components/maturity-radar";
+import { PhotoFrame } from "@/components/photo-frame";
+import { terrainPhotos } from "@/lib/photos";
 import { articles, cases, differentiators, offers, pillars, promises, sectors } from "@/lib/content";
 
 export default function Home() {
@@ -11,6 +13,7 @@ export default function Home() {
       <TrustStrip />
       <Problem />
       <Positioning />
+      <Terrain />
       <Offers />
       <Method />
       <Results />
@@ -271,6 +274,60 @@ function Positioning() {
             </span>
           </p>
         </Reveal>
+      </Container>
+    </section>
+  );
+}
+
+/* ---------------------------------------------------------------- Terrain */
+
+function Terrain() {
+  const { lead, secondary } = terrainPhotos;
+
+  return (
+    <section className="border-b border-line bg-mist py-24 lg:py-32">
+      <Container>
+        <div className="flex flex-wrap items-end justify-between gap-8">
+          <SectionHead
+            eyebrow="Sur le terrain"
+            title="On ne trouve pas les heures perdues depuis une salle de réunion."
+            intro="Nos missions se passent à l'atelier, sur le chantier, au bureau d'études — là où les processus se heurtent au réel. C'est la seule façon de voir ce qu'aucun tableau de bord ne montre."
+          />
+          <Reveal delay={120}>
+            <Button href="/cas-clients" variant="ghost">
+              Voir nos interventions
+            </Button>
+          </Reveal>
+        </div>
+
+        <div className="mt-16 grid gap-5 lg:grid-cols-[1.32fr_0.68fr]">
+          <Reveal>
+            <PhotoFrame
+              photo={lead}
+              overlay="scrim"
+              className="h-full min-h-[380px] lg:min-h-[540px]"
+              sizes="(max-width: 1024px) 100vw, 62vw"
+              priority
+            />
+          </Reveal>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
+            {secondary.map((photo, i) => (
+              <Reveal key={photo.src} delay={100 + i * 90} className="h-full">
+                <div className="relative h-full">
+                  <PhotoFrame
+                    photo={photo}
+                    className="h-full min-h-[220px] lg:min-h-[260px]"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 32vw"
+                  />
+                  <span className="absolute bottom-4 left-4 rounded-full bg-white/90 px-3.5 py-1.5 text-[12px] font-medium text-ink backdrop-blur">
+                    {photo.caption}
+                  </span>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </Container>
     </section>
   );

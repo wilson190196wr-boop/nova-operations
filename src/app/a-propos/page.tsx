@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
-import { CTABand, Container, PageHero, SectionHead } from "@/components/ui";
+import { CTABand, Container, Eyebrow, PageHero, SectionHead } from "@/components/ui";
+import { PhotoFrame } from "@/components/photo-frame";
+import { founder, founderPhoto } from "@/lib/photos";
 
 export const metadata: Metadata = {
   title: "À propos — qui sommes-nous",
@@ -67,6 +69,61 @@ export default function AProposPage() {
           { label: "Basés à", value: "Paris · France entière" },
         ]}
       />
+
+      {/* Fondateur */}
+      <section className="border-b border-line py-24 lg:py-32">
+        <Container>
+          <div className="grid items-center gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-20">
+            <Reveal>
+              <div className="relative">
+                <PhotoFrame
+                  photo={founderPhoto}
+                  className="aspect-[4/5] w-full"
+                  sizes="(max-width: 1024px) 100vw, 38vw"
+                  priority
+                />
+                <div className="absolute -bottom-6 -right-4 hidden rounded-2xl border border-line bg-white px-5 py-4 shadow-[0_24px_50px_-24px_rgba(8,9,12,0.35)] sm:block">
+                  <p className="text-[15px] font-semibold tracking-[-0.02em]">{founder.name}</p>
+                  <p className="mt-1 text-[12.5px] text-azure">{founder.role}</p>
+                </div>
+              </div>
+            </Reveal>
+
+            <div>
+              <Reveal>
+                <Eyebrow>Le fondateur</Eyebrow>
+                <blockquote
+                  className="mt-7 text-[clamp(1.4rem,2.6vw,2rem)] font-semibold leading-[1.32] tracking-[-0.025em]"
+                  style={{ textWrap: "balance" }}
+                >
+                  « {founder.quote} »
+                </blockquote>
+              </Reveal>
+
+              {founder.bio.map((paragraph, i) => (
+                <Reveal key={paragraph} delay={80 + i * 60}>
+                  <p className="mt-6 max-w-2xl text-[16.5px] leading-[1.75] text-ink/65">
+                    {paragraph}
+                  </p>
+                </Reveal>
+              ))}
+
+              <Reveal delay={220}>
+                <div className="mt-10 flex flex-wrap items-center gap-8 border-t border-line pt-8">
+                  <div>
+                    <p className="text-[15px] font-semibold tracking-[-0.02em]">{founder.name}</p>
+                    <p className="mt-1 text-[13.5px] text-ink/50">{founder.role}</p>
+                  </div>
+                  <span className="hidden h-8 w-px bg-line sm:block" />
+                  <p className="text-[13.5px] text-ink/50">
+                    15 ans en direction industrielle, supply chain et systèmes d&apos;information
+                  </p>
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </Container>
+      </section>
 
       {/* Story */}
       <section className="py-24 lg:py-32">

@@ -43,6 +43,23 @@ Zod y est faite côté serveur. Le formulaire est un composant client
 > pour un site en production, ajoutez une limitation de débit (Upstash, Cloudflare
 > Turnstile) avant d'ouvrir le formulaire au public.
 
+## Photos
+
+Les fichiers de `public/photos/` sont des **images d'attente** (dégradés générés,
+signalés par une pastille en développement). Pour publier une vraie photo :
+remplacez le fichier en gardant le même nom, puis mettez à jour `alt` et
+`placeholder: false` dans [`src/lib/photos.ts`](src/lib/photos.ts).
+
+| Fichier | Ratio | Emplacement |
+| --- | --- | --- |
+| `terrain-atelier.png` | 4:3 | Accueil — photo principale « Sur le terrain » |
+| `terrain-chantier.png` | 4:5 | Accueil — vignette chantier |
+| `terrain-pilotage.png` | 4:5 | Accueil — vignette comité de pilotage |
+| `portrait-fondateur.png` | 4:5 | À propos — portrait, cadrage buste |
+
+Le texte alternatif n'est pas décoratif : il est lu par les lecteurs d'écran et
+indexé. Décrivez ce qu'on voit, pas ce que la photo évoque.
+
 ## Contenu
 
 Textes, offres, piliers, cas clients, articles et FAQ sont centralisés dans
