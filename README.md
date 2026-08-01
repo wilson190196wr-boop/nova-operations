@@ -45,20 +45,23 @@ Zod y est faite côté serveur. Le formulaire est un composant client
 
 ## Photos
 
-Les fichiers de `public/photos/` sont des **images d'attente** (dégradés générés,
-signalés par une pastille en développement). Pour publier une vraie photo :
-remplacez le fichier en gardant le même nom, puis mettez à jour `alt` et
-`placeholder: false` dans [`src/lib/photos.ts`](src/lib/photos.ts).
+Les photos vivent dans `public/photos/` et sont décrites dans
+[`src/lib/photos.ts`](src/lib/photos.ts) : chemin, texte alternatif, dimensions.
+Le composant [`PhotoFrame`](src/components/photo-frame.tsx) gère le cadrage, les
+coins arrondis et le voile dégradé pour les légendes en incrustation.
 
 | Fichier | Ratio | Emplacement |
 | --- | --- | --- |
-| `bureaux-espace-travail.png` | 4:3 | Accueil — photo principale « Au contact des équipes » |
-| `bureaux-revue.png` | 4:5 | Accueil — vignette revue de processus |
-| `bureaux-pilotage.png` | 4:5 | Accueil — vignette comité de pilotage |
-| `portrait-fondateur.jpg` | 4:5 | À propos — portrait, cadrage buste ✅ |
+| `portrait-fondateur.jpg` | 4:5 | Accueil (bloc « Qui vous accompagne ») et page À propos |
 
-Le texte alternatif n'est pas décoratif : il est lu par les lecteurs d'écran et
-indexé. Décrivez ce qu'on voit, pas ce que la photo évoque.
+Pour ajouter une photo : déposez le fichier, ajoutez son entrée dans
+`photos.ts`, puis affichez-la avec `<PhotoFrame>`. Le texte alternatif n'est pas
+décoratif — il est lu par les lecteurs d'écran et indexé. Décrivez ce qu'on voit,
+pas ce que la photo évoque.
+
+Les images sont servies par `next/image` : gardez une source large (1600 px de
+côté long suffit), la conversion WebP/AVIF et le redimensionnement sont
+automatiques.
 
 ## Contenu
 

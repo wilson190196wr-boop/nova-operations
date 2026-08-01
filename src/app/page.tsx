@@ -3,7 +3,7 @@ import { Reveal } from "@/components/reveal";
 import { Button, Container, Eyebrow, SectionHead, CTABand } from "@/components/ui";
 import { MaturityBars, MaturityRadar } from "@/components/maturity-radar";
 import { PhotoFrame } from "@/components/photo-frame";
-import { officePhotos } from "@/lib/photos";
+import { founder, founderPhoto } from "@/lib/photos";
 import { articles, cases, differentiators, offers, pillars, promises, sectors } from "@/lib/content";
 
 export default function Home() {
@@ -13,7 +13,7 @@ export default function Home() {
       <TrustStrip />
       <Problem />
       <Positioning />
-      <Workplace />
+      <Founder />
       <Offers />
       <Method />
       <Results />
@@ -279,53 +279,61 @@ function Positioning() {
   );
 }
 
-/* -------------------------------------------------------------- Workplace */
+/* ---------------------------------------------------------------- Founder */
 
-function Workplace() {
-  const { lead, secondary } = officePhotos;
-
+function Founder() {
   return (
     <section className="border-b border-line bg-mist py-24 lg:py-32">
       <Container>
-        <div className="flex flex-wrap items-end justify-between gap-8">
-          <SectionHead
-            eyebrow="Au contact des équipes"
-            title="Nous nous installons chez vous, pas dans une salle de projet."
-            intro="Une mission NOVA se passe dans vos bureaux, aux côtés des personnes qui exécutent les processus tous les jours. Ce sont elles qui savent où le temps se perd — encore faut-il aller le leur demander."
-          />
-          <Reveal delay={120}>
-            <Button href="/cas-clients" variant="ghost">
-              Voir nos missions
-            </Button>
-          </Reveal>
-        </div>
-
-        <div className="mt-16 grid gap-5 lg:grid-cols-[1.32fr_0.68fr]">
+        <div className="grid items-center gap-14 lg:grid-cols-[0.62fr_1.38fr] lg:gap-20">
           <Reveal>
-            <PhotoFrame
-              photo={lead}
-              overlay="scrim"
-              className="h-full min-h-[380px] lg:min-h-[540px]"
-              sizes="(max-width: 1024px) 100vw, 62vw"
-              priority
-            />
+            <div className="relative">
+              <PhotoFrame
+                photo={founderPhoto}
+                className="aspect-[4/5] w-full max-w-[380px]"
+                sizes="(max-width: 1024px) 70vw, 30vw"
+              />
+              <div className="absolute -bottom-5 left-6 rounded-2xl border border-line bg-white px-5 py-3.5 shadow-[0_24px_50px_-24px_rgba(8,9,12,0.35)]">
+                <p className="text-[14.5px] font-semibold tracking-[-0.02em]">{founder.name}</p>
+                <p className="mt-0.5 text-[12.5px] text-azure">{founder.role}</p>
+              </div>
+            </div>
           </Reveal>
 
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-1">
-            {secondary.map((photo, i) => (
-              <Reveal key={photo.src} delay={100 + i * 90} className="h-full">
-                <div className="relative h-full">
-                  <PhotoFrame
-                    photo={photo}
-                    className="h-full min-h-[220px] lg:min-h-[260px]"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 32vw"
-                  />
-                  <span className="absolute bottom-4 left-4 rounded-full bg-white/90 px-3.5 py-1.5 text-[12px] font-medium text-ink backdrop-blur">
-                    {photo.caption}
-                  </span>
-                </div>
-              </Reveal>
-            ))}
+          <div>
+            <Reveal>
+              <Eyebrow>Qui vous accompagne</Eyebrow>
+              <blockquote
+                className="mt-7 max-w-3xl text-[clamp(1.5rem,3vw,2.35rem)] font-semibold leading-[1.28] tracking-[-0.03em]"
+                style={{ textWrap: "balance" }}
+              >
+                « {founder.quote} »
+              </blockquote>
+            </Reveal>
+
+            <Reveal delay={120}>
+              <dl className="mt-12 grid gap-8 border-t border-line pt-8 sm:grid-cols-3">
+                {[
+                  { v: "15 ans", l: "en direction industrielle, supply chain et systèmes d'information" },
+                  { v: "1 interlocuteur", l: "du premier entretien jusqu'au résultat mesuré" },
+                  { v: "0 commission", l: "aucun accord éditeur, aucune revente de licence" },
+                ].map((item) => (
+                  <div key={item.v}>
+                    <dt className="text-[20px] font-semibold tracking-[-0.025em]">{item.v}</dt>
+                    <dd className="mt-2 text-[13.5px] leading-relaxed text-ink/55">{item.l}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
+
+            <Reveal delay={200}>
+              <div className="mt-10 flex flex-wrap gap-3">
+                <Button href="/contact">Prendre rendez-vous</Button>
+                <Button href="/a-propos" variant="ghost">
+                  Notre histoire
+                </Button>
+              </div>
+            </Reveal>
           </div>
         </div>
       </Container>

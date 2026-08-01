@@ -1,10 +1,9 @@
 /**
  * Photos du site.
  *
- * Les fichiers `.png` de `public/photos/` sont des images d'attente (dégradés
- * générés). Pour publier une vraie photo : déposez-la dans `public/photos/`,
- * pointez `src` dessus, décrivez-la dans `alt` et passez `placeholder` à false.
- * Respectez le ratio indiqué, le cadrage est calculé dessus.
+ * Pour ajouter une photo : déposez le fichier dans `public/photos/`, décrivez-le
+ * ici, puis affichez-le avec `<PhotoFrame>` — le composant gère le cadrage, les
+ * coins arrondis et le voile dégradé pour les légendes en incrustation.
  *
  * `alt` est lu par les lecteurs d'écran et indexé par Google : décrivez ce
  * qu'on voit, pas ce que ça évoque. Mettez-le à jour avec la photo.
@@ -19,36 +18,6 @@ export type Photo = {
   height: number;
   /** Vrai tant que l'image est un dégradé d'attente, pas une vraie photo. */
   placeholder?: boolean;
-};
-
-/** Accueil — section « Au contact des équipes ». Ratio 4:3 pour la principale, 4:5 pour les deux autres. */
-export const officePhotos: { lead: Photo; secondary: [Photo, Photo] } = {
-  lead: {
-    src: "/photos/bureaux-espace-travail.png",
-    alt: "Espace de travail ouvert : deux collaborateurs échangent devant un écran",
-    caption: "Nous travaillons depuis vos bureaux, avec les équipes qui tiennent les processus.",
-    width: 1600,
-    height: 1200,
-    placeholder: true,
-  },
-  secondary: [
-    {
-      src: "/photos/bureaux-revue.png",
-      alt: "Revue de processus autour d'une table de réunion, documents étalés",
-      caption: "Revue de processus",
-      width: 900,
-      height: 1125,
-      placeholder: true,
-    },
-    {
-      src: "/photos/bureaux-pilotage.png",
-      alt: "Comité de pilotage devant un écran d'indicateurs",
-      caption: "Comité de pilotage",
-      width: 900,
-      height: 1125,
-      placeholder: true,
-    },
-  ],
 };
 
 /** À propos — portrait du fondateur. Ratio 4:5, cadrage buste. */
