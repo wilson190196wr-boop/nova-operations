@@ -28,7 +28,10 @@ export function Reveal({ children, className = "", delay = 0, as, id }: RevealPr
           }
         });
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+      // Seuil à 0 : un seuil en pourcentage ne se déclenche jamais sur un bloc
+      // plus haut que la fenêtre (embed Cal.com, longs articles…). La marge
+      // basse retarde légèrement l'apparition, à l'entrée dans le champ.
+      { rootMargin: "0px 0px -80px 0px", threshold: 0 },
     );
 
     observer.observe(node);

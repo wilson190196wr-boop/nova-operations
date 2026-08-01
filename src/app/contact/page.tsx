@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
+import { ContactPanel } from "@/components/contact-panel";
 import { Container, Eyebrow } from "@/components/ui";
-import { faq, offers, site } from "@/lib/content";
+import { faq, site } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Contact — réserver un diagnostic de 45 minutes",
@@ -74,75 +75,9 @@ export default function ContactPage() {
               </Reveal>
             </div>
 
-            {/* Form */}
+            {/* Prise de rendez-vous + formulaire */}
             <Reveal delay={120}>
-              <div className="rounded-3xl border border-line bg-white p-8 shadow-[0_40px_90px_-50px_rgba(8,9,12,0.45)] lg:p-10">
-                <div className="flex items-center justify-between">
-                  <p className="text-[11.5px] uppercase tracking-[0.16em] text-ink/40">
-                    Demande de diagnostic
-                  </p>
-                  <span className="flex items-center gap-2 text-[12.5px] text-ink/45">
-                    <span className="h-1.5 w-1.5 rounded-full bg-azure" />
-                    Réponse sous 24 h
-                  </span>
-                </div>
-
-                <form className="mt-8 flex flex-col gap-5">
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    <Field label="Prénom" placeholder="Camille" />
-                    <Field label="Nom" placeholder="Durand" />
-                  </div>
-                  <Field label="Email professionnel" placeholder="camille@entreprise.fr" type="email" />
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    <Field label="Entreprise" placeholder="Nom de la société" />
-                    <SelectField
-                      label="Effectif"
-                      options={["20 à 50 salariés", "50 à 100 salariés", "100 à 250 salariés", "Plus de 250"]}
-                    />
-                  </div>
-                  <SelectField
-                    label="Sujet"
-                    options={[...offers.map((o) => o.name), "Je ne sais pas encore"]}
-                  />
-
-                  <label className="flex flex-col gap-2">
-                    <span className="text-[12.5px] font-medium text-ink/60">
-                      Votre situation en quelques lignes
-                    </span>
-                    <textarea
-                      rows={4}
-                      placeholder="Ce qui vous prend le plus de temps aujourd'hui, ce que vous avez déjà tenté…"
-                      className="resize-none rounded-2xl border border-line bg-mist/60 px-4 py-3.5 text-[14.5px] text-ink outline-none transition-colors placeholder:text-ink/30 focus:border-azure focus:bg-white"
-                    />
-                  </label>
-
-                  <label className="flex items-start gap-3 text-[13px] leading-relaxed text-ink/50">
-                    <input
-                      type="checkbox"
-                      className="mt-0.5 h-4 w-4 shrink-0 rounded border-line accent-[#2f5cff]"
-                    />
-                    J&apos;accepte d&apos;être recontacté par NOVA Operations au sujet de ma
-                    demande. Aucune donnée n&apos;est transmise à des tiers.
-                  </label>
-
-                  <button
-                    type="button"
-                    className="group mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-ink px-6 py-4 text-[14.5px] font-medium text-white transition-colors hover:bg-navy"
-                  >
-                    Réserver mes 45 minutes
-                    <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                      <path
-                        d="M3 8h10m0 0-4-4m4 4-4 4"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="transition-transform duration-300 group-hover:translate-x-1"
-                      />
-                    </svg>
-                  </button>
-                </form>
-              </div>
+              <ContactPanel />
             </Reveal>
           </div>
         </Container>
@@ -172,60 +107,3 @@ export default function ContactPage() {
   );
 }
 
-function Field({
-  label,
-  placeholder,
-  type = "text",
-}: {
-  label: string;
-  placeholder: string;
-  type?: string;
-}) {
-  return (
-    <label className="flex flex-col gap-2">
-      <span className="text-[12.5px] font-medium text-ink/60">{label}</span>
-      <input
-        type={type}
-        placeholder={placeholder}
-        className="rounded-2xl border border-line bg-mist/60 px-4 py-3.5 text-[14.5px] text-ink outline-none transition-colors placeholder:text-ink/30 focus:border-azure focus:bg-white"
-      />
-    </label>
-  );
-}
-
-function SelectField({ label, options }: { label: string; options: string[] }) {
-  return (
-    <label className="flex flex-col gap-2">
-      <span className="text-[12.5px] font-medium text-ink/60">{label}</span>
-      <div className="relative">
-        <select
-          defaultValue=""
-          className="w-full appearance-none rounded-2xl border border-line bg-mist/60 px-4 py-3.5 text-[14.5px] text-ink outline-none transition-colors focus:border-azure focus:bg-white"
-        >
-          <option value="" disabled>
-            Sélectionner…
-          </option>
-          {options.map((o) => (
-            <option key={o}>{o}</option>
-          ))}
-        </select>
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 16 16"
-          fill="none"
-          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-ink/40"
-          aria-hidden="true"
-        >
-          <path
-            d="m4 6 4 4 4-4"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </div>
-    </label>
-  );
-}
