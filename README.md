@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# NOVA Operations — site vitrine
 
-## Getting Started
+Site vitrine du cabinet NOVA Operations (Fractional COO & performance
+opérationnelle des PME). Next.js 16 (App Router), Tailwind CSS v4, TypeScript.
 
-First, run the development server:
+## Démarrer
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Le site est servi sur [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Copiez `.env.example` vers `.env.local` et renseignez les valeurs.
 
-## Learn More
+### Prise de rendez-vous — Cal.com
 
-To learn more about Next.js, take a look at the following resources:
+| Variable | Rôle |
+| --- | --- |
+| `NEXT_PUBLIC_CAL_LINK` | Identifiant public du type d'événement, au format `<équipe-ou-utilisateur>/<event-type>` |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+L'embed est monté dans [`src/components/cal-embed.tsx`](src/components/cal-embed.tsx),
+la configuration (couleur de marque, namespace) dans [`src/lib/booking.ts`](src/lib/booking.ts).
+Tant que la variable n'est pas renseignée, l'iframe pointe vers un lien de
+démonstration inexistant et affiche une page vide.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Formulaire de contact — Resend
 
-## Deploy on Vercel
+| Variable | Rôle |
+| --- | --- |
+| `RESEND_API_KEY` | Clé API Resend. Sans elle, le formulaire valide la saisie puis affiche un repli invitant à écrire directement |
+| `CONTACT_FROM` | Expéditeur. Le domaine doit être vérifié dans Resend (SPF + DKIM) |
+| `CONTACT_TO` | Destinataire des demandes |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+La Server Action vit dans [`src/app/actions.ts`](src/app/actions.ts), la validation
+Zod y est faite côté serveur. Le formulaire est un composant client
+([`src/components/contact-form.tsx`](src/components/contact-form.tsx)) branché via
+`useActionState`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> Une Server Action est joignable en POST direct. Un piège à robots est en place ;
+> pour un site en production, ajoutez une limitation de débit (Upstash, Cloudflare
+> Turnstile) avant d'ouvrir le formulaire au public.
+
+## Contenu
+
+Textes, offres, piliers, cas clients, articles et FAQ sont centralisés dans
+[`src/lib/content.ts`](src/lib/content.ts) — un seul fichier à éditer pour faire
+évoluer le site.
+
+## Hébergement
+
+Les Server Actions nécessitent un runtime Node (Vercel, Netlify, conteneur, Node
+autohébergé). En export statique (`output: "export"`), le formulaire doit être
+remplacé par un service tiers ; la prise de rendez-vous Cal.com, elle, fonctionne
+partout.
