@@ -23,18 +23,7 @@ export type Photo = {
 /** À propos — portrait du fondateur. Ratio 4:5, cadrage buste. */
 export const founderPhoto: Photo = {
   src: "/photos/portrait-fondateur.jpg",
-  alt: "Portrait de Wilson Rault, fondateur de NOVA Operations",
+  alt: "Portrait de Wilson Rault, fondateur de NOVA",
   width: 1600,
   height: 2000,
-};
-
-export const founder = {
-  name: "Wilson Rault",
-  role: "Fondateur · Fractional COO",
-  quote:
-    "J'ai passé quinze ans à l'intérieur des opérations, pas en face d'elles. Ce que je vends aujourd'hui, ce n'est pas un rapport : c'est quelqu'un qui reste jusqu'à ce que les chiffres bougent.",
-  bio: [
-    "Après des années en direction industrielle et en systèmes d'information, j'ai vu le même scénario se rejouer : un diagnostic juste, une recommandation raisonnable, et personne pour la porter six mois plus tard.",
-    "NOVA est né de ce constat. Nous auditons vite, nous chiffrons tout, puis nous restons au comité de direction jusqu'à ce que le gain soit visible dans le compte de résultat.",
-  ],
 };

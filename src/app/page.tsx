@@ -54,7 +54,7 @@ function Hero() {
 function BrandBand() {
   return (
     <section className="mx-auto w-full max-w-[1440px] px-6 pb-8 pt-16 lg:px-12 lg:pt-[72px]">
-      <ul className="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-6">
+      <ul className="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-5">
         {brands.map((brand) => (
           <li key={brand.name} className="text-[16px] font-medium text-ink/25">
             {brand.name}

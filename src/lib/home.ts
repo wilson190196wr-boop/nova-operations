@@ -24,17 +24,18 @@ export const heroTail =
   "Et où elle n'en fait pas. Vous le saurez en trois semaines, chiffres à l'appui, sortis de vos propres processus.";
 
 /**
- * Bandeau de marques. Remplacer chaque entrée par le nom exact, et `logo` par le
- * chemin du fichier dans `public/logos/` quand les visuels seront disponibles.
+ * Bandeau de marques : employeurs et clients rencontrés en agence.
+ * `logo` recevra le chemin du fichier dans `public/logos/` quand les visuels
+ * seront disponibles ; en attendant les noms sont composés typographiquement.
  */
 export const brands = [
-  { name: "[MARQUE 1]", logo: null },
-  { name: "[MARQUE 2]", logo: null },
-  { name: "[MARQUE 3]", logo: null },
-  { name: "[MARQUE 4]", logo: null },
-  { name: "[MARQUE 5]", logo: null },
-  { name: "[MARQUE 6]", logo: null },
+  { name: "Expedia Group", logo: null },
+  { name: "Septeo", logo: null },
+  { name: "Colas", logo: null },
+  { name: "ORTEC", logo: null },
+  { name: "Hermès", logo: null },
 ];
+
 
 export const audiences = [
   {
