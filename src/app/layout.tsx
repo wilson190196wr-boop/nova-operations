@@ -17,22 +17,22 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://nova-operations.fr"),
   title: {
-    default: "NOVA Operations — Fractional COO & performance opérationnelle des PME",
-    template: "%s · NOVA Operations",
+    default: "NOVA — directeur digital et IA à temps partagé",
+    template: "%s · NOVA",
   },
   description:
-    "NOVA Operations aide les PME de 20 à 250 salariés à gagner du temps, réduire leurs coûts et améliorer leur rentabilité : audit d'organisation, optimisation des processus, transformation digitale et automatisation IA.",
+    "En trois semaines, vous saurez où l'IA vous fait gagner de l'argent — et où elle n'en fait pas. Audit, formation, sprints et accompagnement pour les PME de plus de 30 salariés et les startups sans équipe technique.",
   keywords: [
+    "directeur digital à temps partagé",
+    "CTO à temps partagé",
+    "audit organisation PME",
     "optimisation processus PME",
-    "audit organisation",
-    "Fractional COO",
-    "transformation digitale PME",
     "automatisation IA entreprise",
   ],
   openGraph: {
-    title: "NOVA Operations — Fractional COO & Performance Partner",
+    title: "NOVA — directeur digital et IA à temps partagé",
     description:
-      "Nous trouvons les heures perdues de votre entreprise. Audit, sprints d'exécution et pilotage opérationnel pour PME.",
+      "En trois semaines, vous saurez où l'IA vous fait gagner de l'argent — et où elle n'en fait pas.",
     locale: "fr_FR",
     type: "website",
   },
