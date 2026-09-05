@@ -8,7 +8,8 @@
 
 export const site = {
   name: "NOVA",
-  role: "Directeur digital et IA à temps partagé",
+  /** Accroche affichée à côté du mot-symbole et en pied de page. */
+  baseline: "L'IA et le développement applicatif au service de la rentabilité",
 };
 
 export const mainNav = [

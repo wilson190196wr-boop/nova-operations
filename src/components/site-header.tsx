@@ -14,7 +14,7 @@ export function SiteHeader() {
       <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-6 py-5 lg:px-12 lg:py-6">
         <Link href="/" aria-label="NOVA — accueil" className="flex items-baseline gap-3.5">
           <span className="text-[19px] font-semibold tracking-[-0.03em]">{site.name}</span>
-          <span className="hidden text-[13px] text-ink/45 sm:inline">{site.role}</span>
+          <span className="hidden text-[13px] text-ink/45 xl:inline">{site.baseline}</span>
         </Link>
 
         <div className="hidden items-center gap-8 lg:flex">

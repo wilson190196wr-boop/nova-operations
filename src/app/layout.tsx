@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://nova-operations.fr"),
   title: {
-    default: "NOVA — directeur digital et IA à temps partagé",
+    default: "NOVA — l'IA et le développement applicatif au service de la rentabilité",
     template: "%s · NOVA",
   },
   description:
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     "automatisation IA entreprise",
   ],
   openGraph: {
-    title: "NOVA — directeur digital et IA à temps partagé",
+    title: "NOVA — l'IA et le développement applicatif au service de la rentabilité",
     description:
       "En trois semaines, vous saurez où l'IA vous fait gagner de l'argent — et où elle n'en fait pas.",
     locale: "fr_FR",
