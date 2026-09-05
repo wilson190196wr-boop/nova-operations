@@ -136,23 +136,11 @@ function Offers() {
             key={offer.name}
             className={`p-8 lg:px-[34px] lg:py-9 ${
               offer.tone === "dark" ? "bg-navy-deep text-white" : "bg-mist"
-            }`}
+            } ${offer.tone === "accent" ? "border-t-2 border-azure" : ""}`}
           >
-            <div className="flex flex-wrap items-baseline justify-between gap-3">
-              <h3 className="text-[clamp(1.5rem,2.1vw,1.875rem)] font-semibold tracking-[-0.032em]">
-                {offer.name}
-              </h3>
-              {offer.price ? (
-                <p
-                  className="text-[clamp(1.4rem,2.2vw,2rem)] font-semibold tracking-[-0.04em]"
-                  style={{
-                    color: offer.tone === "dark" ? "var(--color-azure-light)" : "var(--color-azure)",
-                  }}
-                >
-                  {offer.price}
-                </p>
-              ) : null}
-            </div>
+            <h3 className="text-[clamp(1.5rem,2.1vw,1.875rem)] font-semibold tracking-[-0.032em]">
+              {offer.name}
+            </h3>
             <p
               className={`mt-4 text-[16px] leading-[1.58] ${
                 offer.tone === "dark" ? "text-white/60" : "text-ink/70"
