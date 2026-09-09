@@ -19,7 +19,28 @@ export const hero = {
     { label: "Premier livrable", value: "2 semaines" },
     { label: "Audit", value: "2 500 ou 7 500 € HT" },
     { label: "Accompagnement", value: "dès 1 600 € / mois" },
+    { label: "Interlocuteur", value: "1, du début à la fin" },
   ],
+};
+
+/**
+ * Le différenciant structurel du positionnement : personne d'autre ne fait à
+ * la fois la construction rapide et le pilotage des prestataires.
+ */
+export const speeds = {
+  title: "Deux vitesses, un seul interlocuteur",
+  text: "Selon ce que le diagnostic révèle, je construis moi-même ou je fais construire. Dans les deux cas vous gardez un contact, un planning et un budget.",
+  modes: [
+    {
+      name: "Je construis",
+      text: "Automatisations, connexion d'outils, assistants, tableaux de bord. Des semaines, pas des trimestres. Cinq jours maximum par automatisation.",
+    },
+    {
+      name: "Je pilote",
+      text: "Cahier des charges, sélection des prestataires, suivi de bout en bout et recette. La réalisation se sous-traite, la responsabilité non.",
+    },
+  ],
+  note: "Un cabinet vend la seconde. Une agence vend la première. Personne ne fait la bascule de l'une à l'autre sans que vous changiez de prestataire.",
 };
 
 export type Offer = {

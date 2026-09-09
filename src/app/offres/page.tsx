@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { BookingCta } from "@/components/booking-cta";
-import { comparison, hero, offers, type Offer } from "@/lib/offers";
+import { comparison, hero, offers, speeds, type Offer } from "@/lib/offers";
 
 export const metadata: Metadata = {
   title: "Offres",
@@ -14,6 +14,7 @@ export default function OffresPage() {
     <>
       <Hero />
       <Offers />
+      <Speeds />
       <Comparison />
       <BookingCta title="Par où commencer ?" />
     </>
@@ -31,7 +32,7 @@ function Hero() {
       <p className="mt-8 max-w-[56ch] text-[18px] leading-[1.6] text-ink/70">{hero.intro}</p>
 
       {/* Bandeau de chiffres repris de la première version de la page. */}
-      <dl className="mt-14 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-3">
+      <dl className="mt-14 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
         {hero.meta.map((item) => (
           <div key={item.label} className="bg-white px-7 py-6">
             <dt className="text-[13.5px] text-ink/45">{item.label}</dt>
@@ -143,12 +144,44 @@ function OfferBlock({ offer }: { offer: Offer }) {
   );
 }
 
+/* ------------------------------------------------------------ Deux vitesses */
+
+function Speeds() {
+  return (
+    <section className="mt-20 bg-navy-deep py-20 text-white lg:mt-[92px] lg:py-24">
+      <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12">
+        <div className="grid gap-6 lg:grid-cols-12">
+          <h2 className="text-[clamp(1.75rem,3.2vw,2.75rem)] font-semibold leading-[1.06] tracking-[-0.04em] lg:col-span-5">
+            {speeds.title}
+          </h2>
+          <p className="max-w-[52ch] text-[17px] leading-[1.6] text-white/55 lg:col-span-5 lg:col-start-7 lg:self-end">
+            {speeds.text}
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          {speeds.modes.map((mode) => (
+            <article key={mode.name} className="bg-white/[0.06] p-8 lg:px-[34px] lg:py-9">
+              <h3 className="text-[clamp(1.5rem,2.1vw,1.875rem)] font-semibold tracking-[-0.032em]">
+                {mode.name}
+              </h3>
+              <p className="mt-4 text-[16px] leading-[1.58] text-white/55">{mode.text}</p>
+            </article>
+          ))}
+        </div>
+
+        <p className="mt-10 max-w-[62ch] text-[17px] leading-[1.6] text-white/80">{speeds.note}</p>
+      </div>
+    </section>
+  );
+}
+
 /* ------------------------------------------------------------ Comparatif */
 
 function Comparison() {
   return (
-    <section className="mt-20 border-y border-line bg-mist py-20 lg:mt-[92px] lg:py-24">
-      <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12">
+    <section className="mx-auto w-full max-w-[1440px] px-6 pt-20 lg:px-12 lg:pt-[92px]">
+      <div>
         <div className="grid gap-6 lg:grid-cols-12">
           <h2 className="text-[clamp(1.75rem,3.2vw,2.75rem)] font-semibold leading-[1.06] tracking-[-0.04em] lg:col-span-5">
             {comparison.title}
