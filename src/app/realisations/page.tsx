@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ai, aiCases, aiProjects, appDev, appProjects, intro } from "@/lib/work";
+import { ai, aiCases, aiProjects, appDev, appProjects, intro, type Work } from "@/lib/work";
 
 export const metadata: Metadata = {
   title: "Réalisations",
@@ -16,6 +16,73 @@ export default function RealisationsPage() {
       <Ai />
       <Booking />
     </>
+  );
+}
+
+/* ------------------------------------------------------------------ Carte */
+
+/**
+ * Format unique pour toutes les réalisations, claires comme sombres :
+ * métadonnées, titre, description, deux indicateurs.
+ */
+function WorkCard({ work, dark = false }: { work: Work; dark?: boolean }) {
+  return (
+    <article
+      className={`flex flex-col p-8 lg:px-[34px] lg:py-9 ${dark ? "bg-white/[0.06]" : "bg-mist"}`}
+    >
+      <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+        {work.years ? (
+          <p className={`text-[14px] ${dark ? "text-white/40" : "text-ink/45"}`}>{work.years}</p>
+        ) : null}
+        <p className={`text-[14px] ${dark ? "text-azure-light" : "text-azure"}`}>{work.context}</p>
+      </div>
+
+      <h3 className="mt-5 text-[clamp(1.3rem,1.8vw,1.5rem)] font-semibold leading-[1.24] tracking-[-0.03em]">
+        {work.title}
+      </h3>
+
+      <p className={`mt-4 text-[16px] leading-[1.58] ${dark ? "text-white/55" : "text-ink/70"}`}>
+        {work.text}
+      </p>
+
+      <ul className="mt-6">
+        {work.metrics.map((metric) => (
+          <li
+            key={metric}
+            className={`border-t py-3 text-[15px] leading-[1.5] ${
+              dark ? "border-white/15 text-white/80" : "border-line text-ink/80"
+            }`}
+          >
+            {metric}
+          </li>
+        ))}
+      </ul>
+    </article>
+  );
+}
+
+function SectionHead({
+  title,
+  text,
+  dark = false,
+}: {
+  title: string;
+  text: string;
+  dark?: boolean;
+}) {
+  return (
+    <div className="grid gap-6 lg:grid-cols-12">
+      <h2 className="text-[clamp(1.75rem,3.2vw,2.75rem)] font-semibold leading-[1.06] tracking-[-0.04em] lg:col-span-5">
+        {title}
+      </h2>
+      <p
+        className={`max-w-[52ch] text-[17px] leading-[1.6] lg:col-span-5 lg:col-start-7 lg:self-end ${
+          dark ? "text-white/55" : "text-ink/70"
+        }`}
+      >
+        {text}
+      </p>
+    </div>
   );
 }
 
@@ -36,104 +103,35 @@ function Intro() {
   );
 }
 
-/* ------------------------------------------------- Développement applicatif */
+/* ----------------------------------------------- Développement applicatif */
 
 function AppDev() {
   return (
     <section className="mx-auto w-full max-w-[1440px] px-6 pt-20 lg:px-12 lg:pt-[92px]">
-      <div className="grid gap-6 lg:grid-cols-12">
-        <h2 className="text-[clamp(1.75rem,3.2vw,2.75rem)] font-semibold leading-[1.06] tracking-[-0.04em] lg:col-span-5">
-          {appDev.title}
-        </h2>
-        <p className="max-w-[52ch] text-[17px] leading-[1.6] text-ink/70 lg:col-span-5 lg:col-start-7 lg:self-end">
-          {appDev.text}
-        </p>
-      </div>
-
+      <SectionHead title={appDev.title} text={appDev.text} />
       <div className="mt-12 grid gap-6 lg:grid-cols-2">
-        {appProjects.map((project) => (
-          <article key={project.title} className="flex flex-col bg-mist p-8 lg:px-[34px] lg:py-9">
-            <ProjectMeta years={project.years} context={project.context} />
-            <h3 className="mt-5 text-[clamp(1.3rem,1.8vw,1.5rem)] font-semibold leading-[1.24] tracking-[-0.03em]">
-              {project.title}
-            </h3>
-            <p className="mt-4 text-[16px] leading-[1.58] text-ink/70">{project.text}</p>
-          </article>
+        {appProjects.map((work) => (
+          <WorkCard key={work.title} work={work} />
         ))}
       </div>
     </section>
   );
 }
 
-/* ------------------------------------------------- Automatisation et IA */
+/* --------------------------------------------------- Automatisation et IA */
 
 function Ai() {
   return (
     <section className="mt-20 bg-navy-deep py-20 text-white lg:mt-[92px] lg:py-24">
       <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12">
-        <div className="grid gap-6 lg:grid-cols-12">
-          <h2 className="text-[clamp(1.75rem,3.2vw,2.75rem)] font-semibold leading-[1.06] tracking-[-0.04em] lg:col-span-5">
-            {ai.title}
-          </h2>
-          <p className="max-w-[52ch] text-[17px] leading-[1.6] text-white/55 lg:col-span-5 lg:col-start-7 lg:self-end">
-            {ai.text}
-          </p>
-        </div>
-
+        <SectionHead title={ai.title} text={ai.text} dark />
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {aiProjects.map((project) => (
-            <article key={project.title} className="flex flex-col bg-white/[0.06] p-8 lg:px-[34px] lg:py-9">
-              <ProjectMeta years={project.years} context={project.context} dark />
-              <h3 className="mt-5 text-[clamp(1.3rem,1.8vw,1.5rem)] font-semibold leading-[1.24] tracking-[-0.03em]">
-                {project.title}
-              </h3>
-              <p className="mt-4 text-[16px] leading-[1.58] text-white/55">{project.text}</p>
-            </article>
-          ))}
-        </div>
-
-        <div className="mt-16 grid gap-x-6 gap-y-10 border-t border-white/20 pt-14 lg:grid-cols-2">
-          {aiCases.map((item) => (
-            <article key={item.title} className="flex flex-col">
-              <p className="text-[14.5px] text-azure-light">{item.audience}</p>
-              <h3 className="mt-3 text-[clamp(1.25rem,1.7vw,1.4rem)] font-semibold leading-[1.26] tracking-[-0.028em]">
-                {item.title}
-              </h3>
-              <p className="mt-3 max-w-[54ch] text-[15.5px] leading-[1.58] text-white/55">
-                {item.text}
-              </p>
-              <ul className="mt-5">
-                {item.metrics.map((metric) => (
-                  <li
-                    key={metric}
-                    className="border-t border-white/15 py-3 text-[15px] leading-[1.5] text-white/80"
-                  >
-                    {metric}
-                  </li>
-                ))}
-              </ul>
-            </article>
+          {[...aiProjects, ...aiCases].map((work) => (
+            <WorkCard key={work.title} work={work} dark />
           ))}
         </div>
       </div>
     </section>
-  );
-}
-
-function ProjectMeta({
-  years,
-  context,
-  dark = false,
-}: {
-  years: string;
-  context: string;
-  dark?: boolean;
-}) {
-  return (
-    <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
-      <p className={`text-[14px] ${dark ? "text-white/40" : "text-ink/45"}`}>{years}</p>
-      <p className={`text-[14px] ${dark ? "text-azure-light" : "text-azure"}`}>{context}</p>
-    </div>
   );
 }
 
@@ -141,7 +139,7 @@ function ProjectMeta({
 
 function Booking() {
   return (
-    <section className="mt-20 bg-navy-deep py-20 text-white lg:mt-0 lg:pb-[84px] lg:pt-0">
+    <section className="bg-navy-deep pb-20 text-white lg:pb-[84px]">
       <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12">
         <div className="grid gap-10 border-t border-white/20 pt-16 lg:grid-cols-12 lg:items-end lg:gap-6 lg:pt-20">
           <div className="lg:col-span-7">
