@@ -41,7 +41,7 @@ function Hero() {
         </p>
         <Link
           href="/contact"
-          className="shrink-0 self-start bg-ink px-8 py-[18px] text-[16px] font-medium text-white transition-colors hover:bg-navy-deep sm:self-auto"
+          className="shrink-0 self-start rounded-lg bg-ink px-8 py-[18px] text-[16px] font-medium text-white transition-colors hover:bg-navy-deep sm:self-auto"
         >
           Réserver un rendez-vous
         </Link>
@@ -225,7 +225,7 @@ function Booking() {
           <div className="lg:col-span-4 lg:col-start-9">
             <Link
               href="/contact"
-              className="block bg-azure px-8 py-5 text-center text-[17px] font-medium text-white transition-opacity hover:opacity-90"
+              className="block rounded-lg bg-azure px-8 py-5 text-center text-[17px] font-medium text-white transition-opacity hover:opacity-90"
             >
               Choisir un créneau
             </Link>

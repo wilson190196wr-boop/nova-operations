@@ -36,7 +36,7 @@ export function SiteHeader() {
           </nav>
           <Link
             href="/contact"
-            className="bg-ink px-5 py-2.5 text-[14.5px] text-white transition-colors hover:bg-navy-deep"
+            className="rounded-lg bg-ink px-5 py-2.5 text-[14.5px] text-white transition-colors hover:bg-navy-deep"
           >
             Rendez-vous
           </Link>
@@ -47,7 +47,7 @@ export function SiteHeader() {
           onClick={() => setOpen((v) => !v)}
           aria-label="Menu"
           aria-expanded={open}
-          className="flex h-10 w-10 items-center justify-center border border-line lg:hidden"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border border-line lg:hidden"
         >
           <span className="relative block h-2.5 w-4">
             <span
@@ -83,7 +83,7 @@ export function SiteHeader() {
           <Link
             href="/contact"
             onClick={() => setOpen(false)}
-            className="mt-4 bg-ink px-5 py-3.5 text-center text-[15px] text-white"
+            className="mt-4 rounded-lg bg-ink px-5 py-3.5 text-center text-[15px] text-white"
           >
             Rendez-vous
           </Link>

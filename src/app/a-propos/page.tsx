@@ -163,7 +163,7 @@ function Booking() {
           <div className="lg:col-span-4 lg:col-start-9">
             <Link
               href="/contact"
-              className="block bg-azure px-8 py-5 text-center text-[17px] font-medium text-white transition-opacity hover:opacity-90"
+              className="block rounded-lg bg-azure px-8 py-5 text-center text-[17px] font-medium text-white transition-opacity hover:opacity-90"
             >
               Choisir un créneau
             </Link>
