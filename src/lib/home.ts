@@ -109,27 +109,35 @@ export const steps = [
 
 /**
  * Les prix ne figurent pas sur l'accueil : ils vivent sur la page Offres.
- * `tone` porte la hiérarchie commerciale — Audit et Accompagnement d'abord.
+ *
+ * `surface` compose un dégradé du sombre vers le clair d'une carte à l'autre.
+ * Il suit l'ordre du parcours — l'audit qualifie, le sprint prouve,
+ * l'accompagnement tient, la formation accompagne — donc la couleur porte la
+ * progression au lieu de décorer. Le texte bascule du blanc à l'encre au
+ * milieu de la série, là où le fond s'éclaircit.
+ *
+ * `accent` marque l'offre qui porte le revenu récurrent.
  */
 export const offers = [
   {
     name: "Audit",
-    tone: "dark" as const,
+    surface: { bg: "#061127", fg: "#ffffff", muted: "rgba(255,255,255,0.60)" },
     text: "Ciblé sur un processus en deux semaines, ou complet sur toutes les fonctions en trois à quatre. Cartographie, score de maturité, feuille de route chiffrée.",
   },
   {
     name: "Sprints",
-    tone: "quiet" as const,
+    surface: { bg: "#16305f", fg: "#ffffff", muted: "rgba(255,255,255,0.62)" },
     text: "Les gains rapides construits en direct. Cinq jours maximum par automatisation — au-delà, ce n'est plus un sprint mais un projet.",
   },
   {
     name: "Accompagnement",
-    tone: "accent" as const,
+    surface: { bg: "#dde3f1", fg: "#08090c", muted: "rgba(8,9,12,0.70)" },
+    accent: true,
     text: "Comité mensuel avec le dirigeant, pilotage des chantiers et des prestataires, maintenance de ce qui tourne, score remis à jour chaque trimestre.",
   },
   {
     name: "Formation",
-    tone: "quiet" as const,
+    surface: { bg: "#f5f6f8", fg: "#08090c", muted: "rgba(8,9,12,0.70)" },
     text: "Vos équipes formées sur vos cas réels, aux outils qu'elles vont vraiment utiliser. Jamais vendue seule : elle suit le diagnostic.",
   },
 ];

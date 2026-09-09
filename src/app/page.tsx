@@ -143,17 +143,15 @@ function Offers() {
         {offers.map((offer) => (
           <article
             key={offer.name}
-            className={`p-8 lg:px-[34px] lg:py-9 ${
-              offer.tone === "dark" ? "bg-navy-deep text-white" : "bg-mist"
-            } ${offer.tone === "accent" ? "border-t-2 border-azure" : ""}`}
+            style={{ background: offer.surface.bg, color: offer.surface.fg }}
+            className={`p-8 lg:px-[34px] lg:py-9 ${offer.accent ? "border-t-2 border-azure" : ""}`}
           >
             <h3 className="text-[clamp(1.5rem,2.1vw,1.875rem)] font-semibold tracking-[-0.032em]">
               {offer.name}
             </h3>
             <p
-              className={`mt-4 text-[16px] leading-[1.58] ${
-                offer.tone === "dark" ? "text-white/60" : "text-ink/70"
-              }`}
+              className="mt-4 text-[16px] leading-[1.58]"
+              style={{ color: offer.surface.muted }}
             >
               {offer.text}
             </p>
