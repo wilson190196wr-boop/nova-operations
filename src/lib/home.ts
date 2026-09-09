@@ -110,14 +110,12 @@ export const steps = [
 /**
  * Les prix ne figurent pas sur l'accueil : ils vivent sur la page Offres.
  *
- * `surface` compose un dégradé d'une carte à l'autre, dans l'ordre du parcours :
- * l'audit qualifie, le sprint prouve, l'accompagnement tient, la formation
- * accompagne. La couleur porte donc la progression au lieu de décorer.
+ * `surface` décrit fond, texte et texte secondaire. L'audit est la seule carte
+ * sombre : c'est l'offre d'entrée, celle par laquelle tout commence. Les trois
+ * autres partagent le même gris clair.
  *
- * La série va du sombre au blanc en passant par le bleu de marque : #061127,
- * #2f5cff, #d3dbf1, #f5f6f8. Ce bleu est celui du mot ARGENT dans le titre et
- * du chiffre 03 de la séquence — le réutiliser ici en fait un système plutôt
- * qu'un accident. Deux gris bleutés voisins ne se distinguaient pas assez.
+ * Un dégradé a été essayé sur les quatre cartes puis abandonné : la couleur
+ * attirait l'œil sans rien dire de plus que l'ordre de lecture.
  */
 export const offers = [
   {
@@ -127,12 +125,12 @@ export const offers = [
   },
   {
     name: "Sprints",
-    surface: { bg: "#2f5cff", fg: "#ffffff", muted: "rgba(255,255,255,0.78)" },
+    surface: { bg: "#f5f6f8", fg: "#08090c", muted: "rgba(8,9,12,0.70)" },
     text: "Les gains rapides construits en direct. Cinq jours maximum par automatisation — au-delà, ce n'est plus un sprint mais un projet.",
   },
   {
     name: "Accompagnement",
-    surface: { bg: "#d3dbf1", fg: "#08090c", muted: "rgba(8,9,12,0.70)" },
+    surface: { bg: "#f5f6f8", fg: "#08090c", muted: "rgba(8,9,12,0.70)" },
     text: "Comité mensuel avec le dirigeant, pilotage des chantiers et des prestataires, maintenance de ce qui tourne, score remis à jour chaque trimestre.",
   },
   {
