@@ -19,25 +19,32 @@ export default function Home() {
 
 function Hero() {
   return (
-    <section className="mx-auto w-full max-w-[1440px] px-6 pt-14 lg:px-12 lg:pt-16">
-      <h1 className="text-[clamp(2.9rem,11.6vw,10.5rem)] font-semibold leading-[0.84] tracking-[-0.062em]">
-        {heroLines.map((line, i) => (
-          <span
-            key={line}
-            className="rise block uppercase"
-            style={{
-              animationDelay: `${i * 70}ms`,
-              color: i === heroLines.length - 1 ? "var(--color-azure)" : undefined,
-            }}
-          >
-            {line}
-          </span>
-        ))}
-      </h1>
+    <section className="relative overflow-hidden">
+      {/* Trame reprise du premier site : carrée, légère, dissoute vers le bas.
+          Elle donne de la matière au fond sans croiser le texte sur toute la
+          page — c'est ce qui ratait avec des filets pleine hauteur. */}
+      <div className="grid-lines pointer-events-none absolute inset-0 opacity-60 mask-fade-b" />
 
-      <p className="mt-10 max-w-[44ch] text-[clamp(1rem,1.4vw,1.25rem)] leading-[1.45] text-ink/70 lg:mt-12">
-        {heroTail}
-      </p>
+      <div className="relative mx-auto w-full max-w-[1440px] px-6 pt-14 lg:px-12 lg:pt-16">
+        <h1 className="text-[clamp(2.9rem,11.6vw,10.5rem)] font-semibold leading-[0.84] tracking-[-0.062em]">
+          {heroLines.map((line, i) => (
+            <span
+              key={line}
+              className="rise block uppercase"
+              style={{
+                animationDelay: `${i * 70}ms`,
+                color: i === heroLines.length - 1 ? "var(--color-azure)" : undefined,
+              }}
+            >
+              {line}
+            </span>
+          ))}
+        </h1>
+
+        <p className="mt-10 max-w-[44ch] text-[clamp(1rem,1.4vw,1.25rem)] leading-[1.45] text-ink/70 lg:mt-12">
+          {heroTail}
+        </p>
+      </div>
     </section>
   );
 }
