@@ -12,7 +12,7 @@
 
 export const intro = {
   title: "Ce que j'ai livré avant de fonder NOVA",
-  text: "Six ans de projets menés comme ingénieur, chef de projet puis directeur de production. Les entreprises ne sont pas nommées — ce qui compte ici est la nature du travail, pas le logo en face. Les premières missions NOVA rejoindront cette page dès qu'elles seront mesurées.",
+  text: "Un modèle de machine learning en production, une dizaine de projets menés de front, puis la direction d'une agence de douze personnes. Six ans à construire et à répondre de ce qui était livré — c'est ce qui me permet aujourd'hui de cadrer, de construire et de piloter sans que vous changiez d'interlocuteur.",
 };
 
 export const works = [
@@ -33,17 +33,5 @@ export const works = [
     context: "Agence digitale, portefeuille de grands comptes",
     title: "Une dizaine de projets de front, du site vitrine à l'ERP",
     text: "Rédaction des cahiers des charges et des spécifications, coordination de plusieurs équipes de développeurs, recette et mise en production. Des périmètres très différents — commerce en ligne, gestion, données, IA — avec la même exigence de cadrage.",
-  },
-  {
-    years: "2024 — 2026",
-    context: "Agence digitale, direction de production",
-    title: "Des prestataires pilotés, un seul interlocuteur côté client",
-    text: "Sélection et pilotage des fournisseurs et des sous-traitants sur des projets que l'équipe interne ne réalisait pas elle-même. Le client gardait un seul contact, un seul planning, un seul budget — c'est exactement ce que NOVA propose aujourd'hui.",
-  },
-  {
-    years: "2022 — 2026",
-    context: "Agence digitale, douze personnes",
-    title: "Une méthode installée : agile, indicateurs, suivi financier",
-    text: "Mise en place de la méthode agile dans une structure qui n'en avait pas, définition des indicateurs de suivi, pilotage du planning et de la rentabilité par projet. Réorganisation de l'activité en unités d'affaires.",
   },
 ];

@@ -41,8 +41,15 @@ function Works() {
   return (
     <section className="mx-auto w-full max-w-[1440px] px-6 pt-14 lg:px-12 lg:pt-16">
       <div className="grid gap-6 lg:grid-cols-2">
-        {works.map((work) => (
-          <article key={work.title} className="flex flex-col bg-mist p-8 lg:px-[34px] lg:py-9">
+        {works.map((work, i) => (
+          <article
+            key={work.title}
+            /* Nombre impair de fiches : la dernière occupe toute la largeur
+               plutôt que de rester orpheline dans une colonne. */
+            className={`flex flex-col bg-mist p-8 lg:px-[34px] lg:py-9 ${
+              works.length % 2 === 1 && i === works.length - 1 ? "lg:col-span-2" : ""
+            }`}
+          >
             <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
               <p className="text-[14px] text-ink/45">{work.years}</p>
               <p className="text-[14px] text-azure">{work.context}</p>
