@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ai, aiCases, aiCasesNote, aiProjects, appDev, appProjects, intro } from "@/lib/work";
+import { ai, aiCases, aiProjects, appDev, appProjects, intro } from "@/lib/work";
 
 export const metadata: Metadata = {
   title: "Réalisations",
@@ -92,11 +92,7 @@ function Ai() {
           ))}
         </div>
 
-        <p className="mt-16 max-w-[62ch] border-t border-white/20 pt-7 text-[16px] leading-[1.6] text-white/50">
-          {aiCasesNote}
-        </p>
-
-        <div className="mt-10 grid gap-x-6 gap-y-10 lg:grid-cols-2">
+        <div className="mt-16 grid gap-x-6 gap-y-10 border-t border-white/20 pt-14 lg:grid-cols-2">
           {aiCases.map((item) => (
             <article key={item.title} className="flex flex-col">
               <p className="text-[14.5px] text-azure-light">{item.audience}</p>

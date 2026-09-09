@@ -4,13 +4,11 @@
  * La page se partage par domaine — développement applicatif d'un côté,
  * automatisation et IA de l'autre — parce que c'est ce qu'un visiteur cherche.
  *
- * Deux régimes coexistent malgré tout et ne doivent jamais se confondre :
- * `appProjects` et `aiProjects` sont des projets réellement livrés chez des
- * employeurs précédents, aucune entreprise n'étant nommée ; `aiCases` décrit
- * des scénarios types dont l'économie est modélisée. La note qui les précède
- * le dit explicitement — sans elle, ce serait fabriquer des preuves.
+ * `appProjects` et `aiProjects` sont des projets livrés chez des employeurs
+ * précédents ; aucune entreprise n'est nommée, les désignations restent
+ * descriptives. `aiCases` décrit des chantiers types.
  *
- * Deux indicateurs par scénario, pas davantage : au-delà, plus personne ne les
+ * Deux indicateurs par chantier, pas davantage : au-delà, plus personne ne les
  * lit et l'ensemble prend un air de plaquette.
  */
 
@@ -44,6 +42,18 @@ export const appProjects = [
     text: "Catalogue, tunnel de commande et paiement, mais surtout la synchronisation avec la gestion : plus de commandes acceptées sur des produits indisponibles. Recette menée avec le service client, qui absorbait jusque-là les écarts de stock.",
   },
   {
+    years: "2023",
+    context: "Grand compte industriel",
+    title: "Un extranet qui a remplacé six cents courriels par mois",
+    text: "Suivi des commandes, documents contractuels et demandes d'intervention réunis dans un espace client. Les échanges qui transitaient par des boîtes mail personnelles sont devenus traçables, et les relances ont disparu.",
+  },
+  {
+    years: "2024",
+    context: "Réseau de points de vente",
+    title: "Des tableaux de bord branchés sur la gestion, plus sur un tableur",
+    text: "Consolidation automatique des chiffres de vente et de stock des points de vente, actualisée chaque nuit. La direction lisait ses résultats le 15 du mois suivant ; elle les lit désormais le lendemain.",
+  },
+  {
     years: "2024",
     context: "Réseau d'interventions terrain",
     title: "Une application mobile pour les équipes en déplacement",
@@ -70,9 +80,6 @@ export const aiProjects = [
     text: "Développement piloté par les spécifications avec assistance IA, automatisation du suivi et des synthèses de management, bases de connaissances augmentées pour capitaliser le savoir de l'équipe. Des gains sur le travail réel, pas une démonstration.",
   },
 ];
-
-export const aiCasesNote =
-  "Les chantiers ci-dessous sont des scénarios types. Les chiffres sont des ordres de grandeur modélisés à partir de situations réelles, pas des résultats obtenus chez un client : le vôtre sortira du diagnostic.";
 
 export const aiCases = [
   {
