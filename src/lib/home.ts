@@ -44,7 +44,11 @@ export const brands: {
     // Wikimedia Commons, domaine public (logo purement typographique).
     logo: { src: "/logos/expedia-group.svg", width: 836, height: 664 },
   },
-  { name: "Septeo", logo: null },
+  {
+    name: "Septeo",
+    // Wikipédia francophone, sous « marque déposée » — aplat de fond retiré.
+    logo: { src: "/logos/septeo.svg", width: 2688, height: 1099 },
+  },
   { name: "Colas", logo: null },
   { name: "ORTEC", logo: null },
   { name: "Hermès", logo: null },
