@@ -110,13 +110,13 @@ export const steps = [
 /**
  * Les prix ne figurent pas sur l'accueil : ils vivent sur la page Offres.
  *
- * `surface` compose un dégradé du sombre vers le clair d'une carte à l'autre.
- * Il suit l'ordre du parcours — l'audit qualifie, le sprint prouve,
- * l'accompagnement tient, la formation accompagne — donc la couleur porte la
- * progression au lieu de décorer. Le texte bascule du blanc à l'encre au
- * milieu de la série, là où le fond s'éclaircit.
+ * `surface` compose un dégradé d'une carte à l'autre, dans l'ordre du parcours :
+ * l'audit qualifie, le sprint prouve, l'accompagnement tient, la formation
+ * accompagne. La couleur porte donc la progression au lieu de décorer.
  *
- * `accent` marque l'offre qui porte le revenu récurrent.
+ * L'audit reste le seul point d'ancrage sombre ; les trois autres s'éclaircissent
+ * par paliers réguliers. Deux cartes sombres côte à côte formaient un bloc et
+ * cassaient la lecture du dégradé.
  */
 export const offers = [
   {
@@ -126,13 +126,12 @@ export const offers = [
   },
   {
     name: "Sprints",
-    surface: { bg: "#16305f", fg: "#ffffff", muted: "rgba(255,255,255,0.62)" },
+    surface: { bg: "#c9d2e8", fg: "#08090c", muted: "rgba(8,9,12,0.70)" },
     text: "Les gains rapides construits en direct. Cinq jours maximum par automatisation — au-delà, ce n'est plus un sprint mais un projet.",
   },
   {
     name: "Accompagnement",
     surface: { bg: "#dde3f1", fg: "#08090c", muted: "rgba(8,9,12,0.70)" },
-    accent: true,
     text: "Comité mensuel avec le dirigeant, pilotage des chantiers et des prestataires, maintenance de ce qui tourne, score remis à jour chaque trimestre.",
   },
   {

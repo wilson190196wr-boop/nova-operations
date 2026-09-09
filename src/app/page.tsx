@@ -144,7 +144,7 @@ function Offers() {
           <article
             key={offer.name}
             style={{ background: offer.surface.bg, color: offer.surface.fg }}
-            className={`p-8 lg:px-[34px] lg:py-9 ${offer.accent ? "border-t-2 border-azure" : ""}`}
+            className="p-8 lg:px-[34px] lg:py-9"
           >
             <h3 className="text-[clamp(1.5rem,2.1vw,1.875rem)] font-semibold tracking-[-0.032em]">
               {offer.name}
