@@ -1,5 +1,5 @@
 /**
- * Contenu de la page « Qui sommes-nous ».
+ * Contenu de la page « À propos ».
  *
  * Tous les faits de cette page proviennent du CV de septembre 2026 : dates,
  * employeurs, tailles d'équipe, formation. Ne rien ajouter ici qui ne soit

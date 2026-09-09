@@ -5,12 +5,12 @@ import { facts, founder, principles, story, turn } from "@/lib/about";
 import { founderPhoto } from "@/lib/photos";
 
 export const metadata: Metadata = {
-  title: "Qui sommes-nous",
+  title: "À propos",
   description:
     "Wilson Rault, ingénieur IMT Mines Alès, passé par Expedia Group, l'agence Glanum et Septeo. Pourquoi NOVA travaille à temps partagé pour les PME et les startups.",
 };
 
-export default function QuiSommesNousPage() {
+export default function AProposPage() {
   return (
     <>
       <Intro />

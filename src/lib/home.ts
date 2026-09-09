@@ -14,7 +14,8 @@ export const site = {
 
 export const mainNav = [
   { href: "/offres", label: "Offres" },
-  { href: "/a-propos", label: "Qui sommes-nous" },
+  { href: "/realisations", label: "Réalisations" },
+  { href: "/a-propos", label: "À propos" },
 ];
 
 /** Le titre-image : une ligne par élément, la dernière est mise en couleur. */
