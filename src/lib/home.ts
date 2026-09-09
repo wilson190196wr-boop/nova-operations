@@ -25,11 +25,25 @@ export const heroTail =
 
 /**
  * Bandeau de marques : employeurs et clients rencontrés en agence.
- * `logo` recevra le chemin du fichier dans `public/logos/` quand les visuels
- * seront disponibles ; en attendant les noms sont composés typographiquement.
+ *
+ * `logo` pointe un fichier de `public/logos/`. Tant qu'il vaut null, le nom est
+ * composé typographiquement — le bandeau reste lisible pendant que les visuels
+ * arrivent. Les SVG locaux passent automatiquement en `unoptimized` dans
+ * next/image, aucune configuration à ajouter.
+ *
+ * Chaque logo doit venir de la charte officielle de la marque, pas d'une
+ * banque d'images : ce sont des marques déposées, leurs conditions d'usage
+ * priment.
  */
-export const brands = [
-  { name: "Expedia Group", logo: null },
+export const brands: {
+  name: string;
+  logo: { src: string; width: number; height: number } | null;
+}[] = [
+  {
+    name: "Expedia Group",
+    // Wikimedia Commons, domaine public (logo purement typographique).
+    logo: { src: "/logos/expedia-group.svg", width: 836, height: 664 },
+  },
   { name: "Septeo", logo: null },
   { name: "Colas", logo: null },
   { name: "ORTEC", logo: null },

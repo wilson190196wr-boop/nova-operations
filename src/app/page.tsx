@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { alternatives, audiences, brands, heroLines, heroTail, offers, steps } from "@/lib/home";
 
@@ -54,12 +55,25 @@ function Hero() {
 function BrandBand() {
   return (
     <section className="mx-auto w-full max-w-[1440px] px-6 pb-8 pt-16 lg:px-12 lg:pt-[72px]">
-      <ul className="grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 lg:grid-cols-5">
-        {brands.map((brand) => (
-          <li key={brand.name} className="text-[16px] font-medium text-ink/25">
-            {brand.name}
-          </li>
-        ))}
+      <ul className="grid grid-cols-2 items-center gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-5">
+        {brands.map((brand) =>
+          brand.logo ? (
+            <li key={brand.name} className="flex h-11 items-center">
+              <Image
+                src={brand.logo.src}
+                alt={brand.name}
+                width={brand.logo.width}
+                height={brand.logo.height}
+                /* Hauteur commune : les logos s'alignent optiquement, pas sur leur boîte. */
+                className="max-h-11 w-auto opacity-45 grayscale"
+              />
+            </li>
+          ) : (
+            <li key={brand.name} className="flex h-11 items-center text-[16px] font-medium text-ink/25">
+              {brand.name}
+            </li>
+          ),
+        )}
       </ul>
     </section>
   );
