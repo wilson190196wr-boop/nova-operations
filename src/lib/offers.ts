@@ -12,7 +12,7 @@
  */
 
 export const hero = {
-  title: "Comprendre. Construire. Tenir.",
+  title: "Comprendre. Exécuter. Piloter.",
   intro:
     "Quatre offres qui s'enchaînent ou s'activent séparément. On commence presque toujours par un audit, et la suite se décide sur ce qu'il révèle — jamais avant.",
   meta: [
