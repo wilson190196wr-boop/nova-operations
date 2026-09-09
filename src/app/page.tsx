@@ -77,30 +77,33 @@ function Situation() {
   return (
     <section className="bg-navy-deep py-20 text-white lg:py-24">
       <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-6">
-          <h2 className="text-[clamp(1.8rem,2.9vw,2.5rem)] font-semibold leading-[1.06] tracking-[-0.038em] lg:col-span-4">
-            Deux situations, la même absence d&apos;interlocuteur.
-          </h2>
+        <h2 className="max-w-[20ch] text-[clamp(2rem,4vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
+          Deux situations, la même absence d&apos;interlocuteur.
+        </h2>
 
+        {/* Blocs décalés : la symétrie parfaite est ce qui faisait diapositive. */}
+        <div className="mt-14 grid gap-14 lg:grid-cols-12 lg:gap-6">
           {audiences.map((audience, i) => (
             <div
               key={audience.who}
-              className={i === 0 ? "lg:col-span-3 lg:col-start-6" : "lg:col-span-3 lg:col-start-10"}
+              className={
+                i === 0
+                  ? "lg:col-span-5 lg:col-start-1"
+                  : "lg:col-span-5 lg:col-start-8 lg:mt-24"
+              }
             >
-              <p className="text-[14.5px] font-medium text-azure-light">{audience.who}</p>
-              <p className="mt-4 text-[22px] font-medium leading-[1.3] tracking-[-0.025em]">
+              <p className="text-[15px] text-azure-light">{audience.who}</p>
+              <p className="mt-4 text-[clamp(1.5rem,2.4vw,2.125rem)] font-semibold leading-[1.14] tracking-[-0.035em]">
                 {audience.headline}
               </p>
-              <ul className="mt-5 flex flex-col gap-3 text-[15.5px] leading-[1.58] text-white/60">
-                {audience.points.map((point) => (
-                  <li key={point}>{point}</li>
-                ))}
-              </ul>
+              <p className="mt-5 max-w-[46ch] text-[16.5px] leading-[1.62] text-white/55">
+                {audience.text}
+              </p>
             </div>
           ))}
         </div>
 
-        <ol className="mt-20 grid gap-10 lg:grid-cols-3 lg:gap-6">
+        <ol className="mt-24 grid gap-10 lg:mt-28 lg:grid-cols-3 lg:gap-6">
           {steps.map((step, i) => (
             <li key={step.n}>
               <p

@@ -75,24 +75,18 @@ export const brands: {
 
 export const audiences = [
   {
-    who: "PME à partir de 30 salariés",
+    who: "Les PME de plus de 30 salariés",
     headline: "Personne ne vient vous dire par où commencer.",
-    points: [
-      "Les agences et les ESN ne se déplacent pas pour vous.",
-      "Les cabinets s'arrêtent au document.",
-      "Pas de DSI, et la décision repose sur vous seul.",
-    ],
+    // En prose plutôt qu'en puces : une liste à trois points fait diapositive.
+    text: "Les agences et les ESN ne se déplacent pas pour vous — trop petit, pas assez de jours à vendre. Les cabinets produisent une recommandation, puis s'arrêtent au document. Et vous n'avez pas de DSI : la décision repose sur vous seul.",
   },
   {
-    who: "Startups sans équipe technique",
+    who: "Les startups sans équipe technique",
     headline: "Aller vite sans porter un CTO à temps plein.",
-    points: [
-      "Quatre à six mois de recrutement, profil introuvable.",
-      "Les décisions techniques se prennent sans personne pour les tenir.",
-      "Je cadre, je construis, je pilote les prestataires.",
-    ],
+    text: "Quatre à six mois de recrutement pour un profil introuvable en région, puis un poste lourd à tenir. En attendant, les décisions techniques se prennent sans personne pour les porter.",
   },
 ];
+
 
 /** Une vraie séquence : la numérotation est justifiée. */
 export const steps = [
