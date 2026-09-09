@@ -58,18 +58,18 @@ function BrandBand() {
       <ul className="grid grid-cols-2 items-center gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-5">
         {brands.map((brand) =>
           brand.logo ? (
-            <li key={brand.name} className="flex h-11 items-center">
+            <li key={brand.name} className="flex h-14 items-center">
               <Image
                 src={brand.logo.src}
                 alt={brand.name}
                 width={brand.logo.width}
                 height={brand.logo.height}
-                /* Hauteur commune : les logos s'alignent optiquement, pas sur leur boîte. */
-                className="max-h-11 w-auto opacity-45 grayscale"
+                style={{ maxHeight: `${44 * (brand.logo.scale ?? 1)}px` }}
+                className="w-auto opacity-45 grayscale"
               />
             </li>
           ) : (
-            <li key={brand.name} className="flex h-11 items-center text-[16px] font-medium text-ink/25">
+            <li key={brand.name} className="flex h-14 items-center text-[16px] font-medium text-ink/25">
               {brand.name}
             </li>
           ),

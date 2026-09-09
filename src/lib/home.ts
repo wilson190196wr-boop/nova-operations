@@ -37,21 +37,38 @@ export const heroTail =
  */
 export const brands: {
   name: string;
-  logo: { src: string; width: number; height: number } | null;
+  /**
+   * `scale` corrige l'équilibre optique : chaque logo a ses propres marges
+   * internes, donc à hauteur égale ils ne pèsent pas pareil. Réglé à l'œil,
+   * 1 étant la hauteur de référence de la rangée.
+   */
+  logo: { src: string; width: number; height: number; scale?: number } | null;
 }[] = [
   {
     name: "Expedia Group",
     // Wikimedia Commons, domaine public (logo purement typographique).
-    logo: { src: "/logos/expedia-group.svg", width: 836, height: 664 },
+    logo: { src: "/logos/expedia-group.svg", width: 836, height: 664, scale: 0.92 },
   },
   {
     name: "Septeo",
     // Wikipédia francophone, sous « marque déposée » — aplat de fond retiré.
     logo: { src: "/logos/septeo.svg", width: 2688, height: 1099 },
   },
-  { name: "Colas", logo: null },
-  { name: "ORTEC", logo: null },
-  { name: "Hermès", logo: null },
+  {
+    name: "Colas",
+    // Wikipédia francophone, sous « marque déposée ». Fond transparent.
+    logo: { src: "/logos/colas.png", width: 800, height: 333, scale: 1.15 },
+  },
+  {
+    name: "ORTEC",
+    // Wikimedia Commons. Attention : fond opaque, à ne pas poser sur du sombre.
+    logo: { src: "/logos/ortec.png", width: 610, height: 236, scale: 1.1 },
+  },
+  {
+    name: "Hermès",
+    // Wikipédia francophone, sous « marque déposée ». Vecteur monochrome.
+    logo: { src: "/logos/hermes.svg", width: 750, height: 435, scale: 1.3 },
+  },
 ];
 
 
