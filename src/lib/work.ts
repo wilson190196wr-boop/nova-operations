@@ -12,7 +12,7 @@
 
 export const intro = {
   title: "Six ans à livrer, pas à recommander",
-  text: "Un modèle de machine learning en production, une dizaine de projets menés de front, puis la direction d'une agence de douze personnes. Six ans à construire et à répondre de ce qui était livré — c'est ce qui me permet aujourd'hui de cadrer, de construire et de piloter sans que vous changiez d'interlocuteur.",
+  text: "Ingénieur logiciel dans un grand groupe, puis chef de projet, puis directeur de production dans une agence : douze personnes à encadrer, des sous-traitants à piloter, des grands comptes à servir. Six ans à construire et à répondre de ce qui était livré — c'est ce qui me permet aujourd'hui de cadrer, de construire et de piloter sans que vous changiez d'interlocuteur.",
 };
 
 export const works = [
