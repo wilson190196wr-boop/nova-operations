@@ -11,7 +11,7 @@
  */
 
 export const intro = {
-  title: "Ce que j'ai livré avant de fonder NOVA",
+  title: "Six ans à livrer, pas à recommander",
   text: "Un modèle de machine learning en production, une dizaine de projets menés de front, puis la direction d'une agence de douze personnes. Six ans à construire et à répondre de ce qui était livré — c'est ce qui me permet aujourd'hui de cadrer, de construire et de piloter sans que vous changiez d'interlocuteur.",
 };
 
