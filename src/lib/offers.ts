@@ -131,7 +131,7 @@ export const comparison = {
     "En cas de doute, l'audit reste le point d'entrée le plus rentable : c'est le moins cher, et il évite d'investir au mauvais endroit.",
   rows: [
     {
-      situation: "« Je sens qu'on perd du temps, mais je ne sais pas où »",
+      situation: "« Nous ne savons pas comment utiliser l'IA dans nos métiers »",
       offer: "Audit",
       result: "Feuille de route chiffrée en deux à quatre semaines",
     },
