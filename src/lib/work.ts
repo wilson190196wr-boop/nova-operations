@@ -163,13 +163,4 @@ export const aiCases: Work[] = [
       "48 rendez-vous qualifiés de plus par mois, coût d'acquisition en baisse de 31 %",
     ],
   },
-  {
-    context: "Startup financée",
-    title: "Support produit et boucle de retour utilisateur",
-    text: "Déviation des tickets par un agent branché sur la documentation, et regroupement automatique des verbatims vers le backlog produit.",
-    metrics: [
-      "44 % des tickets traités sans intervention, coût unitaire de 4,80 € à 1,90 €",
-      "Neuf mois de croissance absorbés sans recruter au support",
-    ],
-  },
 ];

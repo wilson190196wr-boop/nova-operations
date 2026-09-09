@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { BookingCta } from "@/components/booking-cta";
 import { alternatives, audiences, brands, heroLines, heroTail, offers, steps } from "@/lib/home";
 
 export default function Home() {
@@ -10,7 +10,7 @@ export default function Home() {
       <Situation />
       <Offers />
       <Alternatives />
-      <Booking />
+      <BookingCta title="Quarante-cinq minutes." />
     </>
   );
 }
@@ -202,39 +202,6 @@ function Alternatives() {
           </div>
         ))}
       </dl>
-    </section>
-  );
-}
-
-/* --------------------------------------------------------------- Booking */
-
-function Booking() {
-  return (
-    <section className="mt-20 bg-navy-deep py-20 text-white lg:mt-[92px] lg:py-[84px]">
-      <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12">
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-end lg:gap-6">
-          <div className="lg:col-span-7">
-            <p className="text-[clamp(2.2rem,5.3vw,4.75rem)] font-semibold leading-[0.96] tracking-[-0.05em]">
-              Quarante-cinq minutes.
-            </p>
-            <p className="mt-6 max-w-[46ch] text-[19px] leading-[1.5] text-white/60">
-              Vous décrivez votre organisation, je vous dis les trois pertes les plus probables. Si
-              aucune mission ne se justifie, je vous le dirai aussi.
-            </p>
-          </div>
-          <div className="lg:col-span-4 lg:col-start-9">
-            <Link
-              href="/contact"
-              className="block rounded-lg bg-azure px-8 py-5 text-center text-[17px] font-medium text-white transition-opacity hover:opacity-90"
-            >
-              Choisir un créneau
-            </Link>
-            <p className="mt-3 text-center text-[13.5px] text-white/40">
-              Visio ou téléphone, sans engagement
-            </p>
-          </div>
-        </div>
-      </div>
     </section>
   );
 }

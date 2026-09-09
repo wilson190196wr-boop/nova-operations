@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import { BookingCta } from "@/components/booking-cta";
 import { ai, aiCases, aiProjects, appDev, appProjects, intro, type Work } from "@/lib/work";
 
 export const metadata: Metadata = {
@@ -14,7 +14,7 @@ export default function RealisationsPage() {
       <Intro />
       <AppDev />
       <Ai />
-      <Booking />
+      <BookingCta title="Lequel ressemble au vôtre ?" />
     </>
   );
 }
@@ -129,39 +129,6 @@ function Ai() {
           {[...aiProjects, ...aiCases].map((work) => (
             <WorkCard key={work.title} work={work} dark />
           ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* --------------------------------------------------------------- Booking */
-
-function Booking() {
-  return (
-    <section className="bg-navy-deep pb-20 text-white lg:pb-[84px]">
-      <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12">
-        <div className="grid gap-10 border-t border-white/20 pt-16 lg:grid-cols-12 lg:items-end lg:gap-6 lg:pt-20">
-          <div className="lg:col-span-7">
-            <p className="text-[clamp(2.2rem,5.3vw,4.75rem)] font-semibold leading-[0.96] tracking-[-0.05em]">
-              Lequel ressemble au vôtre ?
-            </p>
-            <p className="mt-6 max-w-[46ch] text-[19px] leading-[1.5] text-white/60">
-              Quarante-cinq minutes pour décrire votre organisation et savoir s&apos;il y a matière.
-              Si aucune mission ne se justifie, je vous le dirai aussi.
-            </p>
-          </div>
-          <div className="lg:col-span-4 lg:col-start-9">
-            <Link
-              href="/contact"
-              className="block rounded-lg bg-azure px-8 py-5 text-center text-[17px] font-medium text-white transition-opacity hover:opacity-90"
-            >
-              Choisir un créneau
-            </Link>
-            <p className="mt-3 text-center text-[13.5px] text-white/40">
-              Visio ou téléphone, sans engagement
-            </p>
-          </div>
         </div>
       </div>
     </section>
