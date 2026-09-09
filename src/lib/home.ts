@@ -110,32 +110,33 @@ export const steps = [
 /**
  * Les prix ne figurent pas sur l'accueil : ils vivent sur la page Offres.
  *
- * `surface` décrit fond, texte et texte secondaire. L'audit est la seule carte
- * sombre : c'est l'offre d'entrée, celle par laquelle tout commence. Les trois
- * autres partagent le même gris clair.
+ * `surface` décrit fond, texte et texte secondaire.
  *
- * Un dégradé a été essayé sur les quatre cartes puis abandonné : la couleur
- * attirait l'œil sans rien dire de plus que l'ordre de lecture.
+ * Les quatre fonds forment un dégradé qui part du bleu nuit de la marque et
+ * s'éclaircit par paliers réguliers, à teinte constante : #061127, #0b1f46,
+ * #102c65, #153a84. La série reste entièrement du côté sombre — un palier
+ * intermédiaire clair casserait la lecture, puisque les bleus moyens ne
+ * portent lisiblement ni le texte blanc ni le texte encre.
  */
 export const offers = [
   {
     name: "Audit",
-    surface: { bg: "#061127", fg: "#ffffff", muted: "rgba(255,255,255,0.60)" },
+    surface: { bg: "#061127", fg: "#ffffff", muted: "rgba(255,255,255,0.64)" },
     text: "Ciblé sur un processus en deux semaines, ou complet sur toutes les fonctions en trois à quatre. Cartographie, score de maturité, feuille de route chiffrée.",
   },
   {
     name: "Sprints",
-    surface: { bg: "#f5f6f8", fg: "#08090c", muted: "rgba(8,9,12,0.70)" },
+    surface: { bg: "#0b1f46", fg: "#ffffff", muted: "rgba(255,255,255,0.64)" },
     text: "Les gains rapides construits en direct. Cinq jours maximum par automatisation — au-delà, ce n'est plus un sprint mais un projet.",
   },
   {
     name: "Accompagnement",
-    surface: { bg: "#f5f6f8", fg: "#08090c", muted: "rgba(8,9,12,0.70)" },
+    surface: { bg: "#102c65", fg: "#ffffff", muted: "rgba(255,255,255,0.64)" },
     text: "Comité mensuel avec le dirigeant, pilotage des chantiers et des prestataires, maintenance de ce qui tourne, score remis à jour chaque trimestre.",
   },
   {
     name: "Formation",
-    surface: { bg: "#f5f6f8", fg: "#08090c", muted: "rgba(8,9,12,0.70)" },
+    surface: { bg: "#153a84", fg: "#ffffff", muted: "rgba(255,255,255,0.64)" },
     text: "Vos équipes formées sur vos cas réels, aux outils qu'elles vont vraiment utiliser. Jamais vendue seule : elle suit le diagnostic.",
   },
 ];
