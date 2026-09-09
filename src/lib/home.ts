@@ -118,6 +118,11 @@ export const offers = [
     text: "Ciblé sur un processus en deux semaines, ou complet sur toutes les fonctions en trois à quatre. Cartographie, score de maturité, feuille de route chiffrée.",
   },
   {
+    name: "Sprints",
+    tone: "quiet" as const,
+    text: "Les gains rapides construits en direct. Cinq jours maximum par automatisation — au-delà, ce n'est plus un sprint mais un projet.",
+  },
+  {
     name: "Accompagnement",
     tone: "accent" as const,
     text: "Comité mensuel avec le dirigeant, pilotage des chantiers et des prestataires, maintenance de ce qui tourne, score remis à jour chaque trimestre.",
@@ -127,12 +132,8 @@ export const offers = [
     tone: "quiet" as const,
     text: "Vos équipes formées sur vos cas réels, aux outils qu'elles vont vraiment utiliser. Jamais vendue seule : elle suit le diagnostic.",
   },
-  {
-    name: "Sprints",
-    tone: "quiet" as const,
-    text: "Les gains rapides construits en direct. Cinq jours maximum par automatisation — au-delà, ce n'est plus un sprint mais un projet.",
-  },
 ];
+
 
 export const alternatives = [
   {
