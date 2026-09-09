@@ -142,29 +142,30 @@ export const offers = [
 ];
 
 
+/**
+ * Une phrase par alternative plutôt qu'un tableau à trois colonnes : « ce que
+ * ça fait » et « sa faille » séparés faisaient une taxonomie, pas un argument.
+ */
 export const alternatives = [
   {
-    name: "Agence ou ESN",
-    does: "Exécute un cahier des charges",
-    flaw: "Suppose que vous savez déjà ce que vous voulez. Vend des jours, pas des résultats.",
+    name: "Une agence ou une ESN",
+    text: "Elle exécute un cahier des charges — celui que vous n'avez pas su écrire, puisque c'est justement ce qui vous manque. Et elle vend des jours, pas des résultats.",
     highlight: false,
   },
   {
-    name: "Cabinet de conseil",
-    does: "Produit une recommandation",
-    flaw: "S'arrête au document. Rien n'est livré, rien n'est mesuré.",
+    name: "Un cabinet de conseil",
+    text: "Il produit une recommandation, puis s'arrête au document. Rien n'est livré, rien n'est mesuré, et l'exécution reste entièrement à votre charge.",
     highlight: false,
   },
   {
-    name: "Recruter un CTO",
-    does: "Compétence interne permanente",
-    flaw: "Poste lourd à porter, quatre à six mois de recrutement, profil introuvable en région.",
+    name: "Recruter un directeur technique",
+    text: "Une compétence permanente pour un besoin qui ne l'est pas, quatre à six mois avant qu'elle arrive, et un profil introuvable en région.",
     highlight: false,
   },
   {
     name: "Ne rien faire",
-    does: "—",
-    flaw: "L'alternative la plus fréquente, et le vrai concurrent.",
+    text: "C'est l'alternative la plus fréquente, et donc mon vrai concurrent. Elle ne coûte rien aujourd'hui et se paie sur toutes les années suivantes.",
     highlight: true,
   },
 ];
+

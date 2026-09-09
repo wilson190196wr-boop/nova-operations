@@ -171,26 +171,26 @@ function Alternatives() {
         Ce que vous avez déjà essayé
       </h2>
 
-      <dl className="mt-9">
+      <dl className="mt-12">
         {alternatives.map((row, i) => (
           <div
             key={row.name}
-            className={`grid gap-2 border-t border-line py-5 md:grid-cols-[0.8fr_1fr_1.3fr] md:gap-6 ${
+            className={`grid gap-4 border-t border-line py-9 lg:grid-cols-12 lg:gap-6 ${
               i === alternatives.length - 1 ? "border-b" : ""
             }`}
           >
             <dt
-              className="text-[18px] font-medium"
+              className="text-[clamp(1.25rem,2vw,1.75rem)] font-semibold leading-[1.2] tracking-[-0.03em] lg:col-span-4"
               style={{ color: row.highlight ? "var(--color-azure)" : undefined }}
             >
               {row.name}
             </dt>
-            <dd className="text-[15.5px] leading-[1.55] text-ink/45">{row.does}</dd>
             <dd
-              className="text-[15.5px] leading-[1.55] text-ink/70"
-              style={{ color: row.highlight ? "var(--color-azure)" : undefined }}
+              className={`max-w-[58ch] text-[17px] leading-[1.6] lg:col-span-7 lg:col-start-6 ${
+                row.highlight ? "text-ink" : "text-ink/65"
+              }`}
             >
-              {row.flaw}
+              {row.text}
             </dd>
           </div>
         ))}
