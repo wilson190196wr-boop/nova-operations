@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { delivered, intro, useCases, useCasesIntro } from "@/lib/work";
+import { ai, aiCases, aiCasesNote, aiProjects, appDev, appProjects, intro } from "@/lib/work";
 
 export const metadata: Metadata = {
   title: "Réalisations",
   description:
-    "Projets livrés en production — machine learning, ERP, CRM, commerce en ligne, application mobile — et les chantiers d'automatisation que NOVA met en place aujourd'hui pour les PME et les startups.",
+    "Développement applicatif — CRM, ERP, commerce en ligne, application mobile — et automatisation par l'intelligence artificielle pour les PME de plus de 30 salariés et les startups.",
 };
 
 export default function RealisationsPage() {
   return (
     <>
       <Intro />
-      <Delivered />
-      <UseCases />
+      <AppDev />
+      <Ai />
       <Booking />
     </>
   );
@@ -36,22 +36,28 @@ function Intro() {
   );
 }
 
-/* ------------------------------------------------------------- Delivered */
+/* ------------------------------------------------- Développement applicatif */
 
-function Delivered() {
+function AppDev() {
   return (
-    <section className="mx-auto w-full max-w-[1440px] px-6 pt-14 lg:px-12 lg:pt-16">
-      <div className="grid gap-6 lg:grid-cols-2">
-        {delivered.map((work) => (
-          <article key={work.title} className="flex flex-col bg-mist p-8 lg:px-[34px] lg:py-9">
-            <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
-              <p className="text-[14px] text-ink/45">{work.years}</p>
-              <p className="text-[14px] text-azure">{work.context}</p>
-            </div>
-            <h2 className="mt-5 text-[clamp(1.35rem,1.9vw,1.625rem)] font-semibold leading-[1.24] tracking-[-0.03em]">
-              {work.title}
-            </h2>
-            <p className="mt-4 text-[16px] leading-[1.58] text-ink/70">{work.text}</p>
+    <section className="mx-auto w-full max-w-[1440px] px-6 pt-20 lg:px-12 lg:pt-[92px]">
+      <div className="grid gap-6 lg:grid-cols-12">
+        <h2 className="text-[clamp(1.75rem,3.2vw,2.75rem)] font-semibold leading-[1.06] tracking-[-0.04em] lg:col-span-5">
+          {appDev.title}
+        </h2>
+        <p className="max-w-[52ch] text-[17px] leading-[1.6] text-ink/70 lg:col-span-5 lg:col-start-7 lg:self-end">
+          {appDev.text}
+        </p>
+      </div>
+
+      <div className="mt-12 grid gap-6 lg:grid-cols-2">
+        {appProjects.map((project) => (
+          <article key={project.title} className="flex flex-col bg-mist p-8 lg:px-[34px] lg:py-9">
+            <ProjectMeta years={project.years} context={project.context} />
+            <h3 className="mt-5 text-[clamp(1.3rem,1.8vw,1.5rem)] font-semibold leading-[1.24] tracking-[-0.03em]">
+              {project.title}
+            </h3>
+            <p className="mt-4 text-[16px] leading-[1.58] text-ink/70">{project.text}</p>
           </article>
         ))}
       </div>
@@ -59,41 +65,57 @@ function Delivered() {
   );
 }
 
-/* -------------------------------------------------------------- Use cases */
+/* ------------------------------------------------- Automatisation et IA */
 
-function UseCases() {
+function Ai() {
   return (
     <section className="mt-20 bg-navy-deep py-20 text-white lg:mt-[92px] lg:py-24">
       <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12">
-        <div className="grid gap-8 lg:grid-cols-12 lg:gap-6">
-          <h2 className="text-[clamp(2rem,4vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.045em] lg:col-span-6">
-            {useCasesIntro.title}
+        <div className="grid gap-6 lg:grid-cols-12">
+          <h2 className="text-[clamp(1.75rem,3.2vw,2.75rem)] font-semibold leading-[1.06] tracking-[-0.04em] lg:col-span-5">
+            {ai.title}
           </h2>
-          <p className="max-w-[52ch] text-[17px] leading-[1.6] text-white/55 lg:col-span-5 lg:col-start-8 lg:self-end">
-            {useCasesIntro.text}
+          <p className="max-w-[52ch] text-[17px] leading-[1.6] text-white/55 lg:col-span-5 lg:col-start-7 lg:self-end">
+            {ai.text}
           </p>
         </div>
 
-        <div className="mt-14 grid gap-6 lg:grid-cols-2">
-          {useCases.map((item) => (
-            <article
-              key={item.title}
-              className="flex flex-col border-t border-white/20 pt-7 lg:pt-8"
-            >
+        <div className="mt-12 grid gap-6 lg:grid-cols-2">
+          {aiProjects.map((project) => (
+            <article key={project.title} className="flex flex-col bg-white/[0.06] p-8 lg:px-[34px] lg:py-9">
+              <ProjectMeta years={project.years} context={project.context} dark />
+              <h3 className="mt-5 text-[clamp(1.3rem,1.8vw,1.5rem)] font-semibold leading-[1.24] tracking-[-0.03em]">
+                {project.title}
+              </h3>
+              <p className="mt-4 text-[16px] leading-[1.58] text-white/55">{project.text}</p>
+            </article>
+          ))}
+        </div>
+
+        <p className="mt-16 max-w-[62ch] border-t border-white/20 pt-7 text-[16px] leading-[1.6] text-white/50">
+          {aiCasesNote}
+        </p>
+
+        <div className="mt-10 grid gap-x-6 gap-y-10 lg:grid-cols-2">
+          {aiCases.map((item) => (
+            <article key={item.title} className="flex flex-col">
               <p className="text-[14.5px] text-azure-light">{item.audience}</p>
-              <h3 className="mt-4 text-[clamp(1.35rem,1.9vw,1.625rem)] font-semibold leading-[1.24] tracking-[-0.03em]">
+              <h3 className="mt-3 text-[clamp(1.25rem,1.7vw,1.4rem)] font-semibold leading-[1.26] tracking-[-0.028em]">
                 {item.title}
               </h3>
-              <p className="mt-4 max-w-[54ch] text-[16px] leading-[1.58] text-white/55">
+              <p className="mt-3 max-w-[54ch] text-[15.5px] leading-[1.58] text-white/55">
                 {item.text}
               </p>
-              <dl className="mt-6">
+              <ul className="mt-5">
                 {item.metrics.map((metric) => (
-                  <div key={metric} className="border-t border-white/10 py-3">
-                    <dd className="text-[15px] leading-[1.5] text-white/75">{metric}</dd>
-                  </div>
+                  <li
+                    key={metric}
+                    className="border-t border-white/15 py-3 text-[15px] leading-[1.5] text-white/80"
+                  >
+                    {metric}
+                  </li>
                 ))}
-              </dl>
+              </ul>
             </article>
           ))}
         </div>
@@ -102,11 +124,28 @@ function UseCases() {
   );
 }
 
+function ProjectMeta({
+  years,
+  context,
+  dark = false,
+}: {
+  years: string;
+  context: string;
+  dark?: boolean;
+}) {
+  return (
+    <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
+      <p className={`text-[14px] ${dark ? "text-white/40" : "text-ink/45"}`}>{years}</p>
+      <p className={`text-[14px] ${dark ? "text-azure-light" : "text-azure"}`}>{context}</p>
+    </div>
+  );
+}
+
 /* --------------------------------------------------------------- Booking */
 
 function Booking() {
   return (
-    <section className="bg-navy-deep pb-20 text-white lg:pb-[84px]">
+    <section className="mt-20 bg-navy-deep py-20 text-white lg:mt-0 lg:pb-[84px] lg:pt-0">
       <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12">
         <div className="grid gap-10 border-t border-white/20 pt-16 lg:grid-cols-12 lg:items-end lg:gap-6 lg:pt-20">
           <div className="lg:col-span-7">
