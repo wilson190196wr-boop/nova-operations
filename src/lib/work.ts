@@ -12,7 +12,7 @@
 
 export const intro = {
   title: "Six ans à livrer, pas à recommander",
-  text: "Ingénieur logiciel dans un grand groupe, puis chef de projet, puis directeur de production dans une agence : douze personnes à encadrer, des sous-traitants à piloter, des grands comptes à servir. Six ans à construire et à répondre de ce qui était livré — c'est ce qui me permet aujourd'hui de cadrer, de construire et de piloter sans que vous changiez d'interlocuteur.",
+  text: "Ce qui suit a tourné en production, devant de vrais utilisateurs et avec de vrais budgets — d'un système à l'échelle d'un groupe international jusqu'aux outils quotidiens d'une équipe de sept. C'est ce qui sépare un projet livré d'une recommandation.",
 };
 
 export const works = [
