@@ -35,17 +35,9 @@ function Hero() {
         ))}
       </h1>
 
-      <div className="mt-10 flex flex-col gap-8 sm:flex-row sm:items-end sm:justify-between lg:mt-12">
-        <p className="max-w-[44ch] text-[clamp(1rem,1.4vw,1.25rem)] leading-[1.45] text-ink/70">
-          {heroTail}
-        </p>
-        <Link
-          href="/contact"
-          className="shrink-0 self-start rounded-lg bg-ink px-8 py-[18px] text-[16px] font-medium text-white transition-colors hover:bg-navy-deep sm:self-auto"
-        >
-          Réserver un rendez-vous
-        </Link>
-      </div>
+      <p className="mt-10 max-w-[44ch] text-[clamp(1rem,1.4vw,1.25rem)] leading-[1.45] text-ink/70 lg:mt-12">
+        {heroTail}
+      </p>
     </section>
   );
 }
