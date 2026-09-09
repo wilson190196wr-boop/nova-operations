@@ -81,16 +81,16 @@ function Situation() {
           Deux situations, la même absence d&apos;interlocuteur.
         </h2>
 
-        {/* Blocs décalés : la symétrie parfaite est ce qui faisait diapositive. */}
-        <div className="mt-14 grid gap-14 lg:grid-cols-12 lg:gap-6">
+        {/* Alignés et cadrés par un filet : ce sont les puces qui faisaient
+            diapositive, pas la symétrie. Un décalage vertical sans repère
+            visuel se lit comme un défaut d'affichage. */}
+        <div className="mt-14 grid gap-12 lg:grid-cols-12 lg:gap-6">
           {audiences.map((audience, i) => (
             <div
               key={audience.who}
-              className={
-                i === 0
-                  ? "lg:col-span-5 lg:col-start-1"
-                  : "lg:col-span-5 lg:col-start-8 lg:mt-24"
-              }
+              className={`border-t border-white/20 pt-7 ${
+                i === 0 ? "lg:col-span-5 lg:col-start-1" : "lg:col-span-5 lg:col-start-8"
+              }`}
             >
               <p className="text-[15px] text-azure-light">{audience.who}</p>
               <p className="mt-4 text-[clamp(1.5rem,2.4vw,2.125rem)] font-semibold leading-[1.14] tracking-[-0.035em]">
