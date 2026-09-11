@@ -17,8 +17,9 @@ export function SiteFooter() {
           <Link href="/contact" className="transition-colors hover:text-ink">
             Rendez-vous
           </Link>
-          {/* TODO : page à créer, avec les mentions légales réelles. */}
-          <span>Mentions légales</span>
+          <Link href="/mentions-legales" className="transition-colors hover:text-ink">
+            Mentions légales
+          </Link>
         </nav>
       </div>
     </footer>
