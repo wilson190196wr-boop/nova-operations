@@ -7,7 +7,7 @@
  */
 
 export const site = {
-  name: "NOVA",
+  name: "KELERIA",
   /** Accroche affichée à côté du mot-symbole et en pied de page. */
   baseline: "Le digital et l'IA, là où ils rapportent.",
 };

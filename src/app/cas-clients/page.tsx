@@ -6,7 +6,7 @@ import { cases } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Cas clients — résultats mesurés",
   description:
-    "Missions NOVA Operations en industrie, BTP, ingénierie et logistique : heures récupérées, marge gagnée, délais réduits. Résultats mesurés avant et après.",
+    "Missions KELERIA en industrie, BTP, ingénierie et logistique : heures récupérées, marge gagnée, délais réduits. Résultats mesurés avant et après.",
 };
 
 export default function CasClientsPage() {

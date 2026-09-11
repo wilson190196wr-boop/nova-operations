@@ -23,7 +23,7 @@ export type Photo = {
 /** À propos — portrait du fondateur. Ratio 4:5, cadrage buste. */
 export const founderPhoto: Photo = {
   src: "/photos/portrait-fondateur.jpg",
-  alt: "Portrait de Wilson Rault, fondateur de NOVA",
+  alt: "Portrait de Wilson Rault, fondateur de KELERIA",
   width: 1600,
   height: 2000,
 };

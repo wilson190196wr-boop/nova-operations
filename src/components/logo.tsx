@@ -12,7 +12,7 @@ export function Logo({ className = "", tone = "dark" }: { className?: string; to
           className="text-[15px] font-semibold tracking-[-0.02em]"
           style={{ color: fg }}
         >
-          NOVA
+          KELERIA
         </span>
         <span
           className="text-[11px] font-medium uppercase tracking-[0.18em] opacity-50"

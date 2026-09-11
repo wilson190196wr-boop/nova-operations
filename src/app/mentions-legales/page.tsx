@@ -4,7 +4,7 @@ import { A_COMPLETER, articles, lastUpdated, type Article } from "@/lib/legal";
 export const metadata: Metadata = {
   title: "Mentions légales",
   description:
-    "Éditeur, hébergeur, propriété intellectuelle et traitement des données personnelles du site NOVA.",
+    "Éditeur, hébergeur, propriété intellectuelle et traitement des données personnelles du site KELERIA.",
 };
 
 export default function MentionsLegalesPage() {

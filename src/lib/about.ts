@@ -8,7 +8,7 @@
 
 export const founder = {
   name: "Wilson Rault",
-  role: "Fondateur de NOVA",
+  role: "Fondateur de KELERIA",
   quote:
     "J'ai écrit le code, puis j'ai piloté les projets et dirigé les équipes. Je sais comment répondre à un besoin.",
 };
@@ -52,7 +52,7 @@ export const turn = {
   paragraphs: [
     "Les PME entendent parler d'intelligence artificielle tous les jours. Elles ont le budget, elles ont le besoin, et aucune offre calibrée en face : les agences et les ESN ne se déplacent pas, les cabinets s'arrêtent au document, et recruter un directeur technique n'a aucun sens à leur échelle.",
     "Les startups dont le métier n'est pas la tech vivent le même problème par l'autre bout : elles doivent aller vite sans pouvoir porter un poste à temps plein.",
-    "NOVA existe pour ces deux situations. Le même métier, à temps partagé : je diagnostique de l'intérieur, je chiffre, puis je construis ce qui va vite ou je pilote ceux qui construisent le reste.",
+    "KELERIA existe pour ces deux situations. Le même métier, à temps partagé : je diagnostique de l'intérieur, je chiffre, puis je construis ce qui va vite ou je pilote ceux qui construisent le reste.",
   ],
 };
 

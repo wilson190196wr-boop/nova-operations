@@ -35,12 +35,12 @@ export const articles: Article[] = [
     title: "L'éditeur",
     rows: [
       { label: "Éditeur", value: "Wilson Rault, entrepreneur individuel" },
-      { label: "Nom commercial", value: "NOVA" },
+      { label: "Nom commercial", value: "KELERIA" },
       { label: "Adresse", value: A_COMPLETER },
       { label: "SIRET", value: A_COMPLETER },
       { label: "TVA", value: "TVA non applicable, article 293 B du Code général des impôts" },
-      { label: "Courriel", value: A_COMPLETER },
-      { label: "Téléphone", value: A_COMPLETER },
+      { label: "Courriel", value: "wilson@keleria.com" },
+      { label: "Téléphone", value: "+33 6 62 90 92 59" },
       { label: "Directeur de la publication", value: "Wilson Rault" },
     ],
     paragraphs: [
