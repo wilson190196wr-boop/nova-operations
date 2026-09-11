@@ -9,7 +9,7 @@
 export const site = {
   name: "NOVA",
   /** Accroche affichée à côté du mot-symbole et en pied de page. */
-  baseline: "L'IA et le développement applicatif au service de la rentabilité",
+  baseline: "Le digital et l'IA, là où ils rapportent.",
 };
 
 export const mainNav = [
@@ -18,11 +18,33 @@ export const mainNav = [
   { href: "/a-propos", label: "À propos" },
 ];
 
-/** Le titre-image : une ligne par élément, la dernière est mise en couleur. */
-export const heroLines = ["Où l'IA", "vous fait", "gagner", "de l'argent"];
+/**
+ * Le titre-image : une ligne par élément.
+ *
+ * Le découpage est manuel plutôt que laissé au navigateur, et chaque ligne doit
+ * tenir dans la colonne : à cette taille, une ligne trop longue se replie toute
+ * seule et la mise en couleur ne tombe plus où il faut.
+ *
+ * Trois lignes, pas cinq : isoler « IA » et « et » sur leur propre ligne
+ * donnait deux mots de deux lettres dans un corps calibré pour treize, et
+ * l'escalier partait de travers.
+ *
+ * Chaque ligne se découpe en segments pour que la couleur puisse s'arrêter au
+ * milieu. `accent` met le segment en bleu : il porte sur les deux compétences,
+ * mais pas sur le « et » qui les relie — colorer la conjonction lui donnait le
+ * même poids que les mots qu'elle joint.
+ *
+ * C'est le seul endroit coloré de la hero ; le chapô est resté en gris,
+ * puisque mettre deux choses en avant n'en met plus aucune.
+ */
+export const heroLines: { text: string; accent?: boolean }[][] = [
+  [{ text: "Votre partenaire" }],
+  [{ text: "IA", accent: true }, { text: " et " }, { text: "développement", accent: true }],
+  [{ text: "applicatif", accent: true }],
+];
 
 export const heroTail =
-  "Et où elle n'en fait pas. Vous le saurez en trois semaines, chiffres à l'appui, sortis de vos propres processus.";
+  "En trois semaines, vous saurez où l'IA vous fait gagner de l'argent — et où elle n'en fait pas. Puis on construit, et je reste jusqu'au résultat mesuré.";
 
 /**
  * Bandeau de marques : employeurs et clients rencontrés en agence.
@@ -92,8 +114,8 @@ export const audiences = [
 export const steps = [
   {
     n: "01",
-    title: "J'observe",
-    text: "Entretiens dirigeant et terrain, observation des postes, extraction des données réelles. Aucun questionnaire.",
+    title: "J'analyse",
+    text: "Entretiens avec le dirigeant et le terrain, observation des postes, extraction des données réelles. Une méthode pour mettre en lumière vos réels besoins.",
   },
   {
     n: "02",
@@ -104,6 +126,11 @@ export const steps = [
     n: "03",
     title: "Vous décidez",
     text: "Feuille de route priorisée, ROI estimé par chantier, et la liste de ce qui ne vaut pas la peine.",
+  },
+  {
+    n: "04",
+    title: "Je pilote",
+    text: "Je choisis les prestataires ou je constitue une équipe. Je pilote les projets jusqu'à la livraison et la mesure du ROI.",
   },
 ];
 
@@ -127,7 +154,7 @@ export const offers = [
   {
     name: "Sprints",
     surface: { bg: "#0b1f46", fg: "#ffffff", muted: "rgba(255,255,255,0.64)" },
-    text: "Les gains rapides construits en direct. Cinq jours maximum par automatisation — au-delà, ce n'est plus un sprint mais un projet.",
+    text: "Nous mettons en place des quick wins mesurables : solutions sélectionnées sur le marché, automatisation IA, agent IA. Deux semaines maximum par sujet. Au-delà, ce n'est plus un sprint mais un projet.",
   },
   {
     name: "Accompagnement",
@@ -149,7 +176,7 @@ export const offers = [
 export const alternatives = [
   {
     name: "Une agence ou une ESN",
-    text: "Elle exécute un cahier des charges — celui que vous n'avez pas su écrire, puisque c'est justement ce qui vous manque. Et elle vend des jours, pas des résultats.",
+    text: "Elle exécute un cahier des charges — celui que vous n'avez pas su écrire.",
     highlight: false,
   },
   {

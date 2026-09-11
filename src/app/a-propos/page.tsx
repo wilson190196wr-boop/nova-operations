@@ -7,7 +7,7 @@ import { founderPhoto } from "@/lib/photos";
 export const metadata: Metadata = {
   title: "À propos",
   description:
-    "Wilson Rault, ingénieur IMT Mines Alès, passé par Expedia Group, l'agence Glanum et Septeo. Pourquoi NOVA travaille à temps partagé pour les PME et les startups.",
+    "Wilson Rault, ingénieur de l'École des Mines d'Alès, passé par Expedia Group, l'agence Glanum et Septeo. Pourquoi NOVA travaille à temps partagé pour les PME et les startups.",
 };
 
 export default function AProposPage() {
@@ -49,9 +49,9 @@ function Intro() {
             {founder.quote}
           </h1>
           <p className="mt-8 max-w-[52ch] text-[19px] leading-[1.5] text-ink/70">
-            Six ans à construire des logiciels, puis à diriger ceux qui les construisent — chez un
-            groupe américain, dans une agence digitale, dans un éditeur. NOVA est né de ce que j&apos;y
-            ai vu manquer.
+            Six ans à construire des logiciels, puis à diriger ceux qui les construisent. Dans un
+            groupe américain, dans une agence digitale, puis chez un éditeur. NOVA est né de ce que
+            j&apos;y ai vu manquer : une offre adaptée aux besoins des PME et des startups.
           </p>
 
           <dl className="mt-12 grid gap-8 border-t border-line pt-8 sm:grid-cols-3">
@@ -74,7 +74,7 @@ function Story() {
   return (
     <section className="mx-auto w-full max-w-[1440px] px-6 pt-20 lg:px-12 lg:pt-[92px]">
       <h2 className="max-w-[18ch] text-[clamp(1.9rem,3.6vw,3.25rem)] font-semibold leading-[1] tracking-[-0.045em]">
-        Du code à la direction de production
+        Du code à la direction de projets
       </h2>
 
       <ol className="mt-10">

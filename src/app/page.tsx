@@ -26,17 +26,37 @@ function Hero() {
       <div className="grid-lines pointer-events-none absolute inset-0 opacity-60 mask-fade-b" />
 
       <div className="relative mx-auto w-full max-w-[1440px] px-6 pt-14 lg:px-12 lg:pt-16">
-        <h1 className="text-[clamp(2.9rem,11.6vw,10.5rem)] font-semibold leading-[0.84] tracking-[-0.062em]">
+        {/* Trois réglages que ce titre impose, chacun mesuré :
+
+            8.6vw, parce que la ligne la plus longue — « IA ET DÉVELOPPEMENT »,
+            1467 px pour un corps de 144 — doit tenir dans la colonne jusqu'aux
+            écrans d'ordinateur portable. Au-delà, elle se replie et l'escalier
+            se décale ;
+
+            2.4rem en borne basse, parce que sous 400 px de large c'est elle qui
+            s'applique et que « DÉVELOPPEMENT », mot insécable, débordait alors
+            de sa colonne — la section est en overflow-hidden, le mot se coupait
+            sans rien signaler ;
+
+            0.95 d'interlignage, parce que l'accent du É monte à 131 px pour un
+            corps de 144. En dessous de 0.91 il dépasse la ligne de base du
+            dessus et se lit comme une virgule posée entre deux mots de la ligne
+            précédente. C'était le cas à 0.84. */}
+        <h1 className="text-[clamp(2.4rem,8.6vw,8rem)] font-semibold leading-[0.95] tracking-[-0.062em]">
           {heroLines.map((line, i) => (
             <span
-              key={line}
+              key={line.map((segment) => segment.text).join("")}
               className="rise block uppercase"
-              style={{
-                animationDelay: `${i * 70}ms`,
-                color: i === heroLines.length - 1 ? "var(--color-azure)" : undefined,
-              }}
+              style={{ animationDelay: `${i * 70}ms` }}
             >
-              {line}
+              {line.map((segment) => (
+                <span
+                  key={segment.text}
+                  style={{ color: segment.accent ? "var(--color-azure)" : undefined }}
+                >
+                  {segment.text}
+                </span>
+              ))}
             </span>
           ))}
         </h1>
@@ -110,7 +130,9 @@ function Situation() {
           ))}
         </div>
 
-        <ol className="mt-24 grid gap-10 lg:mt-28 lg:grid-cols-3 lg:gap-6">
+        {/* Quatre colonnes depuis l'ajout de « 04 Je pilote ». Le dernier
+            numéro reste en bleu, la règle n'a pas changé. */}
+        <ol className="mt-24 grid gap-10 lg:mt-28 lg:grid-cols-4 lg:gap-6">
           {steps.map((step, i) => (
             <li key={step.n}>
               <p

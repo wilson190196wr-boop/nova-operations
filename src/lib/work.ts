@@ -18,7 +18,7 @@
 
 export const intro = {
   title: "Six ans à livrer, pas à recommander",
-  text: "Ce qui suit a tourné en production, devant de vrais utilisateurs et avec de vrais budgets — d'un système à l'échelle d'un groupe international jusqu'aux outils quotidiens d'une équipe de sept. C'est ce qui sépare un projet livré d'une recommandation.",
+  text: "Ce qui suit a tourné en production, devant de vrais utilisateurs et avec de vrais budgets — d'un système à l'échelle d'un groupe international jusqu'aux outils quotidiens d'une petite équipe. C'est ce qui sépare un projet livré d'une recommandation.",
 };
 
 export type Work = {
@@ -32,13 +32,12 @@ export type Work = {
 
 export const appDev = {
   title: "Développement applicatif",
-  text: "Des outils de gestion mis en production dans des entreprises qui tournaient jusque-là sur des tableurs et des ressaisies.",
 };
 
 export const appProjects: Work[] = [
   {
     years: "2023",
-    context: "Grand compte du BTP",
+    context: "Grand compte de l'industrie",
     title: "Un CRM à la place de onze fichiers de suivi",
     text: "Le pipeline commercial vivait dans des tableurs, un par agence, sans consolidation possible. Reprise de l'historique, référentiel unique d'affaires, connexion à l'outil de gestion.",
     metrics: [
@@ -58,7 +57,7 @@ export const appProjects: Work[] = [
   },
   {
     years: "2022 — 2023",
-    context: "Marque de distribution",
+    context: "Grand compte de l'industrie",
     title: "Une plateforme de commerce en ligne connectée au stock réel",
     text: "Catalogue, tunnel de commande et paiement, mais surtout la synchronisation avec la gestion. Recette menée avec le service client, qui absorbait jusque-là les écarts de stock.",
     metrics: [
@@ -68,7 +67,7 @@ export const appProjects: Work[] = [
   },
   {
     years: "2023",
-    context: "Grand compte industriel",
+    context: "PME du monde du notariat",
     title: "Un extranet qui a remplacé six cents courriels par mois",
     text: "Suivi des commandes, documents contractuels et demandes d'intervention réunis dans un espace client. Les échanges qui transitaient par des boîtes mail personnelles sont devenus traçables.",
     metrics: [
@@ -100,7 +99,6 @@ export const appProjects: Work[] = [
 
 export const ai = {
   title: "Automatisation et intelligence artificielle",
-  text: "Deux systèmes passés en production, puis les chantiers que je mets en place aujourd'hui chez les PME et les startups.",
 };
 
 export const aiProjects: Work[] = [

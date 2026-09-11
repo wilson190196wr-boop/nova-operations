@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { site } from "@/lib/home";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,10 +15,17 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+/**
+ * Le titre reprend l'accroche de `site` au lieu de la recopier : c'est la même
+ * phrase que porte l'en-tête et le pied de page, et une copie de plus finissait
+ * toujours par rester en arrière lors d'un changement de positionnement.
+ */
+const siteTitle = `${site.name} — ${site.baseline}`;
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://nova-operations.fr"),
   title: {
-    default: "NOVA — l'IA et le développement applicatif au service de la rentabilité",
+    default: siteTitle,
     template: "%s · NOVA",
   },
   description:
@@ -30,7 +38,7 @@ export const metadata: Metadata = {
     "automatisation IA entreprise",
   ],
   openGraph: {
-    title: "NOVA — l'IA et le développement applicatif au service de la rentabilité",
+    title: siteTitle,
     description:
       "En trois semaines, vous saurez où l'IA vous fait gagner de l'argent — et où elle n'en fait pas.",
     locale: "fr_FR",

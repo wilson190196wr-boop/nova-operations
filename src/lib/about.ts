@@ -10,13 +10,13 @@ export const founder = {
   name: "Wilson Rault",
   role: "Fondateur de NOVA",
   quote:
-    "J'ai écrit le code, puis dirigé ceux qui l'écrivent. Une PME n'a accès ni à l'un, ni à l'autre.",
+    "J'ai écrit le code, puis j'ai piloté les projets et dirigé les équipes. Je sais comment répondre à un besoin.",
 };
 
 export const facts = [
-  { label: "Formation", value: "IMT Mines Alès" },
+  { label: "Formation", value: "Ingénieur de l'École des Mines d'Alès" },
   { label: "Parcours", value: "Expedia, Glanum, Septeo" },
-  { label: "Basé à", value: "Montpellier" },
+  { label: "Basé à", value: "Avignon, intervention sur tout le territoire" },
 ];
 
 /** Le récit, dans l'ordre : du code à la direction, puis retour au terrain. */
@@ -31,13 +31,13 @@ export const story = [
     period: "2022 — 2024",
     place: "Agence Glanum, Avignon",
     role: "Chef de projet",
-    text: "Une dizaine de projets menés de front — sites, e-commerce, ERP, big data, intelligence artificielle. J'y ai mis en place la méthode agile et les indicateurs de suivi, et j'ai découvert l'écart entre ce qu'un client demande et ce dont il a besoin.",
+    text: "Une dizaine de projets menés de front : sites, e-commerce, ERP, big data, intelligence artificielle. J'y ai mis en place une méthode de travail et les indicateurs de suivi. J'ai découvert l'écart entre ce qu'un client demande et ce dont il a besoin.",
   },
   {
     period: "2024 — 2026",
     place: "Agence Glanum, Avignon",
     role: "Directeur de production",
-    text: "Douze personnes à diriger, des grands comptes à servir, des sous-traitants à piloter. J'ai vu l'agence de l'intérieur, donc je sais pourquoi elle ne se déplace pas pour une PME de quarante personnes : le modèle vend des jours, et une petite structure n'en achète pas assez.",
+    text: "Douze personnes à diriger, des grands comptes à servir, des sous-traitants à piloter. J'ai été à la tête de la production d'une agence ; je sais donc analyser un besoin, rédiger un cahier des charges, chiffrer un projet, constituer une équipe, livrer et maintenir un projet.",
   },
   {
     period: "2026",

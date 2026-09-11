@@ -61,13 +61,18 @@ function WorkCard({ work, dark = false }: { work: Work; dark?: boolean }) {
   );
 }
 
+/**
+ * Le chapeau de section. `text` est facultatif : les deux sections n'en ont
+ * plus, et rendre un paragraphe vide laisserait une gouttière inexpliquée à
+ * droite du titre.
+ */
 function SectionHead({
   title,
   text,
   dark = false,
 }: {
   title: string;
-  text: string;
+  text?: string;
   dark?: boolean;
 }) {
   return (
@@ -75,13 +80,15 @@ function SectionHead({
       <h2 className="text-[clamp(1.75rem,3.2vw,2.75rem)] font-semibold leading-[1.06] tracking-[-0.04em] lg:col-span-5">
         {title}
       </h2>
-      <p
-        className={`max-w-[52ch] text-[17px] leading-[1.6] lg:col-span-5 lg:col-start-7 lg:self-end ${
-          dark ? "text-white/55" : "text-ink/70"
-        }`}
-      >
-        {text}
-      </p>
+      {text ? (
+        <p
+          className={`max-w-[52ch] text-[17px] leading-[1.6] lg:col-span-5 lg:col-start-7 lg:self-end ${
+            dark ? "text-white/55" : "text-ink/70"
+          }`}
+        >
+          {text}
+        </p>
+      ) : null}
     </div>
   );
 }
@@ -108,7 +115,7 @@ function Intro() {
 function AppDev() {
   return (
     <section className="mx-auto w-full max-w-[1440px] px-6 pt-20 lg:px-12 lg:pt-[92px]">
-      <SectionHead title={appDev.title} text={appDev.text} />
+      <SectionHead title={appDev.title} />
       <div className="mt-12 grid gap-6 lg:grid-cols-2">
         {appProjects.map((work) => (
           <WorkCard key={work.title} work={work} />
@@ -124,7 +131,7 @@ function Ai() {
   return (
     <section className="mt-20 bg-navy-deep py-20 text-white lg:mt-[92px] lg:py-24">
       <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12">
-        <SectionHead title={ai.title} text={ai.text} dark />
+        <SectionHead title={ai.title} dark />
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           {[...aiProjects, ...aiCases].map((work) => (
             <WorkCard key={work.title} work={work} dark />
