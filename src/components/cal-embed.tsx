@@ -51,10 +51,10 @@ export function CalEmbed() {
           Écrivez-nous directement, nous vous proposerons trois créneaux dans la journée.
         </p>
         <a
-          href="mailto:contact@nova-operations.fr"
+          href="mailto:wilson@keleria.com"
           className="mt-2 rounded-full bg-ink px-5 py-3 text-[13.5px] font-medium text-white transition-colors hover:bg-navy"
         >
-          contact@nova-operations.fr
+          wilson@keleria.com
         </a>
       </div>
     );

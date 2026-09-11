@@ -6,7 +6,7 @@ import { comparison, hero, offers, speeds, type Offer } from "@/lib/offers";
 export const metadata: Metadata = {
   title: "Offres",
   description:
-    "Audit à 2 500 ou 7 500 € HT, sprints d'automatisation, accompagnement mensuel à partir de 1 600 € et formation des équipes. Les quatre façons de travailler avec NOVA.",
+    "Audit à 2 500 ou 7 500 € HT, sprints d'automatisation, accompagnement mensuel à partir de 1 600 € et formation des équipes. Les quatre façons de travailler avec KELERIA.",
 };
 
 export default function OffresPage() {

@@ -182,7 +182,7 @@ export function CTABand({
               Réserver 45 minutes
             </Button>
             <Button href="/methode" variant="ghost" className="border-white/20 text-white hover:bg-white/5">
-              Découvrir NOVA OS™
+              Découvrir KELERIA OS™
             </Button>
           </div>
         </Reveal>

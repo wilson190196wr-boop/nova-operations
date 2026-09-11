@@ -6,9 +6,9 @@ import { PageHero } from "@/components/ui";
 import { faq, pillars, steps } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "NOVA OS™ — la méthode",
+  title: "KELERIA OS™ — la méthode",
   description:
-    "NOVA OS™ : six piliers, un score de maturité, une feuille de route priorisée et un ROI estimé. La méthode d'audit et de pilotage opérationnel de NOVA Operations.",
+    "KELERIA OS™ : six piliers, un score de maturité, une feuille de route priorisée et un ROI estimé. La méthode d'audit et de pilotage opérationnel de KELERIA.",
 };
 
 export default function MethodePage() {
@@ -16,7 +16,7 @@ export default function MethodePage() {
     <>
       <PageHero
         eyebrow="Méthode"
-        title={<>NOVA OS™ — le système d&apos;exploitation de vos opérations.</>}
+        title={<>KELERIA OS™ — le système d&apos;exploitation de vos opérations.</>}
         intro="Une méthode unique, appliquée de la même façon à chaque mission : on mesure, on priorise, on exécute, on pilote. Aucune place pour l'intuition non vérifiée."
         meta={[
           { label: "Durée du diagnostic", value: "3 à 4 semaines" },

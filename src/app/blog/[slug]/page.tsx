@@ -69,7 +69,7 @@ export default async function ArticlePage({ params }: Params) {
                   <span className="flex h-8 w-8 items-center justify-center rounded-full bg-ink text-[11px] font-medium text-white">
                     NO
                   </span>
-                  Équipe NOVA Operations
+                  Équipe KELERIA
                 </span>
                 <span className="h-1 w-1 rounded-full bg-ink/20" />
                 {article.date}

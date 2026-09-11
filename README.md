@@ -1,6 +1,6 @@
-# NOVA Operations — site vitrine
+# KELERIA — site vitrine
 
-Site vitrine du cabinet NOVA Operations (Fractional COO & performance
+Site vitrine du cabinet KELERIA (Fractional COO & performance
 opérationnelle des PME). Next.js 16 (App Router), Tailwind CSS v4, TypeScript.
 
 ## Démarrer

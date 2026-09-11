@@ -7,7 +7,7 @@ import { founderPhoto } from "@/lib/photos";
 export const metadata: Metadata = {
   title: "À propos",
   description:
-    "Wilson Rault, ingénieur de l'École des Mines d'Alès, passé par Expedia Group, l'agence Glanum et Septeo. Pourquoi NOVA travaille à temps partagé pour les PME et les startups.",
+    "Wilson Rault, ingénieur de l'École des Mines d'Alès, passé par Expedia Group, l'agence Glanum et Septeo. Pourquoi KELERIA travaille à temps partagé pour les PME et les startups.",
 };
 
 export default function AProposPage() {
@@ -50,7 +50,7 @@ function Intro() {
           </h1>
           <p className="mt-8 max-w-[52ch] text-[19px] leading-[1.5] text-ink/70">
             Six ans à construire des logiciels, puis à diriger ceux qui les construisent. Dans un
-            groupe américain, dans une agence digitale, puis chez un éditeur. NOVA est né de ce que
+            groupe américain, dans une agence digitale, puis chez un éditeur. KELERIA est né de ce que
             j&apos;y ai vu manquer : une offre adaptée aux besoins des PME et des startups.
           </p>
 

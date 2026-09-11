@@ -35,7 +35,7 @@ export function MaturityRadar({ tone = "light" }: { tone?: "light" | "dark" }) {
       viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
       className="h-auto w-full max-w-[420px]"
       role="img"
-      aria-label="Score de maturité NOVA OS par pilier"
+      aria-label="Score de maturité KELERIA OS par pilier"
     >
       <defs>
         <linearGradient id="radarFill" x1="0" y1="0" x2="1" y2="1">

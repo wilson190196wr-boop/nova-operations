@@ -7,7 +7,7 @@ import { faq, site } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Contact — réserver un échange de 45 minutes",
   description:
-    "Quarante-cinq minutes avec NOVA pour décrire votre organisation, vos outils et ce qui vous freine, et savoir s'il y a matière à travailler ensemble. Sans engagement.",
+    "Quarante-cinq minutes avec KELERIA pour décrire votre organisation, vos outils et ce qui vous freine, et savoir s'il y a matière à travailler ensemble. Sans engagement.",
 };
 
 export default function ContactPage() {

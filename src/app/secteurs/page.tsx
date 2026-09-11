@@ -6,7 +6,7 @@ import { sectors } from "@/lib/content";
 export const metadata: Metadata = {
   title: "Secteurs — Industrie, BTP, Fabrication, Services, Logistique",
   description:
-    "NOVA Operations accompagne les PME de 20 à 250 salariés dans l'industrie, le BTP, la fabrication, les cabinets de services et la logistique.",
+    "KELERIA accompagne les PME de 20 à 250 salariés dans l'industrie, le BTP, la fabrication, les cabinets de services et la logistique.",
 };
 
 export default function SecteursPage() {

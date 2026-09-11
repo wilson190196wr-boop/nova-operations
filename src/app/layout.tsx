@@ -23,10 +23,10 @@ const geistMono = Geist_Mono({
 const siteTitle = `${site.name} — ${site.baseline}`;
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nova-operations.fr"),
+  metadataBase: new URL("https://keleria.com"),
   title: {
     default: siteTitle,
-    template: "%s · NOVA",
+    template: "%s · KELERIA",
   },
   description:
     "En trois semaines, vous saurez où l'IA vous fait gagner de l'argent — et où elle n'en fait pas. Audit, formation, sprints et accompagnement pour les PME de plus de 30 salariés et les startups sans équipe technique.",

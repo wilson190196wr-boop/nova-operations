@@ -1,10 +1,10 @@
 export const site = {
-  name: "NOVA Operations",
+  name: "KELERIA",
   tagline: "Fractional COO · Performance Partner",
   baseline: "Nous trouvons les heures perdues de votre entreprise.",
-  email: "contact@nova-operations.fr",
-  phone: "+33 1 84 80 12 40",
-  address: "12 rue de la Bourse · 75002 Paris",
+  email: "wilson@keleria.com",
+  phone: "+33 6 62 90 92 59",
+  address: "Avignon",
 };
 
 export const nav = [
@@ -19,7 +19,7 @@ export const nav = [
 export const offers = [
   {
     slug: "audit",
-    name: "NOVA Audit™",
+    name: "KELERIA Audit™",
     step: "01",
     duration: "3 à 4 semaines",
     price: "À partir de 8 900 €",
@@ -38,7 +38,7 @@ export const offers = [
   },
   {
     slug: "sprint",
-    name: "NOVA Sprint™",
+    name: "KELERIA Sprint™",
     step: "02",
     duration: "6 à 10 semaines",
     price: "À partir de 14 500 €",
@@ -56,7 +56,7 @@ export const offers = [
   },
   {
     slug: "partner",
-    name: "NOVA Partner™",
+    name: "KELERIA Partner™",
     step: "03",
     duration: "Engagement 6 à 12 mois",
     price: "À partir de 3 200 € / mois",
@@ -74,7 +74,7 @@ export const offers = [
   },
   {
     slug: "studio",
-    name: "NOVA Studio™",
+    name: "KELERIA Studio™",
     step: "04",
     duration: "Au projet",
     price: "Sur devis",
@@ -208,7 +208,7 @@ export const cases = [
       { value: "+9 %", label: "taux de transformation" },
       { value: "6 mois", label: "retour sur investissement" },
     ],
-    program: ["NOVA Audit™", "NOVA Sprint™"],
+    program: ["KELERIA Audit™", "KELERIA Sprint™"],
   },
   {
     slug: "groupe-btp-regional",
@@ -221,7 +221,7 @@ export const cases = [
       { value: "1 seul", label: "référentiel de données" },
       { value: "+3,4 pts", label: "de marge chantier" },
     ],
-    program: ["NOVA Audit™", "NOVA Sprint™", "NOVA Partner™"],
+    program: ["KELERIA Audit™", "KELERIA Sprint™", "KELERIA Partner™"],
   },
   {
     slug: "cabinet-ingenierie",
@@ -234,7 +234,7 @@ export const cases = [
       { value: "+22 %", label: "de temps facturable" },
       { value: "4", label: "outils supprimés" },
     ],
-    program: ["NOVA Audit™", "NOVA Partner™"],
+    program: ["KELERIA Audit™", "KELERIA Partner™"],
   },
   {
     slug: "logistique-sous-traitance",
@@ -247,7 +247,7 @@ export const cases = [
       { value: "0", label: "ressaisie manuelle" },
       { value: "11 j", label: "avant le premier gain" },
     ],
-    program: ["NOVA Sprint™", "NOVA Studio™"],
+    program: ["KELERIA Sprint™", "KELERIA Studio™"],
   },
 ];
 
@@ -319,7 +319,7 @@ export const steps = [
     n: "02",
     title: "Diagnostic",
     duration: "Semaines 2 – 3",
-    text: "Cartographie des processus, scoring NOVA OS™ sur les six piliers, chiffrage des pertes.",
+    text: "Cartographie des processus, scoring KELERIA OS™ sur les six piliers, chiffrage des pertes.",
   },
   {
     n: "03",
