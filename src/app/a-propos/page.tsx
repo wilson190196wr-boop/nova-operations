@@ -1,161 +1,145 @@
 import type { Metadata } from "next";
-import { Reveal } from "@/components/reveal";
-import { CTABand, Container, PageHero, SectionHead } from "@/components/ui";
+import Image from "next/image";
+import { BookingCta } from "@/components/booking-cta";
+import { facts, founder, principles, story, turn } from "@/lib/about";
+import { founderPhoto } from "@/lib/photos";
 
 export const metadata: Metadata = {
-  title: "À propos — qui sommes-nous",
+  title: "À propos",
   description:
-    "NOVA Operations : un cabinet de performance opérationnelle qui combine organisation, digital et intelligence artificielle pour les PME françaises.",
+    "Wilson Rault, ingénieur de l'École des Mines d'Alès, passé par Expedia Group, l'agence Glanum et Septeo. Pourquoi NOVA travaille à temps partagé pour les PME et les startups.",
 };
-
-const team = [
-  {
-    initials: "AL",
-    name: "Direction des opérations",
-    role: "Fractional COO",
-    bio: "15 ans en direction industrielle et supply chain. Intervient sur les environnements de production multi-sites.",
-  },
-  {
-    initials: "MB",
-    name: "Pôle processus",
-    role: "Lead Process & Data",
-    bio: "Cartographie, mesure des temps, refonte des flux. Ancienne responsable amélioration continue en ETI.",
-  },
-  {
-    initials: "TC",
-    name: "Pôle digital",
-    role: "Lead Automatisation & IA",
-    bio: "Intégrations, automatisations et assistants métiers. Indépendant de tout éditeur, par principe.",
-  },
-  {
-    initials: "SR",
-    name: "Réseau d'experts",
-    role: "Partenaires associés",
-    bio: "Experts-comptables, avocats, ingénieurs et développeurs mobilisés au cas par cas sur les missions.",
-  },
-];
-
-const values = [
-  {
-    t: "Pragmatisme",
-    d: "Une recommandation qui ne peut pas être mise en œuvre le mois prochain n'a aucune valeur.",
-  },
-  {
-    t: "Transparence",
-    d: "Nos chiffrages sont ouverts. Vous voyez comment le ROI est calculé, hypothèse par hypothèse.",
-  },
-  {
-    t: "Indépendance",
-    d: "Aucune commission éditeur, aucune revente. Nous n'avons rien à gagner à vous vendre un outil.",
-  },
-  {
-    t: "Durée",
-    d: "Nous restons jusqu'à ce que le gain soit constaté dans les chiffres, pas dans une présentation.",
-  },
-];
 
 export default function AProposPage() {
   return (
     <>
-      <PageHero
-        eyebrow="À propos"
-        title={<>Des opérationnels, pas des consultants de passage.</>}
-        intro="NOVA Operations est née d'un constat simple : les PME n'ont pas besoin d'un rapport de plus. Elles ont besoin de quelqu'un qui reste, qui exécute et qui rend des comptes sur les résultats."
-        meta={[
-          { label: "Création", value: "2023" },
-          { label: "Missions menées", value: "40+" },
-          { label: "Basés à", value: "Paris · France entière" },
-        ]}
-      />
-
-      {/* Story */}
-      <section className="py-24 lg:py-32">
-        <Container>
-          <div className="grid gap-16 lg:grid-cols-[0.8fr_1.2fr] lg:gap-24">
-            <SectionHead eyebrow="Notre histoire" title="Pourquoi nous avons créé NOVA." />
-            <div className="max-w-2xl">
-              {[
-                "Nous avons passé quinze ans à l'intérieur des entreprises, pas en face d'elles : direction industrielle, supply chain, amélioration continue, systèmes d'information. Assez longtemps pour voir défiler les cabinets, les rapports et les projets abandonnés au bout de trois mois.",
-                "Le schéma se répétait. Un diagnostic juste, une recommandation raisonnable, puis plus personne pour la porter. Les équipes retournaient à leurs urgences et le rapport rejoignait l'étagère.",
-                "NOVA a été conçue à l'inverse : un audit court et chiffré, puis une présence dans la durée. Nous prenons le pilotage, nous coordonnons les prestataires, nous suivons les indicateurs en comité de direction — jusqu'à ce que le gain soit visible dans les chiffres de l'entreprise.",
-                "C'est ce qu'on appelle le Fractional COO : l'expertise d'un directeur des opérations expérimenté, à temps partagé, sans la structure de coûts d'un recrutement à 120 000 € chargés.",
-              ].map((p, i) => (
-                <Reveal key={p} delay={i * 60}>
-                  <p className="mt-6 text-[16.5px] leading-[1.75] text-ink/70 first:mt-0">{p}</p>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
-
-      {/* Vision */}
-      <section className="relative overflow-hidden bg-navy-deep py-24 text-white lg:py-32">
-        <div className="grid-lines-dark pointer-events-none absolute inset-0" />
-        <div
-          className="pointer-events-none absolute left-1/4 top-0 h-[460px] w-[460px] rounded-full blur-[140px] animate-sheen"
-          style={{ background: "radial-gradient(circle, rgba(47,92,255,0.3), transparent 70%)" }}
-        />
-        <Container className="relative">
-          <Reveal className="mx-auto max-w-3xl text-center">
-            <p className="text-[11px] uppercase tracking-[0.22em] text-white/40">Notre vision</p>
-            <p
-              className="mt-8 text-[clamp(1.7rem,3.8vw,2.8rem)] font-semibold leading-[1.2] tracking-[-0.035em]"
-              style={{ textWrap: "balance" }}
-            >
-              Devenir le partenaire de référence des dirigeants de PME pour la performance
-              opérationnelle, en combinant organisation, digital et intelligence artificielle
-              dans une approche pragmatique, orientée résultats.
-            </p>
-          </Reveal>
-        </Container>
-      </section>
-
-      {/* Team */}
-      <section className="py-24 lg:py-32">
-        <Container>
-          <SectionHead
-            eyebrow="L'équipe"
-            title="Une équipe restreinte, un réseau étendu."
-            intro="Le noyau reste volontairement petit pour garantir que le dirigeant parle toujours à la même personne. Les expertises pointues sont mobilisées au besoin via notre réseau."
-          />
-
-          <div className="mt-16 grid gap-px overflow-hidden rounded-3xl border border-line bg-line md:grid-cols-2 lg:grid-cols-4">
-            {team.map((member, i) => (
-              <Reveal key={member.name} delay={i * 70} className="bg-white p-8">
-                <span className="flex h-14 w-14 items-center justify-center rounded-full bg-mist text-[15px] font-medium text-ink/60">
-                  {member.initials}
-                </span>
-                <h3 className="mt-6 text-[17.5px] font-semibold tracking-[-0.02em]">
-                  {member.name}
-                </h3>
-                <p className="mt-1.5 text-[13.5px] text-azure">{member.role}</p>
-                <p className="mt-4 text-[14px] leading-relaxed text-ink/55">{member.bio}</p>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      {/* Values */}
-      <section className="border-y border-line bg-mist py-24 lg:py-32">
-        <Container>
-          <SectionHead align="center" eyebrow="Nos valeurs" title="Quatre mots, testés en mission." />
-          <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {values.map((v, i) => (
-              <Reveal key={v.t} delay={i * 70} className="rounded-3xl border border-line bg-white p-8">
-                <span className="font-mono text-[12px] text-ink/30">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="mt-5 text-[19px] font-semibold tracking-[-0.02em]">{v.t}</h3>
-                <p className="mt-3 text-[14.5px] leading-relaxed text-ink/55">{v.d}</p>
-              </Reveal>
-            ))}
-          </div>
-        </Container>
-      </section>
-
-      <CTABand />
+      <Intro />
+      <Story />
+      <Turn />
+      <Principles />
+      <BookingCta title="Parlons de votre cas." />
     </>
+  );
+}
+
+/* ----------------------------------------------------------------- Intro */
+
+function Intro() {
+  return (
+    <section className="mx-auto w-full max-w-[1440px] px-6 pt-14 lg:px-12 lg:pt-16">
+      <div className="grid gap-12 lg:grid-cols-12 lg:gap-6">
+        <div className="lg:col-span-4">
+          <div className="relative aspect-[4/5] w-full max-w-[420px] overflow-hidden bg-mist">
+            <Image
+              src={founderPhoto.src}
+              alt={founderPhoto.alt}
+              width={founderPhoto.width}
+              height={founderPhoto.height}
+              sizes="(max-width: 1024px) 80vw, 32vw"
+              priority
+              className="h-full w-full object-cover"
+            />
+          </div>
+          <p className="mt-5 text-[19px] font-semibold tracking-[-0.03em]">{founder.name}</p>
+          <p className="mt-1 text-[14px] text-ink/45">{founder.role}</p>
+        </div>
+
+        <div className="lg:col-span-7 lg:col-start-6">
+          <h1 className="text-[clamp(2rem,4.4vw,4rem)] font-semibold leading-[1.02] tracking-[-0.048em]">
+            {founder.quote}
+          </h1>
+          <p className="mt-8 max-w-[52ch] text-[19px] leading-[1.5] text-ink/70">
+            Six ans à construire des logiciels, puis à diriger ceux qui les construisent. Dans un
+            groupe américain, dans une agence digitale, puis chez un éditeur. NOVA est né de ce que
+            j&apos;y ai vu manquer : une offre adaptée aux besoins des PME et des startups.
+          </p>
+
+          <dl className="mt-12 grid gap-8 border-t border-line pt-8 sm:grid-cols-3">
+            {facts.map((fact) => (
+              <div key={fact.label}>
+                <dt className="text-[13.5px] text-ink/45">{fact.label}</dt>
+                <dd className="mt-1.5 text-[17px] font-medium tracking-[-0.02em]">{fact.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ----------------------------------------------------------------- Story */
+
+function Story() {
+  return (
+    <section className="mx-auto w-full max-w-[1440px] px-6 pt-20 lg:px-12 lg:pt-[92px]">
+      <h2 className="max-w-[18ch] text-[clamp(1.9rem,3.6vw,3.25rem)] font-semibold leading-[1] tracking-[-0.045em]">
+        Du code à la direction de projets
+      </h2>
+
+      <ol className="mt-10">
+        {story.map((item, i) => (
+          <li
+            key={item.period}
+            className={`grid gap-3 border-t border-line py-8 lg:grid-cols-12 lg:gap-6 ${
+              i === story.length - 1 ? "border-b" : ""
+            }`}
+          >
+            <p className="text-[14px] text-ink/45 lg:col-span-2">{item.period}</p>
+            <div className="lg:col-span-3">
+              <p className="text-[18px] font-medium tracking-[-0.02em]">{item.role}</p>
+              <p className="mt-1 text-[14.5px] text-ink/45">{item.place}</p>
+            </div>
+            <p className="max-w-[62ch] text-[16px] leading-[1.6] text-ink/70 lg:col-span-6 lg:col-start-7">
+              {item.text}
+            </p>
+          </li>
+        ))}
+      </ol>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------------ Turn */
+
+function Turn() {
+  return (
+    <section className="mt-20 bg-navy-deep py-20 text-white lg:mt-[92px] lg:py-24">
+      <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-6">
+          <h2 className="text-[clamp(1.8rem,3.2vw,2.75rem)] font-semibold leading-[1.06] tracking-[-0.04em] lg:col-span-5">
+            {turn.title}
+          </h2>
+          <div className="flex flex-col gap-6 lg:col-span-6 lg:col-start-7">
+            {turn.paragraphs.map((paragraph) => (
+              <p key={paragraph} className="max-w-[58ch] text-[17px] leading-[1.62] text-white/60">
+                {paragraph}
+              </p>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------ Principles */
+
+function Principles() {
+  return (
+    <section className="mx-auto w-full max-w-[1440px] px-6 pt-20 lg:px-12 lg:pt-[92px]">
+      <h2 className="max-w-[16ch] text-[clamp(1.9rem,3.6vw,3.25rem)] font-semibold leading-[1] tracking-[-0.045em]">
+        Quatre règles qui ne se négocient pas
+      </h2>
+
+      <div className="mt-12 grid gap-6 lg:grid-cols-2">
+        {principles.map((principle) => (
+          <article key={principle.title} className="bg-mist p-8 lg:px-[34px] lg:py-9">
+            <h3 className="text-[22px] font-semibold tracking-[-0.028em]">{principle.title}</h3>
+            <p className="mt-4 text-[16px] leading-[1.58] text-ink/70">{principle.text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }

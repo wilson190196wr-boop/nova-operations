@@ -65,6 +65,29 @@ body {
   color: #fff;
 }
 
+/* --- Ouverture du titre ------------------------------------------------- */
+/* Un seul moment orchestré au chargement, plutôt qu'une apparition par section. */
+.rise {
+  opacity: 0;
+  transform: translate3d(0, 0.14em, 0);
+  animation: rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes rise {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
+}
+
 /* --- Reveal on scroll --------------------------------------------------- */
 .reveal {
   opacity: 0;

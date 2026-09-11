@@ -43,6 +43,26 @@ Zod y est faite côté serveur. Le formulaire est un composant client
 > pour un site en production, ajoutez une limitation de débit (Upstash, Cloudflare
 > Turnstile) avant d'ouvrir le formulaire au public.
 
+## Photos
+
+Les photos vivent dans `public/photos/` et sont décrites dans
+[`src/lib/photos.ts`](src/lib/photos.ts) : chemin, texte alternatif, dimensions.
+Le composant [`PhotoFrame`](src/components/photo-frame.tsx) gère le cadrage, les
+coins arrondis et le voile dégradé pour les légendes en incrustation.
+
+| Fichier | Ratio | Emplacement |
+| --- | --- | --- |
+| `portrait-fondateur.jpg` | 4:5 | Accueil (bloc « Qui vous accompagne ») et page À propos |
+
+Pour ajouter une photo : déposez le fichier, ajoutez son entrée dans
+`photos.ts`, puis affichez-la avec `<PhotoFrame>`. Le texte alternatif n'est pas
+décoratif — il est lu par les lecteurs d'écran et indexé. Décrivez ce qu'on voit,
+pas ce que la photo évoque.
+
+Les images sont servies par `next/image` : gardez une source large (1600 px de
+côté long suffit), la conversion WebP/AVIF et le redimensionnement sont
+automatiques.
+
 ## Contenu
 
 Textes, offres, piliers, cas clients, articles et FAQ sont centralisés dans

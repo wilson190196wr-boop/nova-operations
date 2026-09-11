@@ -5,9 +5,9 @@ import { Container, Eyebrow } from "@/components/ui";
 import { faq, site } from "@/lib/content";
 
 export const metadata: Metadata = {
-  title: "Contact — réserver un diagnostic de 45 minutes",
+  title: "Contact — réserver un échange de 45 minutes",
   description:
-    "Échangez 45 minutes avec NOVA Operations pour identifier vos trois principales pertes opérationnelles. Sans engagement.",
+    "Quarante-cinq minutes avec NOVA pour décrire votre organisation, vos outils et ce qui vous freine, et savoir s'il y a matière à travailler ensemble. Sans engagement.",
 };
 
 export default function ContactPage() {
@@ -21,65 +21,67 @@ export default function ContactPage() {
         />
 
         <Container className="relative">
-          <div className="grid gap-16 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
-            {/* Left */}
-            <div>
-              <Reveal>
-                <Eyebrow>Contact</Eyebrow>
-                <h1
-                  className="mt-6 text-[clamp(2.3rem,5.4vw,3.9rem)] font-semibold leading-[1.02] tracking-[-0.04em]"
-                  style={{ textWrap: "balance" }}
-                >
-                  45 minutes pour savoir où partent vos heures.
-                </h1>
-                <p className="mt-7 max-w-lg text-[17.5px] leading-[1.65] text-ink/60">
-                  Un échange cadré, sans slide de vente. Vous décrivez votre organisation, nous
-                  identifions les trois pertes les plus probables et nous vous disons franchement
-                  si une mission se justifie.
-                </p>
-              </Reveal>
+          {/* Le texte tient sur deux colonnes, le panneau prend toute la largeur
+              en dessous. Coincé dans une demi-page, le calendrier Cal.com passe
+              en colonne unique et devient interminable. */}
+          <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
+            <Reveal>
+              <Eyebrow>Contact</Eyebrow>
+              <h1
+                className="mt-6 text-[clamp(2.3rem,5.4vw,3.9rem)] font-semibold leading-[1.02] tracking-[-0.04em]"
+                style={{ textWrap: "balance" }}
+              >
+                Quarante-cinq minutes pour y voir clair.
+              </h1>
+              <p className="mt-7 max-w-lg text-[17.5px] leading-[1.65] text-ink/60">
+                Un échange cadré, sans slide de vente. Vous décrivez votre organisation, vos outils
+                et ce qui vous freine. Je vous dis par où je commencerais, ce que ça suppose, et
+                s&apos;il y a matière à travailler ensemble.
+              </p>
 
-              <Reveal delay={100} className="mt-12">
-                <ul className="flex flex-col gap-px overflow-hidden rounded-2xl border border-line bg-line">
-                  {[
-                    ["01", "Vous décrivez", "Activité, effectif, outils en place, irritants ressentis."],
-                    ["02", "Nous cadrons", "Trois hypothèses de perte, chiffrées à la louche mais argumentées."],
-                    ["03", "Vous décidez", "Un audit, un simple conseil, ou rien du tout. Sans relance commerciale."],
-                  ].map(([n, t, d]) => (
-                    <li key={n} className="flex gap-6 bg-white px-6 py-6">
-                      <span className="font-mono text-[12px] text-ink/30">{n}</span>
-                      <div>
-                        <p className="text-[15.5px] font-medium">{t}</p>
-                        <p className="mt-1.5 text-[14px] leading-relaxed text-ink/50">{d}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
+              <dl className="mt-12 grid gap-6 sm:grid-cols-3">
+                {[
+                  ["Email", site.email],
+                  ["Téléphone", site.phone],
+                  ["Adresse", site.address],
+                ].map(([label, value]) => (
+                  <div key={label}>
+                    <dt className="text-[11.5px] uppercase tracking-[0.14em] text-ink/40">
+                      {label}
+                    </dt>
+                    <dd className="mt-2 text-[14.5px] leading-snug text-ink/75">{value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </Reveal>
 
-              <Reveal delay={160} className="mt-12">
-                <dl className="grid gap-6 sm:grid-cols-3">
-                  {[
-                    ["Email", site.email],
-                    ["Téléphone", site.phone],
-                    ["Adresse", site.address],
-                  ].map(([label, value]) => (
-                    <div key={label}>
-                      <dt className="text-[11.5px] uppercase tracking-[0.14em] text-ink/40">
-                        {label}
-                      </dt>
-                      <dd className="mt-2 text-[14.5px] leading-snug text-ink/75">{value}</dd>
+            {/* Aligné par le bas sur la colonne de gauche : son bord inférieur
+                et la ligne des coordonnées partagent la même ligne. Calé en
+                haut, il ne s'alignait que sur le libellé « Contact » et
+                flottait au-dessus du reste. */}
+            <Reveal delay={100} className="lg:self-end">
+              <ul className="flex flex-col gap-px overflow-hidden rounded-2xl border border-line bg-line">
+                {[
+                  ["01", "Vous décrivez", "Votre activité, vos effectifs, les outils en place et ce qui vous freine aujourd'hui."],
+                  ["02", "Je cadre", "Ce qui me paraît prioritaire, ce que ça suppose de votre côté, et ce que je laisserais de côté."],
+                  ["03", "Vous décidez", "Un audit, un chantier précis, un simple conseil, ou rien du tout. Sans relance commerciale."],
+                ].map(([n, t, d]) => (
+                  <li key={n} className="flex gap-6 bg-white px-6 py-6">
+                    <span className="font-mono text-[12px] text-ink/30">{n}</span>
+                    <div>
+                      <p className="text-[15.5px] font-medium">{t}</p>
+                      <p className="mt-1.5 text-[14px] leading-relaxed text-ink/50">{d}</p>
                     </div>
-                  ))}
-                </dl>
-              </Reveal>
-            </div>
-
-            {/* Prise de rendez-vous + formulaire */}
-            <Reveal delay={120}>
-              <ContactPanel />
+                  </li>
+                ))}
+              </ul>
             </Reveal>
           </div>
+
+          {/* Prise de rendez-vous + formulaire */}
+          <Reveal delay={160} className="mt-16 lg:mt-20">
+            <ContactPanel />
+          </Reveal>
         </Container>
       </section>
 

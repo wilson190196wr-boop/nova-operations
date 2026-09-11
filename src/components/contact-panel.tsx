@@ -16,7 +16,7 @@ export function ContactPanel() {
   const current = tabs.find((t) => t.id === active)!;
 
   return (
-    <div className="rounded-3xl border border-line bg-white p-6 shadow-[0_40px_90px_-50px_rgba(8,9,12,0.45)] lg:p-8">
+    <div className="mx-auto w-full max-w-[920px] rounded-3xl border border-line bg-white p-6 shadow-[0_40px_90px_-50px_rgba(8,9,12,0.45)] lg:p-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div
           role="tablist"
@@ -64,7 +64,11 @@ export function ContactPanel() {
         hidden={active !== "message"}
         className="mt-8"
       >
-        <ContactForm />
+        {/* Le panneau est pleine largeur pour le calendrier ; un formulaire
+            étiré sur 1300 px serait illisible. */}
+        <div className="max-w-3xl">
+          <ContactForm />
+        </div>
       </div>
     </div>
   );
