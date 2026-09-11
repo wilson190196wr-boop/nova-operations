@@ -3,7 +3,6 @@
 import { useActionState } from "react";
 import { envoyerDemande } from "@/app/actions";
 import { initialContactState } from "@/lib/contact";
-import { offers } from "@/lib/content";
 
 export function ContactForm() {
   const [state, formAction, pending] = useActionState(envoyerDemande, initialContactState);
@@ -22,10 +21,9 @@ export function ContactForm() {
             />
           </svg>
         </span>
-        <h3 className="mt-6 text-[22px] font-semibold tracking-[-0.02em]">Demande envoyée.</h3>
+        <h3 className="mt-6 text-[22px] font-semibold tracking-[-0.02em]">Message bien reçu.</h3>
         <p className="mt-3 max-w-sm text-[15px] leading-relaxed text-ink/55">
-          Nous revenons vers vous sous 24 heures ouvrées avec trois créneaux. Si c&apos;est urgent,
-          appelez-nous directement.
+          Je vous réponds sous 24 heures ouvrées. Si c&apos;est urgent, appelez-moi.
         </p>
       </div>
     );
@@ -62,27 +60,20 @@ export function ContactForm() {
       <div className="grid gap-5 sm:grid-cols-2">
         <Field
           name="entreprise"
-          label="Entreprise"
+          label="Entreprise (facultatif)"
           placeholder="Nom de la société"
           errors={state.errors?.entreprise}
           defaultValue={state.values?.entreprise}
         />
-        <SelectField
-          name="effectif"
-          label="Effectif"
-          options={["20 à 50 salariés", "50 à 100 salariés", "100 à 250 salariés", "Plus de 250"]}
-          errors={state.errors?.effectif}
-          defaultValue={state.values?.effectif}
+        <Field
+          name="telephone"
+          label="Téléphone (facultatif)"
+          placeholder="06 12 34 56 78"
+          type="tel"
+          errors={state.errors?.telephone}
+          defaultValue={state.values?.telephone}
         />
       </div>
-
-      <SelectField
-        name="sujet"
-        label="Sujet"
-        options={[...offers.map((o) => o.name), "Je ne sais pas encore"]}
-        errors={state.errors?.sujet}
-        defaultValue={state.values?.sujet}
-      />
 
       <label className="flex flex-col gap-2">
         <span className="text-[12.5px] font-medium text-ink/60">
@@ -115,7 +106,7 @@ export function ContactForm() {
           className="mt-0.5 h-4 w-4 shrink-0 rounded border-line accent-[#2f5cff]"
         />
         <span>
-          J&apos;accepte d&apos;être recontacté par NOVA Operations au sujet de ma demande. Aucune
+          J&apos;accepte d&apos;être recontacté par KELERIA au sujet de ma demande. Aucune
           donnée n&apos;est transmise à des tiers.
           <FieldError errors={state.errors?.consentement} />
         </span>
@@ -188,61 +179,6 @@ function Field({
         aria-invalid={errors?.length ? true : undefined}
         className={inputClass(errors)}
       />
-      <FieldError errors={errors} />
-    </label>
-  );
-}
-
-function SelectField({
-  name,
-  label,
-  options,
-  errors,
-  defaultValue,
-}: {
-  name: string;
-  label: string;
-  options: string[];
-  errors?: string[];
-  defaultValue?: string;
-}) {
-  return (
-    <label className="flex flex-col gap-2">
-      <span className="text-[12.5px] font-medium text-ink/60">{label}</span>
-      <div className="relative">
-        <select
-          // Remonte le champ quand l'action renvoie une valeur : `defaultValue`
-          // n'est appliqué qu'au montage, la sélection serait sinon perdue.
-          key={defaultValue ?? "vide"}
-          name={name}
-          defaultValue={defaultValue ?? ""}
-          aria-invalid={errors?.length ? true : undefined}
-          className={`w-full appearance-none ${inputClass(errors)}`}
-        >
-          <option value="" disabled>
-            Sélectionner…
-          </option>
-          {options.map((o) => (
-            <option key={o}>{o}</option>
-          ))}
-        </select>
-        <svg
-          width="14"
-          height="14"
-          viewBox="0 0 16 16"
-          fill="none"
-          className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-ink/40"
-          aria-hidden="true"
-        >
-          <path
-            d="m4 6 4 4 4-4"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </div>
       <FieldError errors={errors} />
     </label>
   );

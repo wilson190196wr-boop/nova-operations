@@ -3,16 +3,19 @@
  *
  * Volontairement séparés de `src/app/actions.ts` : un fichier « use server »
  * ne peut exporter que des fonctions async. Ce module reste importable
- * depuis le client sans embarquer Zod ni Resend dans le bundle.
+ * depuis le client sans embarquer Zod ni la clé d'API dans le bundle.
  */
 
+/**
+ * Les champs du formulaire. « entreprise » et « telephone » sont les deux seuls
+ * facultatifs — le reste est exigé par la validation côté serveur.
+ */
 export type ContactField =
   | "prenom"
   | "nom"
   | "email"
   | "entreprise"
-  | "effectif"
-  | "sujet"
+  | "telephone"
   | "message"
   | "consentement";
 
