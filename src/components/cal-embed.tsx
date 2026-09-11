@@ -19,7 +19,11 @@ export function CalEmbed() {
         cal("ui", {
           theme: "light",
           layout: "month_view",
-          hideEventTypeDetails: false,
+          // La colonne « Wilson Rault / 45 min / Google Meet / Europe/Paris »
+          // répète ce que la page dit déjà juste au-dessus, et elle occupe un
+          // tiers de la largeur : sans elle, le calendrier et les créneaux
+          // tiennent côte à côte au lieu de s'empiler.
+          hideEventTypeDetails: true,
           cssVarsPerTheme: {
             light: { "cal-brand": calBrandColor },
             dark: { "cal-brand": calBrandColor },
@@ -74,10 +78,13 @@ export function CalEmbed() {
         </div>
       ) : null}
 
+      {/* L'iframe se redimensionne toute seule en hauteur : lui imposer
+          `overflow: scroll` ajoutait une barre de défilement interne en plus de
+          celle de la page. */}
       <Cal
         namespace={calNamespace}
         calLink={calLink}
-        style={{ width: "100%", height: "100%", minHeight: "560px", overflow: "scroll" }}
+        style={{ width: "100%", height: "100%", minHeight: "560px" }}
         config={{ layout: "month_view", theme: "light" }}
       />
     </div>
