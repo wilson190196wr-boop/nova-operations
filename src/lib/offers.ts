@@ -33,7 +33,7 @@ export const speeds = {
   modes: [
     {
       name: "Je construis",
-      text: "Automatisations, connexion d'outils, assistants, tableaux de bord. Des semaines, pas des trimestres. Cinq jours maximum par automatisation.",
+      text: "Automatisations, connexion d'outils, assistants, tableaux de bord. Des semaines, pas des trimestres. Deux semaines maximum par sujet.",
     },
     {
       name: "Je pilote",
