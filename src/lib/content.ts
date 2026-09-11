@@ -363,22 +363,22 @@ export const differentiators = [
 export const faq = [
   {
     q: "Combien de temps avant les premiers résultats ?",
-    a: "Le premier Quick Win tombe en moyenne 11 jours après le kick-off. L'audit complet livre sa roadmap chiffrée en 3 à 4 semaines.",
+    a: "Ça dépend de ce que le diagnostic révèle. Un chantier simple peut produire un effet en quelques semaines, un sujet plus lourd demande davantage. Je vous donne un ordre de grandeur une fois vos processus regardés, pas avant.",
   },
   {
     q: "Faut-il changer nos outils actuels ?",
     a: "Rarement. Dans la majorité des missions, les gains viennent d'une meilleure exploitation de l'existant et de la suppression des doublons.",
   },
   {
-    q: "Vos interventions perturbent-elles la production ?",
-    a: "Non. Nous travaillons par périmètres courts et réversibles, avec les équipes concernées, sans arrêter l'activité.",
+    q: "Vos interventions perturbent-elles notre activité ?",
+    a: "Je travaille par périmètres courts et réversibles, avec les équipes concernées. L'activité continue de tourner pendant la mission, quel que soit le métier.",
   },
   {
-    q: "Comment mesurez-vous le ROI ?",
-    a: "Heures récupérées valorisées au coût chargé réel, effet sur la marge et sur les délais. Le calcul est posé dès l'audit et suivi en comité.",
+    q: "Comment mesurez-vous le retour sur investissement ?",
+    a: "Sur des indicateurs choisis avec vous dès l'audit — temps passé, délais, marge, qualité — selon ce que le chantier vise. Mesurés avant, mesurés après, et revus en comité.",
   },
   {
-    q: "Travaillez-vous en dehors de l'Île-de-France ?",
-    a: "Oui. Les missions se déroulent en présentiel sur les phases terrain et à distance pour le pilotage, partout en France.",
+    q: "Où intervenez-vous ?",
+    a: "Je suis basé à Avignon et j'interviens sur tout le territoire. Les phases de terrain se font sur place, le pilotage à distance.",
   },
 ];
