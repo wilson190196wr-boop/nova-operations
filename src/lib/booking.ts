@@ -8,8 +8,14 @@
  *
  * NEXT_PUBLIC_CAL_LINK reste disponible pour pointer un autre type
  * d'événement, par exemple sur un environnement de test.
+ *
+ * Une variable déclarée mais laissée vide vaut ici « non renseignée » : `??` ne
+ * rattrape que `undefined`, et une chaîne vide traversait jusqu'à l'embed, qui
+ * lève « calLink is required » — au build, pas à l'exécution. Un hébergeur où
+ * l'on crée la variable avant d'en connaître la valeur cassait donc le
+ * déploiement entier.
  */
-export const calLink = process.env.NEXT_PUBLIC_CAL_LINK ?? "wilson-rault-vclkvp/45min";
+export const calLink = process.env.NEXT_PUBLIC_CAL_LINK?.trim() || "wilson-rault-vclkvp/45min";
 
 /** Namespace de l'embed : isole cette instance si plusieurs embeds cohabitent. */
 export const calNamespace = "diagnostic";
