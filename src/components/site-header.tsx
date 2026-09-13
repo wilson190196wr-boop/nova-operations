@@ -3,91 +3,102 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { Wordmark } from "@/components/logo";
 import { mainNav, site } from "@/lib/home";
 
+/**
+ * La barre de navigation : une pilule posée sur le fond sable, collée en haut
+ * au défilement.
+ *
+ * Le lien de la page courante porte `aria-current="page"`, comme dans la
+ * maquette, et c'est cet attribut — pas une classe — qui déclenche le
+ * soulignement azur. Un seul état à maintenir au lieu de deux.
+ */
 export function SiteHeader() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
+  const current = (href: string) =>
+    pathname === href || pathname.startsWith(`${href}/`) ? "page" : undefined;
+
+  const underline =
+    "aria-[current=page]:underline aria-[current=page]:decoration-azure aria-[current=page]:decoration-2 aria-[current=page]:underline-offset-[5px]";
+
   return (
-    <header className="border-b border-line bg-white">
-      <div className="mx-auto flex w-full max-w-[1440px] items-center justify-between px-6 py-5 lg:px-12 lg:py-6">
-        <Link href="/" aria-label="KELERIA — accueil" className="flex items-baseline gap-3.5">
-          <span className="text-[19px] font-semibold tracking-[-0.03em]">{site.name}</span>
-          <span className="hidden text-[13px] text-ink/45 xl:inline">{site.baseline}</span>
-        </Link>
+    <header className="sticky top-0 z-20 bg-sand py-2.5 lg:py-3.5">
+      <div className="mx-auto w-full max-w-[1280px] px-gutter">
+        <div className="flex items-center justify-between gap-3 rounded-full border border-line-soft bg-paper py-2 pl-[18px] pr-2 lg:gap-4 lg:py-2.5 lg:pl-6 lg:pr-3">
+          {/* `min-h-[44px]` sur le lien lui-même : sa boîte ne faisait que 26 px
+              de haut, soit une cible tactile sous le seuil recommandé. La
+              pilule est plus haute que cela, le rendu ne change pas. */}
+          <Link
+            href="/"
+            aria-label={`${site.name}, retour à l'accueil`}
+            className="flex min-h-[44px] items-center"
+          >
+            <Wordmark />
+          </Link>
 
-        <div className="hidden items-center gap-8 lg:flex">
-          <nav className="flex items-center gap-8">
-            {mainNav.map((item) => {
-              const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
-              return (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`text-[14.5px] transition-colors ${
-                    active ? "text-ink" : "text-ink/65 hover:text-ink"
-                  }`}
-                >
-                  {item.label}
-                </Link>
-              );
-            })}
+          <nav className="hidden items-center gap-[1.625rem] text-fine text-ink-70 lg:flex">
+            {mainNav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={current(item.href)}
+                className={underline}
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
+
           <Link
             href="/contact"
-            className="rounded-lg bg-ink px-5 py-2.5 text-[14.5px] text-white transition-colors hover:bg-navy-deep"
+            className="hidden min-h-[44px] items-center justify-center rounded-full bg-navy px-6 text-fine font-medium text-white transition-colors hover:bg-[#0b1c3d] hover:text-white lg:inline-flex"
           >
             Rendez-vous
           </Link>
+
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+            aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
+            className="flex min-h-[44px] min-w-[44px] flex-col items-center justify-center gap-[5px] lg:hidden"
+          >
+            <span className="block h-0.5 w-[22px] rounded-sm bg-navy" />
+            <span className="block h-0.5 w-[22px] rounded-sm bg-navy" />
+            <span className="block h-0.5 w-[22px] rounded-sm bg-navy" />
+          </button>
         </div>
 
-        <button
-          type="button"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="Menu"
-          aria-expanded={open}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-line lg:hidden"
-        >
-          <span className="relative block h-2.5 w-4">
-            <span
-              className={`absolute left-0 block h-px w-4 bg-ink transition-all duration-300 ${
-                open ? "top-1 rotate-45" : "top-0"
-              }`}
-            />
-            <span
-              className={`absolute left-0 block h-px w-4 bg-ink transition-all duration-300 ${
-                open ? "top-1 -rotate-45" : "top-2.5"
-              }`}
-            />
-          </span>
-        </button>
-      </div>
-
-      <div
-        className={`overflow-hidden border-t border-line transition-all duration-300 lg:hidden ${
-          open ? "max-h-80" : "max-h-0"
-        }`}
-      >
-        <div className="mx-auto flex w-full max-w-[1440px] flex-col px-6 py-4">
-          {mainNav.map((item) => (
+        {open ? (
+          <nav
+            id="mobile-nav"
+            aria-label="Navigation principale"
+            className="mt-2 flex flex-col gap-0.5 rounded-card border border-line-soft bg-paper p-2.5 lg:hidden"
+          >
+            {mainNav.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={current(item.href)}
+                onClick={() => setOpen(false)}
+                className={`flex min-h-[48px] items-center rounded-[14px] px-3 text-[1.0625rem] hover:bg-sand-2 hover:text-navy ${underline}`}
+              >
+                {item.label}
+              </Link>
+            ))}
             <Link
-              key={item.href}
-              href={item.href}
+              href="/contact"
               onClick={() => setOpen(false)}
-              className="border-b border-line py-3.5 text-[15px] text-ink/80"
+              className="mt-1.5 flex min-h-[44px] items-center justify-center rounded-full bg-navy px-6 text-fine font-medium text-white hover:bg-[#0b1c3d] hover:text-white"
             >
-              {item.label}
+              Rendez-vous
             </Link>
-          ))}
-          <Link
-            href="/contact"
-            onClick={() => setOpen(false)}
-            className="mt-4 rounded-lg bg-ink px-5 py-3.5 text-center text-[15px] text-white"
-          >
-            Rendez-vous
-          </Link>
-        </div>
+          </nav>
+        ) : null}
       </div>
     </header>
   );

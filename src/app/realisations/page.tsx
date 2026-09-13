@@ -1,143 +1,84 @@
 import type { Metadata } from "next";
-import { BookingCta } from "@/components/booking-cta";
+import { Reveal } from "@/components/reveal";
+import { Closing, Container, PageHead } from "@/components/ui";
 import { ai, aiCases, aiProjects, appDev, appProjects, intro, type Work } from "@/lib/work";
 
 export const metadata: Metadata = {
   title: "Réalisations",
   description:
-    "Développement applicatif — CRM, ERP, commerce en ligne, application mobile — et automatisation par l'intelligence artificielle pour les PME de plus de 30 salariés et les startups.",
+    "Six ans de projets livrés en production : CRM, ERP, commerce en ligne, extranets, tableaux de bord, automatisations et intelligence artificielle.",
 };
 
 export default function RealisationsPage() {
   return (
     <>
-      <Intro />
-      <AppDev />
-      <Ai />
-      <BookingCta title="Lequel ressemble au vôtre ?" />
+      <PageHead title={intro.title} lead={intro.text} />
+      <Container>
+        <Group title={appDev.title} id="dev" items={appProjects} />
+        {/* Les chantiers types rejoignent les projets datés sous le même titre :
+            ils relèvent du même domaine, seule leur datation diffère. */}
+        <Group title={ai.title} id="ia" items={[...aiProjects, ...aiCases]} />
+        <Closing title="Lequel ressemble au vôtre ?" />
+      </Container>
     </>
   );
 }
 
-/* ------------------------------------------------------------------ Carte */
-
-/**
- * Format unique pour toutes les réalisations, claires comme sombres :
- * métadonnées, titre, description, deux indicateurs.
- */
-function WorkCard({ work, dark = false }: { work: Work; dark?: boolean }) {
+function Group({ title, id, items }: { title: string; id: string; items: Work[] }) {
   return (
-    <article
-      className={`flex flex-col p-8 lg:px-[34px] lg:py-9 ${dark ? "bg-white/[0.06]" : "bg-mist"}`}
-    >
-      <div className="flex flex-wrap items-baseline gap-x-5 gap-y-1">
-        {work.years ? (
-          <p className={`text-[14px] ${dark ? "text-white/40" : "text-ink/45"}`}>{work.years}</p>
-        ) : null}
-        <p className={`text-[14px] ${dark ? "text-azure-light" : "text-azure"}`}>{work.context}</p>
+    <section aria-labelledby={id}>
+      <Reveal>
+        <h2
+          id={id}
+          className="mt-section text-h2-sm font-semibold leading-[1.05] tracking-[-0.045em]"
+        >
+          {title}
+        </h2>
+      </Reveal>
+      {/* Carrousel sur téléphone, deux colonnes au-delà : six cartes empilées
+          à la file donnaient un mur, alors qu'elles se parcourent très bien au
+          doigt, une par une. */}
+      <div className="rail mt-6 sm:mt-9 sm:grid sm:gap-card lg:grid-cols-2">
+        {items.map((item, i) => (
+          <Reveal key={item.title} as="article" delay={(i % 2) * 90}>
+            <Case item={item} />
+          </Reveal>
+        ))}
       </div>
+    </section>
+  );
+}
 
-      <h3 className="mt-5 text-[clamp(1.3rem,1.8vw,1.5rem)] font-semibold leading-[1.24] tracking-[-0.03em]">
-        {work.title}
+function Case({ item }: { item: Work }) {
+  return (
+    <div className="flex h-full flex-col rounded-card bg-paper p-6 sm:p-[clamp(1.5rem,2.4vw,1.875rem)]">
+      <div className="flex flex-wrap items-center gap-x-3.5 gap-y-2">
+        {item.years ? (
+          <span className="font-mono text-mono tracking-[0.08em] text-azure">{item.years}</span>
+        ) : null}
+        <span className="text-finer text-ink-55">{item.context}</span>
+      </div>
+      <h3
+        className="mt-4 text-[1.4375rem] font-semibold leading-[1.2] tracking-[-0.03em]"
+        style={{ textWrap: "pretty" }}
+      >
+        {item.title}
       </h3>
-
-      <p className={`mt-4 text-[16px] leading-[1.58] ${dark ? "text-white/55" : "text-ink/70"}`}>
-        {work.text}
-      </p>
-
-      <ul className="mt-6">
-        {work.metrics.map((metric) => (
+      <p className="mt-3 text-fine leading-[1.58] text-ink-70">{item.text}</p>
+      {/* `mt-auto` colle les résultats en bas : dans une rangée de deux cartes
+          de hauteurs inégales, ils restent alignés d'une carte à l'autre. Sans
+          effet dans le bloc empilé, dont les lignes ne s'alignent pas entre
+          elles. */}
+      <ul className="mt-auto grid gap-2 pt-5">
+        {item.metrics.map((metric) => (
           <li
             key={metric}
-            className={`border-t py-3 text-[15px] leading-[1.5] ${
-              dark ? "border-white/15 text-white/80" : "border-line text-ink/80"
-            }`}
+            className="relative pl-[1.375rem] text-finer font-medium leading-[1.5] before:absolute before:left-0 before:top-[0.5em] before:h-[7px] before:w-[7px] before:rounded-full before:bg-azure before:content-['']"
           >
             {metric}
           </li>
         ))}
       </ul>
-    </article>
-  );
-}
-
-/**
- * Le chapeau de section. `text` est facultatif : les deux sections n'en ont
- * plus, et rendre un paragraphe vide laisserait une gouttière inexpliquée à
- * droite du titre.
- */
-function SectionHead({
-  title,
-  text,
-  dark = false,
-}: {
-  title: string;
-  text?: string;
-  dark?: boolean;
-}) {
-  return (
-    <div className="grid gap-6 lg:grid-cols-12">
-      <h2 className="text-[clamp(1.75rem,3.2vw,2.75rem)] font-semibold leading-[1.06] tracking-[-0.04em] lg:col-span-5">
-        {title}
-      </h2>
-      {text ? (
-        <p
-          className={`max-w-[52ch] text-[17px] leading-[1.6] lg:col-span-5 lg:col-start-7 lg:self-end ${
-            dark ? "text-white/55" : "text-ink/70"
-          }`}
-        >
-          {text}
-        </p>
-      ) : null}
     </div>
-  );
-}
-
-/* ----------------------------------------------------------------- Intro */
-
-function Intro() {
-  return (
-    <section className="mx-auto w-full max-w-[1440px] px-6 pt-14 lg:px-12 lg:pt-16">
-      <div className="grid gap-8 lg:grid-cols-12 lg:gap-6">
-        <h1 className="text-[clamp(2rem,4.4vw,4rem)] font-semibold leading-[1.02] tracking-[-0.048em] lg:col-span-7">
-          {intro.title}
-        </h1>
-        <p className="max-w-[52ch] text-[17px] leading-[1.6] text-ink/70 lg:col-span-4 lg:col-start-9 lg:self-end">
-          {intro.text}
-        </p>
-      </div>
-    </section>
-  );
-}
-
-/* ----------------------------------------------- Développement applicatif */
-
-function AppDev() {
-  return (
-    <section className="mx-auto w-full max-w-[1440px] px-6 pt-20 lg:px-12 lg:pt-[92px]">
-      <SectionHead title={appDev.title} />
-      <div className="mt-12 grid gap-6 lg:grid-cols-2">
-        {appProjects.map((work) => (
-          <WorkCard key={work.title} work={work} />
-        ))}
-      </div>
-    </section>
-  );
-}
-
-/* --------------------------------------------------- Automatisation et IA */
-
-function Ai() {
-  return (
-    <section className="mt-20 bg-navy-deep py-20 text-white lg:mt-[92px] lg:py-24">
-      <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12">
-        <SectionHead title={ai.title} dark />
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {[...aiProjects, ...aiCases].map((work) => (
-            <WorkCard key={work.title} work={work} dark />
-          ))}
-        </div>
-      </div>
-    </section>
   );
 }

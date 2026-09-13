@@ -51,6 +51,12 @@ export type Offer = {
   description: string;
   duration: string;
   price: string;
+  /**
+   * Libellé du bouton d'appel. Écrit à la main plutôt que composé depuis
+   * `name` : « Parler de » demande une élision différente pour chaque offre
+   * — de l'audit, des sprints, de la formation.
+   */
+  cta: string;
   /** Formats ou paliers, quand l'offre en propose plusieurs. */
   variants?: { name: string; price: string; detail: string }[];
   deliverables: string[];
@@ -78,6 +84,7 @@ export const offers: Offer[] = [
         detail: "Toutes les fonctions, trois à quatre semaines",
       },
     ],
+    cta: "Parler de l'audit",
     deliverables: [
       "Cartographie des processus",
       "Relevé des temps et des points de rupture",
@@ -96,6 +103,7 @@ export const offers: Offer[] = [
       "Les chantiers de la feuille de route qui se règlent en semaines. Qu'il s'agisse de la mise en place d'un outil, de la connexion entre vos outils ou d'automatisation IA.",
     duration: "2 à 10 semaines",
     price: "Sur devis, à partir de la feuille de route",
+    cta: "Parler des sprints",
     deliverables: [
       "Automatisations construites et mises en production",
       "Connexion de vos outils entre eux, sans ressaisie",
@@ -120,6 +128,7 @@ export const offers: Offer[] = [
       { name: "Intensif", price: "6 400 € / mois", detail: "+ construction et présence hebdomadaire" },
       { name: "Sur mesure", price: "Sur devis", detail: "Plusieurs entités, direction de programme" },
     ],
+    cta: "Parler de l'accompagnement",
     deliverables: [
       "Un comité mensuel avec le dirigeant : avancement, arbitrages, feuille de route",
       "Le pilotage des chantiers en cours et des prestataires",
@@ -137,6 +146,7 @@ export const offers: Offer[] = [
       "Jamais vendue seule : elle suit le diagnostic. Sinon on forme des gens à des outils qui ne résolvent pas leur problème, et l'usage retombe au bout de trois semaines.",
     duration: "À la session",
     price: "Sur devis",
+    cta: "Parler de la formation",
     deliverables: [
       "Formation aux outils réellement déployés chez vous",
       "Exercices construits sur vos propres dossiers",

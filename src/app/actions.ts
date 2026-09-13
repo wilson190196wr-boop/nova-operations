@@ -1,7 +1,7 @@
 "use server";
 
 import { z } from "zod";
-import { site } from "@/lib/content";
+import { site } from "@/lib/home";
 import type { ContactState } from "@/lib/contact";
 
 /**

@@ -3,6 +3,7 @@
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect, useState } from "react";
 import { calBrandColor, calLink, calNamespace } from "@/lib/booking";
+import { site } from "@/lib/home";
 
 export function CalEmbed() {
   const [ready, setReady] = useState(false);
@@ -45,32 +46,32 @@ export function CalEmbed() {
 
   if (failed) {
     return (
-      <div className="flex min-h-[560px] flex-col items-center justify-center gap-4 rounded-2xl border border-line bg-mist/60 p-10 text-center">
-        <p className="text-[15.5px] font-medium">Le calendrier n&apos;a pas pu se charger.</p>
-        <p className="max-w-sm text-[14.5px] leading-relaxed text-ink/55">
+      <div className="mt-5 flex min-h-[280px] flex-col items-center justify-center gap-4 rounded-tier border border-dashed border-ink/20 bg-sand p-8 text-center">
+        <p className="text-fine font-medium">Le calendrier n&apos;a pas pu se charger.</p>
+        <p className="max-w-sm text-finer leading-[1.55] text-ink-70">
           Écrivez-nous directement, nous vous proposerons trois créneaux dans la journée.
         </p>
         <a
-          href="mailto:wilson@keleria.com"
-          className="mt-2 rounded-full bg-ink px-5 py-3 text-[13.5px] font-medium text-white transition-colors hover:bg-navy"
+          href={`mailto:${site.email}`}
+          className="mt-2 inline-flex min-h-[44px] items-center rounded-full bg-navy px-5 text-finer font-medium text-white transition-colors hover:bg-[#0b1c3d] hover:text-white"
         >
-          wilson@keleria.com
+          {site.email}
         </a>
       </div>
     );
   }
 
   return (
-    <div className="relative min-h-[560px] overflow-hidden rounded-2xl border border-line">
+    <div className="relative mt-5 min-h-[560px] overflow-hidden rounded-tier">
       {!ready ? (
-        <div className="absolute inset-0 z-10 flex flex-col gap-4 bg-white p-8">
-          <div className="h-4 w-40 animate-pulse rounded-full bg-mist" />
-          <div className="h-3 w-64 animate-pulse rounded-full bg-mist" />
+        <div className="absolute inset-0 z-10 flex flex-col gap-4 bg-sand p-8">
+          <div className="h-4 w-40 animate-pulse rounded-full bg-sand-2" />
+          <div className="h-3 w-64 animate-pulse rounded-full bg-sand-2" />
           <div className="mt-6 grid flex-1 grid-cols-7 gap-2">
             {Array.from({ length: 35 }).map((_, i) => (
               <div
                 key={i}
-                className="animate-pulse rounded-lg bg-mist"
+                className="animate-pulse rounded-lg bg-sand-2"
                 style={{ animationDelay: `${i * 18}ms` }}
               />
             ))}

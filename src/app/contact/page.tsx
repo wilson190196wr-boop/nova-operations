@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
-import { Reveal } from "@/components/reveal";
 import { ContactPanel } from "@/components/contact-panel";
-import { Container, Eyebrow } from "@/components/ui";
-import { faq, site } from "@/lib/content";
+import { Reveal } from "@/components/reveal";
+import { Container, Eyebrow, PageHead, SectionHead, Steps } from "@/components/ui";
+import { faq } from "@/lib/faq";
+import { site } from "@/lib/home";
 
 export const metadata: Metadata = {
   title: "Contact — réserver un échange de 45 minutes",
@@ -10,102 +11,124 @@ export const metadata: Metadata = {
     "Quarante-cinq minutes avec KELERIA pour décrire votre organisation, vos outils et ce qui vous freine, et savoir s'il y a matière à travailler ensemble. Sans engagement.",
 };
 
+/** Les trois temps de l'échange, propres à cette page. */
+const echange = [
+  {
+    n: "01",
+    title: "Vous décrivez",
+    text: "Votre activité, vos effectifs, les outils en place et ce qui vous freine aujourd'hui.",
+  },
+  {
+    n: "02",
+    title: "Je cadre",
+    text: "Ce qui me paraît prioritaire, ce que ça suppose de votre côté, et ce que je laisserais de côté.",
+  },
+  {
+    n: "03",
+    title: "Vous décidez",
+    text: "Un audit, un chantier précis, un simple conseil, ou rien du tout. Sans relance commerciale.",
+  },
+];
+
 export default function ContactPage() {
   return (
     <>
-      <section className="relative overflow-hidden pt-[128px] pb-24 lg:pt-[168px] lg:pb-32">
-        <div className="grid-lines pointer-events-none absolute inset-0 opacity-50 mask-fade-b" />
-        <div
-          className="pointer-events-none absolute -right-32 top-0 h-[520px] w-[520px] rounded-full blur-[140px] animate-sheen"
-          style={{ background: "radial-gradient(circle, rgba(47,92,255,0.15), transparent 70%)" }}
-        />
+      <PageHead
+        eyebrow="Contact"
+        title="Quarante-cinq minutes pour y voir clair."
+        lead="Un échange cadré, sans slide de vente. Vous décrivez votre organisation, vos outils et ce qui vous freine. Je vous dis par où je commencerais, ce que ça suppose, et s'il y a matière à travailler ensemble."
+      >
+        <Coordinates />
+      </PageHead>
 
-        <Container className="relative">
-          {/* Le texte tient sur deux colonnes, le panneau prend toute la largeur
-              en dessous. Coincé dans une demi-page, le calendrier Cal.com passe
-              en colonne unique et devient interminable. */}
-          <div className="grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-20">
-            <Reveal>
-              <Eyebrow>Contact</Eyebrow>
-              <h1
-                className="mt-6 text-[clamp(2.3rem,5.4vw,3.9rem)] font-semibold leading-[1.02] tracking-[-0.04em]"
-                style={{ textWrap: "balance" }}
-              >
-                Quarante-cinq minutes pour y voir clair.
-              </h1>
-              <p className="mt-7 max-w-lg text-[17.5px] leading-[1.65] text-ink/60">
-                Un échange cadré, sans slide de vente. Vous décrivez votre organisation, vos outils
-                et ce qui vous freine. Je vous dis par où je commencerais, ce que ça suppose, et
-                s&apos;il y a matière à travailler ensemble.
-              </p>
+      <Container>
+        <Steps items={echange} />
 
-              <dl className="mt-12 grid gap-6 sm:grid-cols-3">
-                {[
-                  ["Email", site.email],
-                  ["Téléphone", site.phone],
-                  ["Adresse", site.address],
-                ].map(([label, value]) => (
-                  <div key={label}>
-                    <dt className="text-[11.5px] uppercase tracking-[0.14em] text-ink/40">
-                      {label}
-                    </dt>
-                    <dd className="mt-2 text-[14.5px] leading-snug text-ink/75">{value}</dd>
-                  </div>
-                ))}
-              </dl>
-            </Reveal>
+        <Reveal className="mt-section">
+          <ContactPanel />
+        </Reveal>
 
-            {/* Aligné par le bas sur la colonne de gauche : son bord inférieur
-                et la ligne des coordonnées partagent la même ligne. Calé en
-                haut, il ne s'alignait que sur le libellé « Contact » et
-                flottait au-dessus du reste. */}
-            <Reveal delay={100} className="lg:self-end">
-              <ul className="flex flex-col gap-px overflow-hidden rounded-2xl border border-line bg-line">
-                {[
-                  ["01", "Vous décrivez", "Votre activité, vos effectifs, les outils en place et ce qui vous freine aujourd'hui."],
-                  ["02", "Je cadre", "Ce qui me paraît prioritaire, ce que ça suppose de votre côté, et ce que je laisserais de côté."],
-                  ["03", "Vous décidez", "Un audit, un chantier précis, un simple conseil, ou rien du tout. Sans relance commerciale."],
-                ].map(([n, t, d]) => (
-                  <li key={n} className="flex gap-6 bg-white px-6 py-6">
-                    <span className="font-mono text-[12px] text-ink/30">{n}</span>
-                    <div>
-                      <p className="text-[15.5px] font-medium">{t}</p>
-                      <p className="mt-1.5 text-[14px] leading-relaxed text-ink/50">{d}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </Reveal>
-          </div>
-
-          {/* Prise de rendez-vous + formulaire */}
-          <Reveal delay={160} className="mt-16 lg:mt-20">
-            <ContactPanel />
-          </Reveal>
-        </Container>
-      </section>
-
-      <section className="border-t border-line bg-mist py-24 lg:py-28">
-        <Container>
-          <div className="grid gap-14 lg:grid-cols-[0.8fr_1.2fr]">
-            <Reveal>
-              <Eyebrow>Avant de nous écrire</Eyebrow>
-              <h2 className="mt-5 text-[clamp(1.7rem,3.4vw,2.5rem)] font-semibold leading-[1.1] tracking-[-0.035em]">
-                Les réponses aux questions les plus fréquentes.
-              </h2>
-            </Reveal>
-            <div>
-              {faq.map((item, i) => (
-                <Reveal key={item.q} delay={i * 60} className="border-t border-line py-7 last:border-b">
-                  <h3 className="text-[17px] font-medium tracking-[-0.01em]">{item.q}</h3>
-                  <p className="mt-3 max-w-2xl text-[15px] leading-[1.7] text-ink/55">{item.a}</p>
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </section>
+        <Faq />
+      </Container>
     </>
   );
 }
 
+/* ----------------------------------------------------------- Coordinates */
+
+/**
+ * Les coordonnées, en une seule ligne compacte sur une carte claire.
+ *
+ * Elles occupaient auparavant trois colonnes coiffées d'un filet — le même
+ * traitement que la rangée des étapes qui suit immédiatement, ce qui donnait
+ * deux bandeaux jumeaux et rendait la hiérarchie illisible. Ramenées sur une
+ * carte, elles se lisent comme un encart de contact et non comme une section.
+ */
+function Coordinates() {
+  const rows = [
+    { label: "Email", value: site.email, href: `mailto:${site.email}` },
+    // `tel:` n'accepte ni espace ni signe de ponctuation : le numéro affiché
+    // reste lisible, celui composé est nettoyé.
+    { label: "Téléphone", value: site.phone, href: `tel:${site.phone.replace(/\s/g, "")}` },
+    { label: "Localisation", value: site.address, href: null },
+  ];
+
+  return (
+    <dl className="mt-7 grid grid-cols-2 gap-x-6 gap-y-4 rounded-tier bg-paper px-5 py-4 sm:mt-9 sm:inline-flex sm:flex-wrap sm:gap-x-10 sm:px-6 sm:py-5">
+      {rows.map((row) => (
+        <div key={row.label} className="flex flex-col gap-1">
+          <dt>
+            <Eyebrow uppercase>{row.label}</Eyebrow>
+          </dt>
+          <dd className="text-[1.0625rem] font-medium leading-none">
+            {/* Padding vertical compensé par une marge négative : la zone
+                tappable passe de 22 à 45 px sans déplacer le texte d'un pixel.
+                3.5 et non 3, parce que `leading-none` réduit la boîte de ligne
+                à 17 px — 24 px de padding ne suffisaient pas à atteindre 44. */}
+            {row.href ? (
+              <a href={row.href} className="-my-3.5 inline-block py-3.5">
+                {row.value}
+              </a>
+            ) : (
+              row.value
+            )}
+          </dd>
+        </div>
+      ))}
+    </dl>
+  );
+}
+
+/* -------------------------------------------------------------------- FAQ */
+
+function Faq() {
+  return (
+    <section aria-labelledby="faq-title" className="mt-section">
+      <SectionHead
+        id="faq-title"
+        eyebrow="Avant de nous écrire"
+        title="Les réponses aux questions les plus fréquentes."
+      />
+      {/* `details` plutôt qu'une liste toujours ouverte : le dépliage est natif,
+          donc opérable au clavier et annoncé par les lecteurs d'écran sans une
+          ligne de JavaScript. */}
+      <div className="mt-6 grid gap-2 sm:mt-9 sm:gap-3">
+        {faq.map((item, i) => (
+          <Reveal key={item.q} delay={i * 60}>
+            <details className="group rounded-card bg-paper px-5 py-[1.125rem] sm:px-[clamp(1.25rem,2vw,1.75rem)] sm:py-5">
+              {/* 44 px au doigt, la hauteur de la maquette à la souris. */}
+              <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold tracking-[-0.02em] sm:text-[1.0625rem] lg:min-h-8 [&::-webkit-details-marker]:hidden">
+                {item.q}
+                <span
+                  aria-hidden="true"
+                  className="font-mono text-xl leading-none text-azure after:content-['+'] group-open:after:content-['–']"
+                />
+              </summary>
+              <p className="mt-3 max-w-[70ch] text-fine leading-[1.6] text-ink-70 sm:mt-3.5">{item.a}</p>
+            </details>
+          </Reveal>
+        ))}
+      </div>
+    </section>
+  );
+}

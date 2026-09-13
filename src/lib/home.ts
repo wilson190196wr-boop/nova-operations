@@ -1,15 +1,24 @@
 /**
  * Contenu de la page d'accueil — positionnement du 4 septembre 2026.
  *
- * Volontairement séparé de `content.ts`, qui porte encore les textes des briefs
- * de juillet utilisés par les autres pages. Les deux fusionneront quand chaque
- * page aura été reprise.
+ * Porte aussi l'identité du site, désormais seule : `content.ts` en gardait une
+ * seconde copie pour les pages de juillet, avec une accroche périmée. Deux
+ * objets `site` cohabitaient donc, et ce que le visiteur lisait dépendait de la
+ * page où il se trouvait.
  */
 
+/**
+ * L'identité du site, source unique. Les coordonnées valent aussi pour les
+ * mentions légales et pour l'adresse de réception du formulaire : les changer
+ * ici les change partout.
+ */
 export const site = {
   name: "KELERIA",
   /** Accroche affichée à côté du mot-symbole et en pied de page. */
   baseline: "Le digital et l'IA, là où ils rapportent.",
+  email: "wilson@keleria.com",
+  phone: "+33 6 62 90 92 59",
+  address: "Avignon",
 };
 
 export const mainNav = [
@@ -19,29 +28,17 @@ export const mainNav = [
 ];
 
 /**
- * Le titre-image : une ligne par élément.
+ * Le titre d'accueil : une ligne par élément.
  *
- * Le découpage est manuel plutôt que laissé au navigateur, et chaque ligne doit
- * tenir dans la colonne : à cette taille, une ligne trop longue se replie toute
- * seule et la mise en couleur ne tombe plus où il faut.
+ * Le découpage reste manuel plutôt que laissé au navigateur — c'est la
+ * composition voulue, et non le hasard de la largeur disponible.
  *
- * Trois lignes, pas cinq : isoler « IA » et « et » sur leur propre ligne
- * donnait deux mots de deux lettres dans un corps calibré pour treize, et
- * l'escalier partait de travers.
- *
- * Chaque ligne se découpe en segments pour que la couleur puisse s'arrêter au
- * milieu. `accent` met le segment en bleu : il porte sur les deux compétences,
- * mais pas sur le « et » qui les relie — colorer la conjonction lui donnait le
- * même poids que les mots qu'elle joint.
- *
- * C'est le seul endroit coloré de la hero ; le chapô est resté en gris,
- * puisque mettre deux choses en avant n'en met plus aucune.
+ * La charte ne colore pas ce titre. L'azur y portait auparavant les deux
+ * compétences ; il marque désormais les numéros, les surtitres et les puces,
+ * où il signale une hiérarchie au lieu de se disputer l'attention avec le
+ * titre lui-même.
  */
-export const heroLines: { text: string; accent?: boolean }[][] = [
-  [{ text: "Votre partenaire" }],
-  [{ text: "IA", accent: true }, { text: " et " }, { text: "développement", accent: true }],
-  [{ text: "applicatif", accent: true }],
-];
+export const heroLines = ["Votre partenaire", "IA et développement", "applicatif"];
 
 export const heroTail =
   "En trois semaines, vous saurez où l'IA vous fait gagner de l'argent — et où elle n'en fait pas. Puis on construit, et je reste jusqu'au résultat mesuré.";
@@ -137,33 +134,25 @@ export const steps = [
 /**
  * Les prix ne figurent pas sur l'accueil : ils vivent sur la page Offres.
  *
- * `surface` décrit fond, texte et texte secondaire.
- *
- * Les quatre fonds forment un dégradé qui part du bleu nuit de la marque et
- * s'éclaircit par paliers réguliers, à teinte constante : #061127, #0b1f46,
- * #102c65, #153a84. La série reste entièrement du côté sombre — un palier
- * intermédiaire clair casserait la lecture, puisque les bleus moyens ne
- * portent lisiblement ni le texte blanc ni le texte encre.
+ * Les quatre cartes partagent désormais la même surface claire. Elles
+ * portaient un dégradé de quatre bleus nuit, qui hiérarchisait quatre offres
+ * de rang égal — la charte les remet sur un pied d'égalité.
  */
 export const offers = [
   {
     name: "Audit",
-    surface: { bg: "#061127", fg: "#ffffff", muted: "rgba(255,255,255,0.64)" },
     text: "Ciblé sur un processus en deux semaines, ou complet sur toutes les fonctions en trois à quatre. Cartographie, score de maturité, feuille de route chiffrée.",
   },
   {
     name: "Sprints",
-    surface: { bg: "#0b1f46", fg: "#ffffff", muted: "rgba(255,255,255,0.64)" },
     text: "Nous mettons en place des quick wins mesurables : solutions sélectionnées sur le marché, automatisation IA, agent IA. Deux semaines maximum par sujet. Au-delà, ce n'est plus un sprint mais un projet.",
   },
   {
     name: "Accompagnement",
-    surface: { bg: "#102c65", fg: "#ffffff", muted: "rgba(255,255,255,0.64)" },
     text: "Comité mensuel avec le dirigeant, pilotage des chantiers et des prestataires, maintenance de ce qui tourne, score remis à jour chaque trimestre.",
   },
   {
     name: "Formation",
-    surface: { bg: "#153a84", fg: "#ffffff", muted: "rgba(255,255,255,0.64)" },
     text: "Vos équipes formées sur vos cas réels, aux outils qu'elles vont vraiment utiliser. Jamais vendue seule : elle suit le diagnostic.",
   },
 ];

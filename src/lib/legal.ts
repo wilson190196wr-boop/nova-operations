@@ -26,8 +26,6 @@ export type Article = {
   paragraphs?: string[];
   /** Sous-articles numérotés 7.1, 7.2… */
   subsections?: { title: string; paragraphs: string[] }[];
-  /** Un seul article passe sur fond bleu nuit : celui qui compte le plus. */
-  emphasis?: boolean;
 };
 
 export const articles: Article[] = [
@@ -102,7 +100,6 @@ export const articles: Article[] = [
      * écrit.
      */
     title: "Données à caractère personnel",
-    emphasis: true,
     paragraphs: [
       "Ce site ne collecte de données que par son formulaire de contact, et uniquement celles que vous y écrivez.",
     ],

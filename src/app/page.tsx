@@ -1,5 +1,7 @@
 import Image from "next/image";
-import { BookingCta } from "@/components/booking-cta";
+import type { CSSProperties } from "react";
+import { Reveal } from "@/components/reveal";
+import { Card, Closing, Container, Eyebrow, SectionHead, Steps } from "@/components/ui";
 import { alternatives, audiences, brands, heroLines, heroTail, offers, steps } from "@/lib/home";
 
 export default function Home() {
@@ -7,10 +9,13 @@ export default function Home() {
     <>
       <Hero />
       <BrandBand />
-      <Situation />
-      <Offers />
-      <Alternatives />
-      <BookingCta title="Quarante-cinq minutes." />
+      <Container>
+        <Situation />
+        <Steps items={steps} />
+        <Offers />
+        <Alternatives />
+        <Closing title="Quarante-cinq minutes." />
+      </Container>
     </>
   );
 }
@@ -19,82 +24,96 @@ export default function Home() {
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      {/* Trame reprise du premier site : carrée, légère, dissoute vers le bas.
-          Elle donne de la matière au fond sans croiser le texte sur toute la
-          page — c'est ce qui ratait avec des filets pleine hauteur. */}
-      <div className="grid-lines pointer-events-none absolute inset-0 opacity-60 mask-fade-b" />
-
-      <div className="relative mx-auto w-full max-w-[1440px] px-6 pt-14 lg:px-12 lg:pt-16">
-        {/* Trois réglages que ce titre impose, chacun mesuré :
-
-            8.6vw, parce que la ligne la plus longue — « IA ET DÉVELOPPEMENT »,
-            1467 px pour un corps de 144 — doit tenir dans la colonne jusqu'aux
-            écrans d'ordinateur portable. Au-delà, elle se replie et l'escalier
-            se décale ;
-
-            2.4rem en borne basse, parce que sous 400 px de large c'est elle qui
-            s'applique et que « DÉVELOPPEMENT », mot insécable, débordait alors
-            de sa colonne — la section est en overflow-hidden, le mot se coupait
-            sans rien signaler ;
-
-            0.95 d'interlignage, parce que l'accent du É monte à 131 px pour un
-            corps de 144. En dessous de 0.91 il dépasse la ligne de base du
-            dessus et se lit comme une virgule posée entre deux mots de la ligne
-            précédente. C'était le cas à 0.84. */}
-        <h1 className="text-[clamp(2.4rem,8.6vw,8rem)] font-semibold leading-[0.95] tracking-[-0.062em]">
-          {heroLines.map((line, i) => (
-            <span
-              key={line.map((segment) => segment.text).join("")}
-              className="rise block uppercase"
-              style={{ animationDelay: `${i * 70}ms` }}
-            >
-              {line.map((segment) => (
-                <span
-                  key={segment.text}
-                  style={{ color: segment.accent ? "var(--color-azure)" : undefined }}
-                >
-                  {segment.text}
-                </span>
-              ))}
-            </span>
-          ))}
-        </h1>
-
-        <p className="mt-10 max-w-[44ch] text-[clamp(1rem,1.4vw,1.25rem)] leading-[1.45] text-ink/70 lg:mt-12">
-          {heroTail}
-        </p>
-      </div>
-    </section>
+    <Container className="pt-7 sm:pt-[clamp(2.5rem,5vw,3.5rem)]">
+      <h1
+        className="text-display font-semibold leading-none tracking-[-0.045em] sm:max-w-[22ch] sm:leading-[0.98]"
+        style={{ textWrap: "pretty" }}
+      >
+        {heroLines.map((line, i) => (
+          <span key={line} className="rise block" style={{ animationDelay: `${i * 70}ms` }}>
+            {line}
+          </span>
+        ))}
+      </h1>
+      <p className="mt-5 text-lead leading-[1.55] text-ink-70 sm:mt-[1.625rem] sm:max-w-[46ch]">{heroTail}</p>
+    </Container>
   );
 }
 
 /* ------------------------------------------------------------ Brand band */
 
+/**
+ * Les marques, en grille sur grand écran et en bandeau défilant en dessous.
+ *
+ * Cinq logos ne se répartissent pas dans une grille de deux ou trois colonnes :
+ * il reste toujours une cellule orpheline. Le bandeau supprime la question —
+ * le nombre de marques n'a plus d'incidence sur la mise en page.
+ *
+ * La grille de cinq est conservée à partir de `lg`, où les cinq cellules
+ * tombent juste et où la charte la prévoit ainsi.
+ */
 function BrandBand() {
   return (
-    <section className="mx-auto w-full max-w-[1440px] px-6 pb-8 pt-16 lg:px-12 lg:pt-[72px]">
-      <ul className="grid grid-cols-2 items-center gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-5">
-        {brands.map((brand) =>
-          brand.logo ? (
-            <li key={brand.name} className="flex h-14 items-center">
-              <Image
-                src={brand.logo.src}
-                alt={brand.name}
-                width={brand.logo.width}
-                height={brand.logo.height}
-                style={{ maxHeight: `${44 * (brand.logo.scale ?? 1)}px` }}
-                className="w-auto opacity-45 grayscale"
-              />
-            </li>
-          ) : (
-            <li key={brand.name} className="flex h-14 items-center text-[16px] font-medium text-ink/25">
-              {brand.name}
-            </li>
-          ),
-        )}
-      </ul>
-    </section>
+    <div className="mt-8 sm:mt-section">
+      <Container className="max-lg:hidden">
+        <ul aria-label="Références" className="grid grid-cols-5 gap-3">
+          {brands.map((brand) => (
+            <BrandCell key={brand.name} brand={brand} />
+          ))}
+        </ul>
+      </Container>
+
+      {/* Pleine largeur, hors du conteneur : un bandeau qui s'arrête aux
+          gouttières se lit comme une liste tronquée, pas comme un défilé. */}
+      <div className="mask-fade-x overflow-hidden lg:hidden">
+        <ul aria-label="Références" className="marquee-track flex w-max gap-3">
+          {/* Deux copies : la première est lue par les lecteurs d'écran, la
+              seconde n'existe que pour boucler sans raccord. */}
+          {[...brands, ...brands].map((brand, i) => (
+            <BrandCell
+              key={`${brand.name}-${i}`}
+              brand={brand}
+              aria-hidden={i >= brands.length}
+              fixedWidth
+            />
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function BrandCell({
+  brand,
+  fixedWidth = false,
+  ...rest
+}: {
+  brand: (typeof brands)[number];
+  fixedWidth?: boolean;
+  "aria-hidden"?: boolean;
+}) {
+  return (
+    <li
+      {...rest}
+      className={`flex min-h-[52px] items-center justify-center whitespace-nowrap rounded-full bg-paper px-[18px] text-center sm:min-h-[76px] sm:whitespace-normal sm:rounded-[20px] sm:py-3 ${
+        fixedWidth ? "w-[168px] shrink-0" : ""
+      }`}
+    >
+      {brand.logo ? (
+        <Image
+          src={brand.logo.src}
+          alt={brand.name}
+          width={brand.logo.width}
+          height={brand.logo.height}
+          // Le plafond de 30 px vient de la charte ; `scale` corrige ensuite
+          // les marges internes propres à chaque logo.
+          style={{ maxHeight: `${30 * (brand.logo.scale ?? 1)}px` }}
+          className="w-auto object-contain"
+        />
+      ) : (
+        <Eyebrow uppercase>{brand.name}</Eyebrow>
+      )}
+    </li>
   );
 }
 
@@ -102,52 +121,43 @@ function BrandBand() {
 
 function Situation() {
   return (
-    <section className="bg-navy-deep py-20 text-white lg:py-24">
-      <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12">
-        <h2 className="max-w-[20ch] text-[clamp(2rem,4vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.045em]">
+    <section
+      aria-labelledby="situations-title"
+      className="panel-organic bleed mt-section rounded-panel px-gutter py-9 sm:px-[clamp(1.5rem,3vw,2.75rem)] sm:py-[clamp(2rem,4vw,3.5rem)]"
+    >
+      <Reveal>
+        <h2
+          id="situations-title"
+          className="max-w-[30ch] text-h2 font-semibold leading-[1.02] tracking-[-0.045em] sm:leading-[1.03]"
+          style={{ textWrap: "pretty" }}
+        >
           Deux situations, la même absence d&apos;interlocuteur.
         </h2>
+      </Reveal>
 
-        {/* Alignés et cadrés par un filet : ce sont les puces qui faisaient
-            diapositive, pas la symétrie. Un décalage vertical sans repère
-            visuel se lit comme un défaut d'affichage. */}
-        <div className="mt-14 grid gap-12 lg:grid-cols-12 lg:gap-6">
-          {audiences.map((audience, i) => (
-            <div
-              key={audience.who}
-              className={`border-t border-white/20 pt-7 ${
-                i === 0 ? "lg:col-span-5 lg:col-start-1" : "lg:col-span-5 lg:col-start-8"
-              }`}
-            >
-              <p className="text-[15px] text-azure-light">{audience.who}</p>
-              <p className="mt-4 text-[clamp(1.5rem,2.4vw,2.125rem)] font-semibold leading-[1.14] tracking-[-0.035em]">
-                {audience.headline}
+      <div className="rail mt-7 sm:grid sm:gap-card lg:grid-cols-2">
+        {audiences.map((audience, i) => (
+          <Reveal key={audience.who} delay={i * 90}>
+            <Card className="h-full">
+              {/* Sur grand écran, cette ligne n'est pas la petite étiquette azur
+                  qu'annonce son nom : dans la maquette, la règle `.card p` qui
+                  la suit est plus spécifique que `.card__over` et lui reprend
+                  sa taille et sa couleur. Seules la graisse monospace et la
+                  capitale survivent. C'est le rendu validé — reproduit tel
+                  quel, borné au bureau pour ne pas toucher au téléphone. */}
+              <p className="font-mono text-mono uppercase tracking-[0.08em] text-azure sm:mt-3 sm:text-body sm:leading-[1.58] sm:text-ink-70">
+                {audience.who}
               </p>
-              <p className="mt-5 max-w-[46ch] text-[16.5px] leading-[1.62] text-white/55">
-                {audience.text}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* Quatre colonnes depuis l'ajout de « 04 Je pilote ». Le dernier
-            numéro reste en bleu, la règle n'a pas changé. */}
-        <ol className="mt-24 grid gap-10 lg:mt-28 lg:grid-cols-4 lg:gap-6">
-          {steps.map((step, i) => (
-            <li key={step.n}>
-              <p
-                className="text-[clamp(4.5rem,9vw,8.125rem)] font-semibold leading-[0.84] tracking-[-0.06em]"
-                style={{ color: i === steps.length - 1 ? "var(--color-azure)" : "var(--color-navy-soft)" }}
+              <h3
+                className="mt-3.5 text-h3 font-semibold leading-[1.14] tracking-[-0.035em] sm:mt-3 sm:leading-[1.16]"
+                style={{ textWrap: "pretty" }}
               >
-                {step.n}
-              </p>
-              <p className="mt-3.5 text-[30px] font-semibold tracking-[-0.032em]">{step.title}</p>
-              <p className="mt-3 max-w-[34ch] text-[15.5px] leading-[1.62] text-white/60">
-                {step.text}
-              </p>
-            </li>
-          ))}
-        </ol>
+                {audience.headline}
+              </h3>
+              <p className="mt-3.5 text-body leading-[1.58] text-ink-70 sm:mt-3">{audience.text}</p>
+            </Card>
+          </Reveal>
+        ))}
       </div>
     </section>
   );
@@ -157,73 +167,104 @@ function Situation() {
 
 function Offers() {
   return (
-    <section className="mx-auto w-full max-w-[1440px] px-6 pt-20 lg:px-12 lg:pt-[92px]">
-      <div className="grid gap-8 lg:grid-cols-12 lg:gap-6">
-        <h2 className="text-[clamp(2.2rem,5vw,4.5rem)] font-semibold leading-[0.96] tracking-[-0.048em] lg:col-span-7">
-          Quatre façons de travailler ensemble
-        </h2>
-        <p className="text-[16px] leading-[1.58] text-ink/70 lg:col-span-4 lg:col-start-9 lg:self-end">
-          L&apos;audit qualifie, le sprint prouve, l&apos;accompagnement tient dans la durée. On ne
-          les pose jamais toutes sur la table au premier rendez-vous.
-        </p>
-      </div>
-
-      <div className="mt-12 grid gap-6 lg:mt-[52px] lg:grid-cols-2">
-        {offers.map((offer) => (
-          <article
-            key={offer.name}
-            style={{ background: offer.surface.bg, color: offer.surface.fg }}
-            className="p-8 lg:px-[34px] lg:py-9"
-          >
-            <h3 className="text-[clamp(1.5rem,2.1vw,1.875rem)] font-semibold tracking-[-0.032em]">
-              {offer.name}
-            </h3>
-            <p
-              className="mt-4 text-[16px] leading-[1.58]"
-              style={{ color: offer.surface.muted }}
-            >
-              {offer.text}
-            </p>
-          </article>
+    <section aria-labelledby="offres-title" className="mt-section">
+      <SectionHead
+        id="offres-title"
+        title="Quatre façons de travailler ensemble"
+        intro="L'audit qualifie, le sprint prouve, l'accompagnement tient dans la durée. On ne les pose jamais toutes sur la table au premier rendez-vous."
+      />
+      {/* Deux colonnes et non quatre : les cartes deviennent assez larges pour
+          que leur texte se lise en pleine phrase, et la rangée cesse de répéter
+          la forme du déroulé qui la précède. */}
+      <div className="rail mt-7 sm:grid sm:grid-cols-2 sm:gap-card">
+        {offers.map((offer, i) => (
+          <Reveal key={offer.name} as="article" delay={i * 70}>
+            <OfferCard offer={offer} />
+          </Reveal>
         ))}
       </div>
     </section>
   );
 }
 
+function OfferCard({ offer }: { offer: (typeof offers)[number] }) {
+  return (
+    <div className="flex h-full flex-col rounded-card bg-paper p-6 sm:p-[clamp(1.75rem,2.6vw,2.25rem)]">
+      {/* `sm:leading-[1.2]` répète l'interligne posé juste avant : `sm:text-2xl`
+          embarque le sien, et un utilitaire préfixé passe après celui qui ne
+          l'est pas. Sans cette reprise, la carte grandit de quatre pixels. */}
+      <h3 className="text-h4 font-semibold leading-[1.2] tracking-[-0.03em] sm:text-2xl sm:leading-[1.2] sm:tracking-[-0.035em]">
+        {offer.name}
+      </h3>
+      {/* La colonne de 52 caractères vaut plus que la largeur disponible : sans
+          elle, le texte d'une carte de 585 px court sur toute sa laisse. */}
+      <p className="mt-2.5 text-fine leading-[1.58] text-ink-70 sm:mt-3.5 sm:max-w-[52ch] sm:text-body">
+        {offer.text}
+      </p>
+    </div>
+  );
+}
+
 /* ---------------------------------------------------------- Alternatives */
 
+/**
+ * « Ce que vous avez déjà essayé » — un registre, pas une rangée de cartes.
+ *
+ * Les trois premières alternatives sont des lignes séparées par un filet ; la
+ * quatrième, « Ne rien faire », se détache en carte navy. Le contraste entre
+ * les deux registres porte tout l'argument : les trois options courantes
+ * s'alignent comme un constat, le vrai concurrent seul prend une surface.
+ *
+ * Le registre vaut à toutes les largeurs. Sur grand écran il se pose sur une
+ * bande argile, seul aplat coloré de la page : c'est lui qui sépare cette
+ * section des deux rangées de cartes qui la précèdent.
+ *
+ * `--band-pad` est déclarée ici plutôt que recopiée dans les classes parce que
+ * deux règles doivent en donner exactement la même valeur : le rembourrage de
+ * la bande, et la marge négative par laquelle « Ne rien faire » la déborde. Ce
+ * débordement est ce qui fait tomber ses deux colonnes sur celles des lignes
+ * du dessus ; une valeur approchée se verrait.
+ *
+ * L'argile ne reçoit que de l'encre. L'azur y tombe à 3,86:1, sous le seuil de
+ * 4,5:1 — le bleu clair du titre de « Ne rien faire » reste donc sur le navy.
+ */
 function Alternatives() {
   return (
-    <section className="mx-auto w-full max-w-[1440px] px-6 pt-20 lg:px-12 lg:pt-[92px]">
-      <h2 className="max-w-[16ch] text-[clamp(1.9rem,3.6vw,3.25rem)] font-semibold leading-[1] tracking-[-0.045em]">
-        Ce que vous avez déjà essayé
-      </h2>
-
-      <dl className="mt-12">
+    <section
+      aria-labelledby="essaye-title"
+      style={{ "--band-pad": "clamp(1.75rem,3vw,2.75rem)" } as CSSProperties}
+      className="mt-section sm:rounded-panel sm:bg-clay sm:px-[var(--band-pad)] sm:py-[clamp(2.25rem,3.6vw,3rem)]"
+    >
+      <SectionHead id="essaye-title" title="Ce que vous avez déjà essayé" />
+      <div className="mt-7 grid sm:mt-8">
         {alternatives.map((row, i) => (
-          <div
+          <Reveal
             key={row.name}
-            className={`grid gap-4 border-t border-line py-9 lg:grid-cols-12 lg:gap-6 ${
-              i === alternatives.length - 1 ? "border-b" : ""
+            as="article"
+            delay={i * 70}
+            className={`sm:grid sm:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] sm:items-baseline sm:gap-[clamp(1.5rem,3vw,2.5rem)] ${
+              row.highlight
+                ? "mt-5 rounded-card bg-navy p-6 text-white sm:mx-[calc(var(--band-pad)*-1)] sm:px-[var(--band-pad)] sm:py-[clamp(1.5rem,2.4vw,1.875rem)]"
+                : "border-t border-line py-5 sm:border-[rgba(8,9,12,0.16)] sm:py-6"
             }`}
           >
-            <dt
-              className="text-[clamp(1.25rem,2vw,1.75rem)] font-semibold leading-[1.2] tracking-[-0.03em] lg:col-span-4"
-              style={{ color: row.highlight ? "var(--color-azure)" : undefined }}
+            <h3
+              className={`text-[1.125rem] font-semibold leading-[1.25] tracking-[-0.025em] sm:text-[1.3125rem] sm:tracking-[-0.03em] ${
+                row.highlight ? "text-azure-light" : ""
+              }`}
             >
               {row.name}
-            </dt>
-            <dd
-              className={`max-w-[58ch] text-[17px] leading-[1.6] lg:col-span-7 lg:col-start-6 ${
-                row.highlight ? "text-ink" : "text-ink/65"
+            </h3>
+            <p
+              className={`mt-2 text-fine leading-[1.58] sm:mt-0 sm:max-w-[64ch] sm:text-body ${
+                row.highlight ? "text-on-navy" : "text-ink-70 sm:text-[#4a4034]"
               }`}
             >
               {row.text}
-            </dd>
-          </div>
+            </p>
+          </Reveal>
         ))}
-      </dl>
+      </div>
     </section>
   );
 }
