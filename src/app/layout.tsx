@@ -53,7 +53,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="fr" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-      <body className="flex min-h-full flex-col bg-white">
+      {/* Le fond sable est déjà posé sur `body` dans globals.css ; le laisser
+          aussi ici en `bg-white` le recouvrait. */}
+      <body className="flex min-h-full flex-col">
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />

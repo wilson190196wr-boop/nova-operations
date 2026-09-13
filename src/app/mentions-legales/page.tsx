@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Reveal } from "@/components/reveal";
+import { Container, Eyebrow } from "@/components/ui";
 import { A_COMPLETER, articles, lastUpdated, type Article } from "@/lib/legal";
 
 export const metadata: Metadata = {
@@ -9,162 +11,120 @@ export const metadata: Metadata = {
 
 export default function MentionsLegalesPage() {
   return (
-    <>
-      <Hero />
-      {articles.map((article, i) => (
-        <ArticleBlock key={article.title} article={article} n={i + 1} />
-      ))}
-    </>
-  );
-}
+    <Container className="pt-[clamp(2.25rem,4.5vw,3.25rem)]">
+      {/* Une colonne de 74 caractères : la charte cale ici sur la longueur de
+          ligne d'un document, pas sur la largeur de la page. */}
+      <div className="max-w-[74ch]">
+        <Reveal>
+          <h1
+            className="max-w-[24ch] text-page font-semibold leading-none tracking-[-0.05em] max-sm:max-w-none"
+            style={{ textWrap: "pretty" }}
+          >
+            Mentions légales
+          </h1>
+          <p className="mt-6 max-w-[62ch] text-lead leading-[1.55] text-ink-70">
+            Les informations que la loi impose de publier, et ce qui arrive aux données que vous
+            laissez sur ce site.
+          </p>
+          <p className="mt-6 font-mono text-mono tracking-[0.06em] text-ink-55">
+            Dernière mise à jour : {lastUpdated}
+          </p>
+        </Reveal>
 
-/* ------------------------------------------------------------------ Hero */
-
-function Hero() {
-  return (
-    <section className="mx-auto w-full max-w-[1440px] px-6 pt-14 lg:px-12 lg:pt-16">
-      <h1 className="max-w-[16ch] text-[clamp(2.4rem,5.6vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.05em]">
-        Mentions légales
-      </h1>
-      <p className="mt-8 max-w-[56ch] text-[18px] leading-[1.6] text-ink/70">
-        Les informations que la loi impose de publier, et ce qui arrive aux données que vous
-        laissez sur ce site.
-      </p>
-      <p className="mt-6 text-[14px] text-ink/45">Dernière mise à jour : {lastUpdated}</p>
-    </section>
+        {articles.map((article, i) => (
+          <ArticleBlock key={article.title} article={article} n={i + 1} />
+        ))}
+      </div>
+    </Container>
   );
 }
 
 /* --------------------------------------------------------------- Article */
 
-/**
- * Une valeur manquante s'affiche en rouge plutôt qu'en gris : c'est une mention
- * obligatoire, elle doit se voir au premier coup d'œil sur la page comme dans
- * une relecture rapide.
- */
-function Rows({ rows, dark }: { rows: { label: string; value: string }[]; dark: boolean }) {
+function ArticleBlock({ article, n }: { article: Article; n: number }) {
   return (
-    <dl className="mt-8">
-      {rows.map((row, i) => (
-        <div
-          key={row.label}
-          className={`grid gap-2 border-t py-5 lg:grid-cols-12 lg:gap-6 ${
-            dark ? "border-white/15" : "border-line"
-          } ${i === rows.length - 1 ? "border-b" : ""}`}
-        >
-          <dt className={`text-[14px] lg:col-span-3 ${dark ? "text-white/45" : "text-ink/45"}`}>
-            {row.label}
+    <Reveal as="section" className="mt-9 sm:mt-section">
+      <p className="font-mono text-mono tracking-[0.12em] text-azure">Article {n}</p>
+      <h2 className="mt-2 text-[1.4375rem] font-semibold leading-[1.12] tracking-[-0.04em] sm:mt-3 sm:text-[1.75rem] sm:leading-[1.1]">
+        {article.title}
+      </h2>
+
+      {article.paragraphs?.map((paragraph) => (
+        <p key={paragraph} className="mt-3.5 text-fine leading-[1.68] text-ink-70 sm:mt-4 sm:text-body">
+          {paragraph}
+        </p>
+      ))}
+
+      {article.rows ? <Rows rows={article.rows} /> : null}
+
+      {article.subsections?.map((subsection, i) => (
+        <div key={subsection.title}>
+          <h3 className="mt-7 text-[1.0625rem] font-semibold tracking-[-0.025em] sm:mt-8 sm:text-[1.1875rem]">
+            {n}.{i + 1} {subsection.title}
+          </h3>
+          {subsection.paragraphs.map((paragraph) => (
+            <p key={paragraph} className="mt-3.5 text-fine leading-[1.68] text-ink-70 sm:mt-4 sm:text-body">
+              {paragraph}
+            </p>
+          ))}
+        </div>
+      ))}
+    </Reveal>
+  );
+}
+
+/**
+ * Rend une valeur cliquable quand c'en est une.
+ *
+ * Le lien est déduit de la valeur plutôt que déclaré dans `legal.ts` : ajouter
+ * un champ `href` à chaque ligne obligerait à le renseigner sur les quinze
+ * lignes qui n'en ont pas besoin, et à ne pas l'oublier sur les deux qui en
+ * ont besoin. Une adresse contient une arobase, un numéro ne contient que des
+ * chiffres et des espaces — aucune autre valeur de cette page ne s'y prête.
+ */
+function valeurCliquable(value: string) {
+  const href = value.includes("@")
+    ? `mailto:${value}`
+    : /^\+?[\d\s]{8,}$/.test(value)
+      ? `tel:${value.replace(/\s/g, "")}`
+      : null;
+
+  if (!href) return value;
+
+  // Rembourrage compensé par une marge négative : zone tappable de 44 px sans
+  // déplacer le texte d'un pixel.
+  return (
+    <a href={href} className="-my-3 inline-block py-3">
+      {value}
+    </a>
+  );
+}
+
+/**
+ * Les lignes d'identification, sur une carte claire.
+ *
+ * Une valeur manquante s'affiche en rouge plutôt qu'en gris : c'est une
+ * mention obligatoire au sens de l'article 6-III de la LCEN, elle doit se voir
+ * au premier coup d'œil. La maquette ne prévoit pas ce traitement — c'est un
+ * garde-fou conservé volontairement.
+ */
+function Rows({ rows }: { rows: { label: string; value: string }[] }) {
+  return (
+    <dl className="mt-5 grid gap-y-0 rounded-card bg-paper p-5 sm:mt-6 sm:p-[clamp(1.25rem,2vw,1.75rem)] lg:grid-cols-[minmax(0,4fr)_minmax(0,7fr)] lg:gap-x-6 lg:gap-y-3.5">
+      {rows.map((row) => (
+        <div key={row.label} className="contents">
+          <dt className="mt-3.5 self-start first:mt-0 lg:mt-0">
+            <Eyebrow uppercase>{row.label}</Eyebrow>
           </dt>
           <dd
-            className={`text-[16px] leading-[1.5] lg:col-span-9 ${
-              row.value === A_COMPLETER
-                ? "font-medium text-[#b23c17]"
-                : dark
-                  ? "text-white/80"
-                  : "text-ink/80"
+            className={`mt-[0.1875rem] text-fine leading-[1.5] lg:mt-0 ${
+              row.value === A_COMPLETER ? "text-[#b23c17]" : ""
             }`}
           >
-            {row.value}
+            {row.value === A_COMPLETER ? row.value : valeurCliquable(row.value)}
           </dd>
         </div>
       ))}
     </dl>
-  );
-}
-
-function ArticleBlock({ article, n }: { article: Article; n: number }) {
-  const dark = article.emphasis === true;
-
-  const body = (
-    <>
-      {/* Le numéro reprend le chiffre en chasse fixe de la page Offres. */}
-      <div className="grid gap-4 lg:grid-cols-12 lg:gap-6">
-        <p className={`font-mono text-[13px] lg:col-span-3 ${dark ? "text-white/40" : "text-ink/30"}`}>
-          Article {n}
-        </p>
-        <h2
-          className={`text-[clamp(1.5rem,2.6vw,2.25rem)] font-semibold leading-[1.1] tracking-[-0.035em] lg:col-span-9 ${
-            dark ? "text-white" : ""
-          }`}
-        >
-          {article.title}
-        </h2>
-      </div>
-
-      {article.paragraphs ? (
-        <div className="mt-8 grid gap-4 lg:grid-cols-12 lg:gap-6">
-          <div className="flex flex-col gap-4 lg:col-span-9 lg:col-start-4">
-            {article.paragraphs.map((paragraph) => (
-              <p
-                key={paragraph}
-                className={`max-w-[68ch] text-[16px] leading-[1.68] ${
-                  dark ? "text-white/60" : "text-ink/70"
-                }`}
-              >
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </div>
-      ) : null}
-
-      {article.rows ? (
-        <div className="grid lg:grid-cols-12 lg:gap-6">
-          <div className="lg:col-span-9 lg:col-start-4">
-            <Rows rows={article.rows} dark={dark} />
-          </div>
-        </div>
-      ) : null}
-
-      {article.subsections ? (
-        <div className="mt-10 grid lg:grid-cols-12 lg:gap-6">
-          <div className="lg:col-span-9 lg:col-start-4">
-            {article.subsections.map((sub, i) => (
-              <div
-                key={sub.title}
-                className={`border-t py-7 last:border-b ${dark ? "border-white/15" : "border-line"}`}
-              >
-                <h3
-                  className={`text-[17px] font-semibold tracking-[-0.02em] ${
-                    dark ? "text-white" : ""
-                  }`}
-                >
-                  <span className={`font-mono text-[13px] ${dark ? "text-white/40" : "text-ink/30"}`}>
-                    {n}.{i + 1}
-                  </span>{" "}
-                  {sub.title}
-                </h3>
-                <div className="mt-3 flex flex-col gap-3">
-                  {sub.paragraphs.map((paragraph) => (
-                    <p
-                      key={paragraph}
-                      className={`max-w-[68ch] text-[16px] leading-[1.68] ${
-                        dark ? "text-white/60" : "text-ink/70"
-                      }`}
-                    >
-                      {paragraph}
-                    </p>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      ) : null}
-    </>
-  );
-
-  if (dark) {
-    return (
-      <section className="mt-20 bg-navy-deep py-20 text-white lg:mt-[92px] lg:py-24">
-        <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12">{body}</div>
-      </section>
-    );
-  }
-
-  return (
-    <section className="mx-auto w-full max-w-[1440px] px-6 pt-20 lg:px-12 lg:pt-[92px]">
-      {body}
-    </section>
   );
 }

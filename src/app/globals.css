@@ -1,68 +1,287 @@
 @import "tailwindcss";
 
+/**
+ * Les jetons de la charte KELERIA, repris de la maquette Claude Design.
+ *
+ * Ils sont déclarés dans `@theme` plutôt qu'en variables CSS libres : Tailwind
+ * en dérive alors les utilitaires (`bg-sand`, `text-h2`, `rounded-panel`,
+ * `mt-section`), donc les pages s'écrivent avec les classes du projet et non
+ * avec des valeurs arbitraires recopiées à la main.
+ */
 @theme inline {
+  /* --- couleur ---------------------------------------------------------- */
   --color-ink: #08090c;
-  --color-ink-soft: #12141a;
-  --color-navy: #0a1a3d;
-  --color-navy-deep: #061127;
-  --color-navy-soft: #16305f;
+  /* Les deux gris de texte de la charte. Nommés par leur opacité d'origine
+     pour rester reconnaissables face à la maquette. */
+  --color-ink-70: #3f4450;
+  --color-ink-55: #5b6070;
+  --color-navy: #061127;
   --color-azure: #2f5cff;
   --color-azure-light: #7fa0ff;
-  --color-mist: #f5f6f8;
-  --color-line: #e6e8ec;
+  /* Le fond du site est un sable chaud, pas du blanc ; les cartes s'en
+     détachent par un blanc cassé légèrement plus clair. */
+  --color-sand: #f7f4ee;
+  --color-sand-2: #f1eee6;
+  --color-paper: #fffdf9;
+  /**
+   * `clay` et `sage` viennent de la maquette. Seul `clay` sert, en fond
+   * d'attente derrière le portrait. Les employer comme surfaces de carte a été
+   * essayé puis abandonné : la palette devenait bavarde.
+   *
+   * Si l'un des deux est repris un jour, attention au contraste — l'azur tombe
+   * à 4,0:1 sur `sage` et 3,9:1 sur `clay`, sous le seuil de 4,5:1 exigé pour
+   * du petit texte. Ils ne conviennent qu'au texte en encre.
+   */
+  --color-clay: #e8ded1;
+  --color-sage: #dfe6dc;
+  --color-line: rgba(8, 9, 12, 0.09);
+  --color-line-soft: rgba(8, 9, 12, 0.06);
+  --color-on-navy: rgba(255, 255, 255, 0.76);
 
+  /* --- familles --------------------------------------------------------- */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-display);
 
-  --animate-marquee: marquee 44s linear infinite;
-  --animate-float: float 9s ease-in-out infinite;
-  --animate-sheen: sheen 6s ease-in-out infinite;
+  /* --- échelle typographique, formes et rythme --------------------------- */
+  /**
+   * Ces jetons pointent vers des variables redéfinies plus bas selon la
+   * largeur d'écran. C'est tout l'intérêt de `@theme inline` : l'utilitaire
+   * émet `font-size: var(--fs-h2)` au lieu d'une valeur figée, donc une seule
+   * classe `text-h2` donne 2 rem sur téléphone et jusqu'à 3,375 rem sur
+   * grand écran, sans variante responsive à écrire dans chaque page.
+   *
+   * `fine`, `finer` et `mono` ne reprennent pas les noms `sm`/`xs` de
+   * Tailwind : les écraser changerait toutes les tailles par défaut.
+   */
+  --text-display: var(--fs-display);
+  --text-page: var(--fs-page);
+  --text-h2: var(--fs-h2);
+  --text-h2-sm: var(--fs-h2-sm);
+  --text-h3: var(--fs-h3);
+  --text-h4: var(--fs-h4);
+  --text-lead: var(--fs-lead);
+  --text-body: 1.03125rem;
+  --text-fine: var(--fs-sm);
+  --text-finer: 0.90625rem;
+  --text-mono: 0.78125rem;
+
+  --radius-panel: var(--r-panel);
+  --radius-card: var(--r-card);
+  --radius-tier: 16px;
+
+  --spacing-section: var(--section);
+  --spacing-gutter: var(--gutter);
+  --spacing-card: var(--gap-card);
 }
 
+/**
+ * La charte est écrite en mobile-first, comme la maquette : la base décrit le
+ * téléphone, le palier de 640 px décrit tout le reste. Les valeurs du
+ * téléphone sont fixes plutôt qu'en `clamp` — sur 375 px de large, une borne
+ * basse de clamp est de toute façon la seule valeur atteinte, autant la poser
+ * franchement.
+ */
+:root {
+  --fs-display: 2.5rem;
+  --fs-page: 2.25rem;
+  --fs-h2: 2rem;
+  --fs-h2-sm: 1.75rem;
+  --fs-h3: 1.375rem;
+  --fs-h4: 1.25rem;
+  --fs-lead: 1.0625rem;
+  --fs-sm: 0.96875rem;
+
+  --gutter: 1.25rem;
+  --section: 2.875rem;
+  --gap-card: 0.75rem;
+
+  --r-panel: 24px;
+  --r-card: 20px;
+
+  /* Largeur d'une carte de carrousel : la suivante dépasse de 18 %. */
+  --peek: 82%;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --fs-display: clamp(2.5rem, 7.2vw, 5.125rem);
+    --fs-page: clamp(2.125rem, 5.4vw, 4rem);
+    --fs-h2: clamp(1.875rem, 4vw, 3.375rem);
+    --fs-h2-sm: clamp(1.625rem, 3.2vw, 2.625rem);
+    --fs-h3: clamp(1.375rem, 2vw, 2rem);
+    --fs-h4: 1.3125rem;
+    --fs-lead: clamp(1.0625rem, 1.4vw, 1.21875rem);
+    --fs-sm: 0.96875rem;
+
+    --gutter: clamp(1.25rem, 4vw, 2.5rem);
+    --section: clamp(3.5rem, 7vw, 5rem);
+    --gap-card: 1rem;
+
+    --r-panel: 32px;
+    --r-card: 24px;
+  }
+}
+
+/**
+ * Les réglages de base vont dans `@layer base`, et c'est indispensable : une
+ * règle écrite hors de toute couche l'emporte sur `@layer utilities`, où vit
+ * tout Tailwind. Un simple `a { color: inherit }` non couché écrasait donc le
+ * `text-white` de chaque lien — le bouton « Rendez-vous » s'affichait en encre
+ * sur navy, illisible.
+ */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background: var(--color-sand);
+    color: var(--color-ink);
+    font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+    font-size: var(--text-body);
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Les liens héritent de la couleur de leur contexte : la charte n'en donne
+     qu'au survol. Une classe Tailwind reste prioritaire sur cet héritage. */
+  a {
+    color: inherit;
+  }
+
+  a:hover {
+    color: var(--color-azure);
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  summary:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--color-azure);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--color-azure);
+    color: #fff;
+  }
+}
+
+/* --- Panneaux organiques ------------------------------------------------ */
+/* Trois dégradés radiaux superposés, réutilisés sur plusieurs pages : trop
+   long pour une valeur arbitraire, et le rendu doit rester identique partout. */
+.panel-organic {
+  background-color: #eef1ea;
+  background-image:
+    radial-gradient(120% 90% at 12% 8%, rgba(47, 92, 255, 0.16) 0%, rgba(47, 92, 255, 0) 55%),
+    radial-gradient(90% 80% at 88% 22%, rgba(200, 168, 120, 0.32) 0%, rgba(200, 168, 120, 0) 60%),
+    radial-gradient(70% 70% at 60% 100%, rgba(6, 17, 39, 0.12) 0%, rgba(6, 17, 39, 0) 60%);
+}
+
+.closing-organic {
+  background-color: var(--color-navy);
+  background-image:
+    radial-gradient(100% 90% at 90% 10%, rgba(47, 92, 255, 0.45) 0%, rgba(47, 92, 255, 0) 60%),
+    radial-gradient(80% 80% at 8% 90%, rgba(200, 168, 120, 0.22) 0%, rgba(200, 168, 120, 0) 60%);
+}
+
+/* --- Carrousel ----------------------------------------------------------- */
+/**
+ * Une seule mécanique, réutilisée par toutes les sections en cartes.
+ *
+ * Le rail déborde jusqu'aux bords de l'écran puis se réinsère par son propre
+ * rembourrage, et `scroll-padding` cale les cartes sur la gouttière de la page
+ * plutôt que sur le bord de l'écran. La carte suivante dépasse de 18 % : c'est
+ * ce dépassement qui dit « ça glisse », sans flèche ni mot ajouté.
+ *
+ * La barre de défilement est masquée à dessein — elle doublerait l'indication
+ * que donne déjà le dépassement, et sur téléphone elle n'est de toute façon
+ * qu'un liseré fugace.
+ *
+ * Toute la règle est bornée au téléphone. Au-delà, l'élément n'est plus que ce
+ * que ses classes Tailwind en disent — une grille, en l'occurrence. Sans cette
+ * borne, `margin-inline` et `overflow` survivraient sur grand écran ; et hors
+ * d'une requête média il aurait fallu la placer dans une couche, faute de quoi
+ * une règle non couchée l'emporterait sur les utilitaires.
+ */
+@media (max-width: 639.98px) {
+  .rail {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: var(--gap-card);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline-start: var(--gutter);
+    margin-inline: calc(-1 * var(--gutter));
+    padding: 0 var(--gutter) 0.25rem;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .rail::-webkit-scrollbar {
+    display: none;
+  }
+
+  .rail > * {
+    flex: 0 0 var(--peek);
+    scroll-snap-align: start;
+    align-self: stretch;
+  }
+
+  /* Un pseudo-élément d'un pixel : sans lui, le rembourrage de fin est ignoré
+     au défilement et la dernière carte reste collée au bord. */
+  .rail::after {
+    content: "";
+    flex: 0 0 0.0625rem;
+  }
+
+  /* Le panneau organique et le bandeau de clôture vont d'un bord à l'autre :
+     sur téléphone, une carte arrondie de 20 px de marge perd son effet de
+     bloc. C'est ce qui cadence la descente de la page. */
+  .bleed {
+    margin-inline: calc(-1 * var(--gutter));
+    border-radius: 0;
+  }
+}
+
+/* --- Bandeau de marques défilant ---------------------------------------- */
+/**
+ * La piste contient deux copies identiques de la rangée et se translate d'une
+ * demi-largeur. À l'arrivée, la seconde copie occupe exactement la position de
+ * départ de la première : la boucle est invisible, sans saut.
+ *
+ * Le mouvement va de la gauche vers la droite, donc l'animation part de -50 %
+ * pour revenir à 0. Inverser le sens revient à échanger `from` et `to`.
+ */
 @keyframes marquee {
   from {
-    transform: translateX(0);
+    transform: translate3d(-50%, 0, 0);
   }
   to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
     transform: translate3d(0, 0, 0);
   }
-  50% {
-    transform: translate3d(0, -14px, 0);
+}
+
+.marquee-track {
+  animation: marquee 32s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+    transform: none;
   }
 }
 
-@keyframes sheen {
-  0%,
-  100% {
-    opacity: 0.35;
-  }
-  50% {
-    opacity: 0.75;
-  }
-}
-
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-}
-
-body {
-  background: #ffffff;
-  color: var(--color-ink);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-}
-
-::selection {
-  background: var(--color-azure);
-  color: #fff;
+/* Les logos s'effacent sur les bords au lieu d'être coupés net. */
+.mask-fade-x {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
 }
 
 /* --- Ouverture du titre ------------------------------------------------- */
@@ -112,41 +331,4 @@ body {
   html {
     scroll-behavior: auto;
   }
-}
-
-/* --- Decorative --------------------------------------------------------- */
-.grid-lines {
-  background-image:
-    linear-gradient(to right, #e6e8ec 1px, transparent 1px),
-    linear-gradient(to bottom, #e6e8ec 1px, transparent 1px);
-  background-size: 72px 72px;
-}
-
-.grid-lines-dark {
-  background-image:
-    linear-gradient(to right, #ffffff0f 1px, transparent 1px),
-    linear-gradient(to bottom, #ffffff0f 1px, transparent 1px);
-  background-size: 72px 72px;
-}
-
-.mask-fade-b {
-  -webkit-mask-image: linear-gradient(to bottom, black 45%, transparent 100%);
-  mask-image: linear-gradient(to bottom, black 45%, transparent 100%);
-}
-
-.mask-fade-x {
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 10%,
-    black 90%,
-    transparent
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent,
-    black 10%,
-    black 90%,
-    transparent
-  );
 }

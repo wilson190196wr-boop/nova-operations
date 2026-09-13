@@ -1,221 +1,224 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { BookingCta } from "@/components/booking-cta";
+import { Reveal } from "@/components/reveal";
+import { Button, Card, Closing, Container, Eyebrow, Facts, PageHead, SectionHead } from "@/components/ui";
 import { comparison, hero, offers, speeds, type Offer } from "@/lib/offers";
 
 export const metadata: Metadata = {
   title: "Offres",
   description:
-    "Audit à 2 500 ou 7 500 € HT, sprints d'automatisation, accompagnement mensuel à partir de 1 600 € et formation des équipes. Les quatre façons de travailler avec KELERIA.",
+    "Audit, sprints, accompagnement et formation. Quatre offres qui s'enchaînent ou s'activent séparément, avec un seul interlocuteur du début à la fin.",
 };
 
 export default function OffresPage() {
   return (
     <>
-      <Hero />
-      <Offers />
-      <Speeds />
-      <Comparison />
-      <BookingCta title="Par où commencer ?" />
+      <PageHead title={hero.title} lead={hero.intro}>
+        <Facts items={hero.meta.map((m) => ({ label: m.label, value: m.value }))} />
+      </PageHead>
+      <Container>
+        {offers.map((offer, i) => (
+          <OfferBlock key={offer.slug} offer={offer} rang={i} />
+        ))}
+        <Speeds />
+        <Comparison />
+        <Closing title="Par où commencer ?" />
+      </Container>
     </>
   );
 }
 
-/* ------------------------------------------------------------------ Hero */
-
-function Hero() {
-  return (
-    <section className="mx-auto w-full max-w-[1440px] px-6 pt-14 lg:px-12 lg:pt-16">
-      <h1 className="max-w-[16ch] text-[clamp(2.4rem,5.6vw,4.5rem)] font-semibold leading-[1.02] tracking-[-0.05em]">
-        {hero.title}
-      </h1>
-      <p className="mt-8 max-w-[56ch] text-[18px] leading-[1.6] text-ink/70">{hero.intro}</p>
-
-      {/* Bandeau de chiffres repris de la première version de la page. */}
-      <dl className="mt-14 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-        {hero.meta.map((item) => (
-          <div key={item.label} className="bg-white px-7 py-6">
-            <dt className="text-[13.5px] text-ink/45">{item.label}</dt>
-            <dd className="mt-2 text-[21px] font-semibold tracking-[-0.03em]">{item.value}</dd>
-          </div>
-        ))}
-      </dl>
-    </section>
-  );
-}
-
-/* ---------------------------------------------------------------- Offres */
-
-function Offers() {
-  return (
-    <section className="mx-auto w-full max-w-[1440px] px-6 pt-20 lg:px-12 lg:pt-[92px]">
-      <div className="flex flex-col gap-20 lg:gap-28">
-        {offers.map((offer) => (
-          <OfferBlock key={offer.slug} offer={offer} />
-        ))}
-      </div>
-    </section>
-  );
-}
+/* ------------------------------------------------------------ Offer block */
 
 /**
- * Anatomie reprise de la première version : colonne descriptive collante à
- * gauche, carte des livrables à droite. La colonne suit le défilement pendant
- * qu'on parcourt la liste, ce qui garde le prix et le bouton sous les yeux.
+ * Un palier d'offre.
+ *
+ * Sur téléphone les quatre blocs se suivent en bandes pleine largeur qui
+ * alternent blanc cassé et sable : sans marge entre eux, c'est le changement
+ * de fond qui marque la séparation, et la page se lit comme une succession de
+ * registres plutôt que comme quatre cartes identiques. Au-delà, chaque bloc
+ * redevient un panneau arrondi détaché du fond.
  */
-function OfferBlock({ offer }: { offer: Offer }) {
+function OfferBlock({ offer, rang }: { offer: Offer; rang: number }) {
+  const pair = rang % 2 === 1;
   return (
-    <article id={offer.slug} className="scroll-mt-8">
-      <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
-        <div className="lg:sticky lg:top-10 lg:self-start">
-          <span className="font-mono text-[13px] text-ink/30">{offer.step}</span>
-          <h2 className="mt-4 text-[clamp(2rem,4vw,2.9rem)] font-semibold tracking-[-0.04em]">
-            {offer.name}
-          </h2>
-          <p className="mt-3 text-[17px] text-azure">{offer.tagline}</p>
-          <p className="mt-6 max-w-md text-[16px] leading-[1.68] text-ink/65">
-            {offer.description}
-          </p>
+    <section
+      aria-labelledby={offer.slug}
+      className={`bleed border-t border-line-soft px-gutter py-9 first:mt-section sm:mt-section sm:rounded-panel sm:border-0 sm:bg-paper sm:p-[clamp(1.75rem,3.2vw,3rem)] ${
+        pair ? "bg-sand-2" : "bg-paper"
+      }`}
+    >
+      <Reveal>
+        <p className="font-mono text-mono tracking-[0.12em] text-azure">[ {offer.step} ]</p>
+        <h2
+          id={offer.slug}
+          className="mt-2.5 text-h2-sm font-semibold leading-[1.05] tracking-[-0.045em] sm:mt-3.5"
+        >
+          {offer.name}
+        </h2>
+        <p className="mt-3.5 text-lead font-medium leading-[1.4] sm:mt-4 sm:max-w-[34ch]">{offer.tagline}</p>
+      </Reveal>
 
-          <dl className="mt-9 flex flex-wrap gap-x-12 gap-y-5">
+      <div className="mt-6 grid gap-6 sm:mt-7 sm:gap-[clamp(1.75rem,3.5vw,3rem)] lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:items-start">
+        <Reveal>
+          <p className="text-fine leading-[1.6] text-ink-70 sm:max-w-[62ch] sm:text-body">{offer.description}</p>
+          <dl className="mt-6 grid grid-cols-2 gap-4 sm:mt-7 sm:flex sm:flex-wrap sm:gap-7">
             <div>
-              <dt className="text-[13.5px] text-ink/45">Durée</dt>
-              <dd className="mt-1.5 text-[15.5px] font-medium">{offer.duration}</dd>
+              <dt>
+                <Eyebrow uppercase>Durée</Eyebrow>
+              </dt>
+              <dd className="mt-1.5 text-[1.0625rem] font-medium">{offer.duration}</dd>
             </div>
             <div>
-              <dt className="text-[13.5px] text-ink/45">Investissement</dt>
-              <dd className="mt-1.5 text-[15.5px] font-medium">{offer.price}</dd>
+              <dt>
+                <Eyebrow uppercase>Investissement</Eyebrow>
+              </dt>
+              <dd className="mt-1.5 text-[1.0625rem] font-medium">{offer.price}</dd>
             </div>
           </dl>
+          <Button href="/contact" className="mt-6 w-full sm:mt-7 sm:w-auto">
+            {offer.cta}
+          </Button>
+        </Reveal>
 
-          <Link
-            href="/contact"
-            className="mt-9 inline-block rounded-lg bg-ink px-6 py-3.5 text-[15px] font-medium text-white transition-colors hover:bg-navy-deep"
-          >
-            Parler de {offer.name.toLowerCase()}
-          </Link>
-        </div>
-
-        <div className="flex flex-col gap-6">
+        <Reveal delay={90}>
           {offer.variants ? (
-            <dl className="grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2">
+            <div className="grid gap-3 sm:grid-cols-2">
               {offer.variants.map((variant) => (
-                <div key={variant.name} className="bg-white px-6 py-5">
-                  <dt className="text-[16px] font-semibold tracking-[-0.02em]">{variant.name}</dt>
-                  <dd className="mt-1 text-[16px] font-semibold tracking-[-0.02em] text-azure">
+                <div key={variant.name} className={`rounded-tier px-[1.0625rem] py-[0.9375rem] sm:px-5 sm:py-[1.125rem] ${pair ? "bg-paper sm:bg-sand" : "bg-sand"}`}>
+                  <h3 className="text-[1.0625rem] font-semibold tracking-[-0.02em]">
+                    {variant.name}
+                  </h3>
+                  <p className="mt-1 text-[1.0625rem] font-semibold tracking-[-0.02em] text-azure">
                     {variant.price}
-                  </dd>
-                  <dd className="mt-1.5 text-[14px] leading-snug text-ink/55">{variant.detail}</dd>
+                  </p>
+                  <p className="mt-2 text-finer leading-[1.5] text-ink-70">{variant.detail}</p>
                 </div>
               ))}
-            </dl>
+            </div>
           ) : null}
 
-          <div className="bg-mist p-8 lg:p-10">
-            <p className="text-[13.5px] text-ink/45">Ce que vous obtenez</p>
-            <ul className="mt-6 grid gap-px overflow-hidden bg-line">
+          <div className={`border-t border-line pt-5 sm:border-0 sm:pt-0 ${offer.variants ? "mt-6" : ""}`}>
+            <Eyebrow uppercase className="block">
+              Ce que vous obtenez
+            </Eyebrow>
+            <ul className="mt-4 grid gap-[0.6875rem]">
               {offer.deliverables.map((item) => (
-                <li key={item} className="flex items-start gap-4 bg-white px-6 py-5">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    className="mt-0.5 shrink-0"
-                    aria-hidden="true"
-                  >
-                    <circle cx="8" cy="8" r="7.25" stroke="#2f5cff" strokeWidth="1.15" />
-                    <path
-                      d="M5 8.2l2.1 2.1L11 6.4"
-                      stroke="#2f5cff"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                  <span className="text-[15.5px] leading-snug text-ink/80">{item}</span>
+                <li
+                  key={item}
+                  className="relative pl-[1.375rem] text-fine leading-[1.55] text-ink-70 before:absolute before:left-0 before:top-[0.55em] before:h-[7px] before:w-[7px] before:rounded-full before:bg-azure before:content-['']"
+                >
+                  {item}
                 </li>
               ))}
             </ul>
           </div>
-        </div>
-      </div>
-    </article>
-  );
-}
-
-/* ------------------------------------------------------------ Deux vitesses */
-
-function Speeds() {
-  return (
-    <section className="mt-20 bg-navy-deep py-20 text-white lg:mt-[92px] lg:py-24">
-      <div className="mx-auto w-full max-w-[1440px] px-6 lg:px-12">
-        <div className="grid gap-6 lg:grid-cols-12">
-          <h2 className="text-[clamp(1.75rem,3.2vw,2.75rem)] font-semibold leading-[1.06] tracking-[-0.04em] lg:col-span-5">
-            {speeds.title}
-          </h2>
-          <p className="max-w-[52ch] text-[17px] leading-[1.6] text-white/55 lg:col-span-5 lg:col-start-7 lg:self-end">
-            {speeds.text}
-          </p>
-        </div>
-
-        <div className="mt-12 grid gap-6 lg:grid-cols-2">
-          {speeds.modes.map((mode) => (
-            <article key={mode.name} className="bg-white/[0.06] p-8 lg:px-[34px] lg:py-9">
-              <h3 className="text-[clamp(1.5rem,2.1vw,1.875rem)] font-semibold tracking-[-0.032em]">
-                {mode.name}
-              </h3>
-              <p className="mt-4 text-[16px] leading-[1.58] text-white/55">{mode.text}</p>
-            </article>
-          ))}
-        </div>
-
-        <p className="mt-10 max-w-[62ch] text-[17px] leading-[1.6] text-white/80">{speeds.note}</p>
+        </Reveal>
       </div>
     </section>
   );
 }
 
-/* ------------------------------------------------------------ Comparatif */
+/* ----------------------------------------------------------------- Speeds */
+
+function Speeds() {
+  return (
+    <section aria-labelledby="vitesses-title" className="mt-section">
+      <SectionHead id="vitesses-title" title={speeds.title} intro={speeds.text} />
+      <div className="mt-9 grid gap-4 lg:grid-cols-2">
+        {speeds.modes.map((mode, i) => (
+          <Reveal key={mode.name} as="article" delay={i * 90}>
+            <Card className="h-full">
+              <h3 className="text-h3 font-semibold leading-[1.14] tracking-[-0.035em]">
+                {mode.name}
+              </h3>
+              <p className="mt-3.5 text-body leading-[1.58] text-ink-70">{mode.text}</p>
+            </Card>
+          </Reveal>
+        ))}
+      </div>
+      <p className="mt-6 max-w-[70ch] text-fine leading-[1.6] text-ink-55">{speeds.note}</p>
+    </section>
+  );
+}
+
+/* ------------------------------------------------------------- Comparison */
 
 function Comparison() {
   return (
-    <section className="mx-auto w-full max-w-[1440px] px-6 pt-20 lg:px-12 lg:pt-[92px]">
-      <div>
-        <div className="grid gap-6 lg:grid-cols-12">
-          <h2 className="text-[clamp(1.75rem,3.2vw,2.75rem)] font-semibold leading-[1.06] tracking-[-0.04em] lg:col-span-5">
-            {comparison.title}
-          </h2>
-          <p className="max-w-[52ch] text-[17px] leading-[1.6] text-ink/70 lg:col-span-5 lg:col-start-7 lg:self-end">
-            {comparison.intro}
-          </p>
-        </div>
+    <section aria-labelledby="quelle-title" className="mt-section">
+      <SectionHead id="quelle-title" title={comparison.title} intro={comparison.intro} />
 
-        <div className="mt-12 overflow-x-auto">
-          <table className="w-full min-w-[720px] border-collapse text-left">
-            <thead>
-              <tr className="border-b-2 border-ink">
-                <th className="py-4 pr-6 text-[13.5px] font-normal text-ink/45">Votre situation</th>
-                <th className="py-4 pr-6 text-[13.5px] font-normal text-ink/45">
-                  Offre recommandée
+      {/* Trois colonnes ne tiennent pas sur un écran de téléphone : le tableau
+          demandait 620 px et défilait horizontalement. Sous `lg`, les mêmes
+          lignes sont donc empilées en blocs étiquetés — une seule source de
+          données, deux présentations, et plus aucun défilement latéral. */}
+      <Reveal className="mt-9 grid gap-3 lg:hidden">
+        {comparison.rows.map((row) => (
+          <div key={row.situation} className="rounded-card bg-paper p-5">
+            <p className="text-fine leading-[1.5]">{row.situation}</p>
+            <dl className="mt-4 grid gap-3 border-t border-line-soft pt-4">
+              <div>
+                <dt>
+                  <Eyebrow uppercase>Offre recommandée</Eyebrow>
+                </dt>
+                <dd className="mt-1 text-fine font-semibold">{row.offer}</dd>
+              </div>
+              <div>
+                <dt>
+                  <Eyebrow uppercase>Premier résultat</Eyebrow>
+                </dt>
+                <dd className="mt-1 text-fine leading-[1.5] text-ink-70">{row.result}</dd>
+              </div>
+            </dl>
+          </div>
+        ))}
+      </Reveal>
+
+      <Reveal className="mt-9 hidden rounded-card bg-paper lg:block">
+        <table className="w-full border-collapse text-fine">
+          <thead>
+            <tr>
+              {["Votre situation", "Offre recommandée", "Premier résultat"].map((head) => (
+                <th
+                  key={head}
+                  scope="col"
+                  className="whitespace-nowrap border-b border-line-soft px-5 py-[1.125rem] text-left font-mono text-mono font-normal uppercase tracking-[0.08em] text-ink-55"
+                >
+                  {head}
                 </th>
-                <th className="py-4 text-[13.5px] font-normal text-ink/45">Premier résultat</th>
-              </tr>
-            </thead>
-            <tbody>
-              {comparison.rows.map((row) => (
-                <tr key={row.situation} className="border-b border-line last:border-b-0">
-                  <td className="py-6 pr-6 text-[16px] leading-[1.5] text-ink/70">
-                    {row.situation}
-                  </td>
-                  <td className="py-6 pr-6 text-[17px] font-medium">{row.offer}</td>
-                  <td className="py-6 text-[16px] leading-[1.5] text-azure">{row.result}</td>
-                </tr>
               ))}
-            </tbody>
-          </table>
-        </div>
-      </div>
+            </tr>
+          </thead>
+          <tbody>
+            {comparison.rows.map((row, i) => (
+              <tr key={row.situation}>
+                <th
+                  scope="row"
+                  className={`px-5 py-[1.125rem] text-left align-top font-normal leading-[1.5] ${
+                    i === comparison.rows.length - 1 ? "" : "border-b border-line-soft"
+                  }`}
+                >
+                  {row.situation}
+                </th>
+                <td
+                  className={`whitespace-nowrap px-5 py-[1.125rem] align-top font-semibold leading-[1.5] ${
+                    i === comparison.rows.length - 1 ? "" : "border-b border-line-soft"
+                  }`}
+                >
+                  {row.offer}
+                </td>
+                <td
+                  className={`px-5 py-[1.125rem] align-top leading-[1.5] ${
+                    i === comparison.rows.length - 1 ? "" : "border-b border-line-soft"
+                  }`}
+                >
+                  {row.result}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </Reveal>
     </section>
   );
 }
