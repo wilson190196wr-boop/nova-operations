@@ -4,7 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Wordmark } from "@/components/logo";
-import { mainNav, site } from "@/lib/home";
+import { CHEMIN_CONTACT } from "@/sanity/routes";
+import type { LienNavigation } from "@/sanity/types";
 
 /**
  * La barre de navigation : une pilule posée sur le fond sable, collée en haut
@@ -13,8 +14,20 @@ import { mainNav, site } from "@/lib/home";
  * Le lien de la page courante porte `aria-current="page"`, comme dans la
  * maquette, et c'est cet attribut — pas une classe — qui déclenche le
  * soulignement azur. Un seul état à maintenir au lieu de deux.
+ *
+ * Ce soulignement tient à une égalité exacte de chemins : c'est pourquoi le
+ * schéma valide les adresses de navigation (début par /, pas de slash final).
+ * Un chemin approximatif éteindrait le repère sans la moindre erreur visible.
  */
-export function SiteHeader() {
+export function SiteHeader({
+  nom,
+  navigation,
+  libelleRendezVous,
+}: {
+  nom: string;
+  navigation: LienNavigation[];
+  libelleRendezVous: string;
+}) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
@@ -33,30 +46,30 @@ export function SiteHeader() {
               pilule est plus haute que cela, le rendu ne change pas. */}
           <Link
             href="/"
-            aria-label={`${site.name}, retour à l'accueil`}
+            aria-label={`${nom}, retour à l'accueil`}
             className="flex min-h-[44px] items-center"
           >
             <Wordmark />
           </Link>
 
           <nav className="hidden items-center gap-[1.625rem] text-fine text-ink-70 lg:flex">
-            {mainNav.map((item) => (
+            {navigation.map((item) => (
               <Link
-                key={item.href}
-                href={item.href}
-                aria-current={current(item.href)}
+                key={item._key}
+                href={item.chemin}
+                aria-current={current(item.chemin)}
                 className={underline}
               >
-                {item.label}
+                {item.libelle}
               </Link>
             ))}
           </nav>
 
           <Link
-            href="/contact"
+            href={CHEMIN_CONTACT}
             className="hidden min-h-[44px] items-center justify-center rounded-full bg-navy px-6 text-fine font-medium text-white transition-colors hover:bg-[#0b1c3d] hover:text-white lg:inline-flex"
           >
-            Rendez-vous
+            {libelleRendezVous}
           </Link>
 
           <button
@@ -79,23 +92,23 @@ export function SiteHeader() {
             aria-label="Navigation principale"
             className="mt-2 flex flex-col gap-0.5 rounded-card border border-line-soft bg-paper p-2.5 lg:hidden"
           >
-            {mainNav.map((item) => (
+            {navigation.map((item) => (
               <Link
-                key={item.href}
-                href={item.href}
-                aria-current={current(item.href)}
+                key={item._key}
+                href={item.chemin}
+                aria-current={current(item.chemin)}
                 onClick={() => setOpen(false)}
                 className={`flex min-h-[48px] items-center rounded-[14px] px-3 text-[1.0625rem] hover:bg-sand-2 hover:text-navy ${underline}`}
               >
-                {item.label}
+                {item.libelle}
               </Link>
             ))}
             <Link
-              href="/contact"
+              href={CHEMIN_CONTACT}
               onClick={() => setOpen(false)}
               className="mt-1.5 flex min-h-[44px] items-center justify-center rounded-full bg-navy px-6 text-fine font-medium text-white hover:bg-[#0b1c3d] hover:text-white"
             >
-              Rendez-vous
+              {libelleRendezVous}
             </Link>
           </nav>
         ) : null}

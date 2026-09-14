@@ -3,9 +3,15 @@
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { useEffect, useState } from "react";
 import { calBrandColor, calLink, calNamespace } from "@/lib/booking";
-import { site } from "@/lib/home";
 
-export function CalEmbed() {
+export function CalEmbed({
+  repli,
+  email,
+}: {
+  /** Ce qui s'affiche à la place du calendrier quand il ne peut pas se charger. */
+  repli: { titre: string; texte: string };
+  email: string;
+}) {
   const [ready, setReady] = useState(false);
   const [failed, setFailed] = useState(false);
 
@@ -47,15 +53,13 @@ export function CalEmbed() {
   if (failed) {
     return (
       <div className="mt-5 flex min-h-[280px] flex-col items-center justify-center gap-4 rounded-tier border border-dashed border-ink/20 bg-sand p-8 text-center">
-        <p className="text-fine font-medium">Le calendrier n&apos;a pas pu se charger.</p>
-        <p className="max-w-sm text-finer leading-[1.55] text-ink-70">
-          Écrivez-nous directement, nous vous proposerons trois créneaux dans la journée.
-        </p>
+        <p className="text-fine font-medium">{repli.titre}</p>
+        <p className="max-w-sm text-finer leading-[1.55] text-ink-70">{repli.texte}</p>
         <a
-          href={`mailto:${site.email}`}
+          href={`mailto:${email}`}
           className="mt-2 inline-flex min-h-[44px] items-center rounded-full bg-navy px-5 text-finer font-medium text-white transition-colors hover:bg-[#0b1c3d] hover:text-white"
         >
-          {site.email}
+          {email}
         </a>
       </div>
     );

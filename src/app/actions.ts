@@ -1,13 +1,20 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+import { draftMode } from "next/headers";
 import { z } from "zod";
-import { site } from "@/lib/home";
+import { lireParametres } from "@/sanity/lire";
 import type { ContactState } from "@/lib/contact";
 
 /**
  * « entreprise » et « telephone » sont facultatifs : ils acceptent la chaîne
  * vide que le navigateur envoie pour un champ laissé vide. Tous les autres sont
  * exigés.
+ *
+ * Les messages restent écrits ici, au plus près des règles qui les produisent,
+ * et ne sont pas remontés dans le CMS : « 20 caractères minimum » est la
+ * formulation d'un `min(20)`. Les séparer permettrait de changer le message
+ * sans la règle, donc d'afficher au visiteur une exigence qui n'existe pas.
  */
 const schema = z.object({
   prenom: z.string().trim().min(1, "Prénom requis"),
@@ -62,12 +69,33 @@ export async function envoyerDemande(
     };
   }
 
+  /**
+   * L'adresse affichée sur le site, lue depuis le CMS.
+   *
+   * C'est la même source que la page Contact et les mentions légales : le
+   * visiteur à qui l'on dit « écrivez-nous à… » doit lire l'adresse qu'il voit
+   * partout ailleurs. Si le CMS ne répond pas, l'envoi s'arrête ici plutôt que
+   * de partir vers une adresse devinée.
+   */
+  let parametres;
+  try {
+    parametres = await lireParametres();
+  } catch (error) {
+    console.error("Réglages du site illisibles, envoi interrompu :", error);
+    return {
+      status: "error",
+      message: "L'envoi est momentanément indisponible. Réessayez dans quelques minutes.",
+      values,
+    };
+  }
+  const adresseSite = parametres.email;
+
   const apiKey = process.env.BREVO_API_KEY;
   if (!apiKey) {
     console.error("BREVO_API_KEY manquante : impossible d'envoyer la demande de contact.");
     return {
       status: "error",
-      message: `L'envoi est momentanément indisponible. Écrivez-nous à ${site.email}.`,
+      message: `L'envoi est momentanément indisponible. Écrivez-nous à ${adresseSite}.`,
       values,
     };
   }
@@ -77,8 +105,8 @@ export async function envoyerDemande(
   // L'expéditeur doit être un expéditeur validé dans Brevo, ou une adresse d'un
   // domaine authentifié chez eux. À défaut, c'est l'adresse du site.
   const expediteur = {
-    name: process.env.CONTACT_FROM_NAME ?? `Site ${site.name}`,
-    email: process.env.CONTACT_FROM_EMAIL ?? site.email,
+    name: process.env.CONTACT_FROM_NAME ?? `Site ${parametres.nom}`,
+    email: process.env.CONTACT_FROM_EMAIL ?? adresseSite,
   };
 
   try {
@@ -94,7 +122,7 @@ export async function envoyerDemande(
         // À défaut de CONTACT_TO, les demandes partent vers l'adresse affichée
         // sur le site : une seule source, donc pas de divergence possible entre
         // ce qu'un visiteur lit et l'endroit où son message arrive.
-        to: [{ email: process.env.CONTACT_TO ?? site.email }],
+        to: [{ email: process.env.CONTACT_TO ?? adresseSite }],
         // Répondre au courriel répond au visiteur, pas au site.
         replyTo: { email: d.email, name: `${d.prenom} ${d.nom}` },
         // L'entreprise complète l'objet quand elle est renseignée : sans elle,
@@ -125,7 +153,7 @@ export async function envoyerDemande(
       );
       return {
         status: "error",
-        message: `L'envoi a échoué. Réessayez ou écrivez-nous à ${site.email}.`,
+        message: `L'envoi a échoué. Réessayez ou écrivez-nous à ${adresseSite}.`,
         values,
       };
     }
@@ -133,12 +161,25 @@ export async function envoyerDemande(
     console.error("Erreur réseau lors de l'envoi de la demande de contact :", error);
     return {
       status: "error",
-      message: `L'envoi a échoué. Réessayez ou écrivez-nous à ${site.email}.`,
+      message: `L'envoi a échoué. Réessayez ou écrivez-nous à ${adresseSite}.`,
       values,
     };
   }
 
   return { status: "success" };
+}
+
+/**
+ * Coupe la prévisualisation des brouillons.
+ *
+ * Appelée depuis un formulaire et non un lien : Next précharge les liens au
+ * survol, ce qui supprimerait le cookie avant tout clic. `revalidatePath`
+ * redessine ensuite la mise en page entière avec le contenu publié, sans quoi
+ * le bandeau resterait affiché jusqu'au prochain rechargement complet.
+ */
+export async function quitterPrevisualisation(): Promise<void> {
+  (await draftMode()).disable();
+  revalidatePath("/", "layout");
 }
 
 function str(value: FormDataEntryValue | null): string {
