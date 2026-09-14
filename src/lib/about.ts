@@ -16,7 +16,7 @@ export const founder = {
 export const facts = [
   { label: "Formation", value: "Ingénieur de l'École des Mines d'Alès" },
   { label: "Parcours", value: "Expedia, Glanum, Septeo" },
-  { label: "Basé à", value: "Avignon, intervention sur tout le territoire" },
+  { label: "Basé à", value: "Avignon — PACA et Occitanie, autres régions selon le projet" },
 ];
 
 /** Le récit, dans l'ordre : du code à la direction, puis retour au terrain. */
@@ -48,9 +48,9 @@ export const story = [
 ];
 
 export const turn = {
-  title: "Puis j'ai regardé qui n'était servi par personne.",
+  title: "Une offre pensée pour les PME et les startups.",
   paragraphs: [
-    "Les PME entendent parler d'intelligence artificielle tous les jours. Elles ont le budget, elles ont le besoin, et aucune offre calibrée en face : les agences et les ESN ne se déplacent pas, les cabinets s'arrêtent au document, et recruter un directeur technique n'a aucun sens à leur échelle.",
+    "Les PME entendent parler d'intelligence artificielle tous les jours. Le besoin est souvent plus concret : comprendre ce qui ralentit le travail, choisir les bons outils et disposer de quelqu'un pour porter le projet jusqu'à sa livraison.",
     "Les startups dont le métier n'est pas la tech vivent le même problème par l'autre bout : elles doivent aller vite sans pouvoir porter un poste à temps plein.",
     "KELERIA existe pour ces deux situations. Le même métier, à temps partagé : je diagnostique de l'intérieur, je chiffre, puis je construis ce qui va vite ou je pilote ceux qui construisent le reste.",
   ],

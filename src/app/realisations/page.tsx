@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
+import { metadonnees } from "@/lib/seo";
 import { Reveal } from "@/components/reveal";
 import { Closing, Container, PageHead } from "@/components/ui";
 import { ai, aiCases, aiProjects, appDev, appProjects, intro, type Work } from "@/lib/work";
 
-export const metadata: Metadata = {
-  title: "Réalisations",
-  description:
-    "Six ans de projets livrés en production : CRM, ERP, commerce en ligne, extranets, tableaux de bord, automatisations et intelligence artificielle.",
-};
+export const metadata: Metadata = metadonnees("/realisations");
 
 export default function RealisationsPage() {
   return (

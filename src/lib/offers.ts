@@ -12,9 +12,9 @@
  */
 
 export const hero = {
-  title: "Comprendre. Exécuter. Piloter.",
+  title: "Audit IA, développement applicatif et pilotage",
   intro:
-    "Quatre offres qui s'enchaînent ou s'activent séparément. On commence presque toujours par un audit, et la suite se décide sur ce qu'il révèle — jamais avant.",
+    "Quatre façons de travailler ensemble : audit, sprints, accompagnement et formation. Le diagnostic cadre les priorités ; la suite se décide sur ce qu'il révèle. La formation accompagne les outils retenus et ne se vend pas seule.",
   meta: [
     { label: "Premier livrable", value: "2 semaines" },
     { label: "Audit", value: "2 500 ou 7 500 € HT" },
@@ -33,14 +33,14 @@ export const speeds = {
   modes: [
     {
       name: "Je construis",
-      text: "Automatisations, connexion d'outils, assistants, tableaux de bord. Des semaines, pas des trimestres. Deux semaines maximum par sujet.",
+      text: "Automatisations, connexion d'outils, assistants, tableaux de bord. Un périmètre court, un délai convenu et un indicateur de résultat défini avant de commencer.",
     },
     {
       name: "Je pilote",
       text: "Cahier des charges, sélection des prestataires, suivi de bout en bout et recette. La réalisation se sous-traite, la responsabilité non.",
     },
   ],
-  note: "Un cabinet vend la seconde. Une agence vend la première. Personne ne fait la bascule de l'une à l'autre sans que vous changiez de prestataire.",
+  note: "Vous gardez le même interlocuteur pour cadrer le besoin, construire les solutions ciblées et piloter les prestataires lorsque le projet le demande.",
 };
 
 export type Offer = {
@@ -101,7 +101,7 @@ export const offers: Offer[] = [
     tagline: "Les quick wins",
     description:
       "Les chantiers de la feuille de route qui se règlent en semaines. Qu'il s'agisse de la mise en place d'un outil, de la connexion entre vos outils ou d'automatisation IA.",
-    duration: "2 à 10 semaines",
+    duration: "Définie après cadrage",
     price: "Sur devis, à partir de la feuille de route",
     cta: "Parler des sprints",
     deliverables: [
@@ -143,7 +143,7 @@ export const offers: Offer[] = [
     name: "Formation",
     tagline: "Vos équipes formées sur vos cas, pas sur des exemples.",
     description:
-      "Jamais vendue seule : elle suit le diagnostic. Sinon on forme des gens à des outils qui ne résolvent pas leur problème, et l'usage retombe au bout de trois semaines.",
+      "Jamais vendue seule : elle suit le diagnostic et porte sur les outils retenus pour vos usages. Les exercices et la documentation partent de vos propres cas pour aider vos équipes à les utiliser au quotidien.",
     duration: "À la session",
     price: "Sur devis",
     cta: "Parler de la formation",
@@ -156,29 +156,37 @@ export const offers: Offer[] = [
   },
 ];
 
+/**
+ * Chaque ligne porte l'ancre de l'offre qu'elle nomme : le tableau servait de
+ * conclusion sans sortie, le lecteur devait remonter chercher le bloc.
+ */
 export const comparison = {
   title: "Quelle offre pour quelle situation ?",
   intro:
-    "En cas de doute, l'audit reste le point d'entrée le plus rentable : c'est le moins cher, et il évite d'investir au mauvais endroit.",
+    "Si vous ne savez pas par où commencer, l'audit sert à chiffrer les priorités avant d'engager un chantier. Si votre besoin est déjà cadré, le premier échange permet de vérifier quelle offre convient.",
   rows: [
     {
       situation: "« Nous ne savons pas comment utiliser l'IA dans nos métiers »",
       offer: "Audit",
+      href: "/offres#audit",
       result: "Feuille de route chiffrée en deux à quatre semaines",
     },
     {
       situation: "« Je sais quoi faire, personne n'a le temps de le faire »",
       offer: "Sprints",
+      href: "/offres#sprints",
       result: "Chantier livré et gain mesuré",
     },
     {
       situation: "« On a déployé des outils que personne n'utilise »",
       offer: "Formation",
+      href: "/offres#formation",
       result: "Équipes autonomes sur leurs propres cas",
     },
     {
       situation: "« Il me faudrait un directeur technique, pas à plein temps »",
       offer: "Accompagnement",
+      href: "/offres#accompagnement",
       result: "Comité de pilotage dès le premier mois",
     },
   ],

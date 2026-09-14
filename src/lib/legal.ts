@@ -101,7 +101,7 @@ export const articles: Article[] = [
      */
     title: "Données à caractère personnel",
     paragraphs: [
-      "Ce site ne collecte de données que par son formulaire de contact, et uniquement celles que vous y écrivez.",
+      "Vous pouvez contacter KELERIA par le formulaire ou réserver un rendez-vous via Cal.com. Le formulaire et le calendrier impliquent des traitements de données décrits ci-dessous.",
     ],
     subsections: [
       {
@@ -113,7 +113,7 @@ export const articles: Article[] = [
       {
         title: "Données collectées",
         paragraphs: [
-          "Vos prénom, nom, adresse électronique professionnelle, le nom et l'effectif de votre entreprise, le sujet de votre demande et le contenu de votre message.",
+          "Les informations saisies dans le formulaire sont vos prénom, nom, adresse électronique professionnelle et message. Vous pouvez également indiquer le nom de votre entreprise et votre numéro de téléphone.",
           "Aucune information n'est collectée au-delà de ce qui permet de vous répondre. Aucun profilage ni décision automatisée n'est appliqué.",
         ],
       },
@@ -133,7 +133,7 @@ export const articles: Article[] = [
         title: "Destinataires",
         paragraphs: [
           "Wilson Rault est le seul destinataire de vos messages. Aucune donnée n'est vendue, louée ni transmise à des tiers à des fins de prospection.",
-          "L'acheminement des courriels transite par un prestataire technique agissant comme sous-traitant, sur la base d'un accord de traitement des données et d'un hébergement en Union européenne.",
+          "Le formulaire utilise Brevo pour l'acheminement des courriels. La réservation d'un rendez-vous utilise Cal.com.",
         ],
       },
       {

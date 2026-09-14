@@ -12,11 +12,11 @@ export const faq = [
   },
   {
     q: "Faut-il changer nos outils actuels ?",
-    a: "Rarement. Dans la majorité des missions, les gains viennent d'une meilleure exploitation de l'existant et de la suppression des doublons.",
+    a: "Pas nécessairement. Je commence par examiner les outils en place, leurs usages et leurs doublons. Le diagnostic permet de décider s'il faut mieux exploiter l'existant, connecter certains outils ou envisager un remplacement.",
   },
   {
     q: "Vos interventions perturbent-elles notre activité ?",
-    a: "Je travaille par périmètres courts et réversibles, avec les équipes concernées. L'activité continue de tourner pendant la mission, quel que soit le métier.",
+    a: "Je découpe les interventions en périmètres courts avec les équipes concernées. Les changements, les tests et le déploiement sont planifiés en tenant compte de vos contraintes d'activité.",
   },
   {
     q: "Comment mesurez-vous le retour sur investissement ?",
@@ -24,6 +24,6 @@ export const faq = [
   },
   {
     q: "Où intervenez-vous ?",
-    a: "Je suis basé à Avignon et j'interviens sur tout le territoire. Les phases de terrain se font sur place, le pilotage à distance.",
+    a: "Je suis basé à Avignon et j'accompagne en priorité les PME et startups de Provence-Alpes-Côte d'Azur et d'Occitanie. Les phases de terrain se font sur place et le pilotage peut se poursuivre à distance. Les interventions dans les autres régions se discutent selon le projet.",
   },
 ];

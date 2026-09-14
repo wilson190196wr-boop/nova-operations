@@ -1,12 +1,16 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { CSSProperties } from "react";
 import { Reveal } from "@/components/reveal";
+import { DonneesStructurees } from "@/components/structured-data";
+import { grapheAccueil } from "@/lib/structured-data";
 import { Card, Closing, Container, Eyebrow, SectionHead, Steps } from "@/components/ui";
 import { alternatives, audiences, brands, heroLines, heroTail, offers, steps } from "@/lib/home";
 
 export default function Home() {
   return (
     <>
+      <DonneesStructurees noeuds={grapheAccueil} />
       <Hero />
       <BrandBand />
       <Container>
@@ -29,9 +33,14 @@ function Hero() {
         className="text-display font-semibold leading-none tracking-[-0.045em] sm:max-w-[22ch] sm:leading-[0.98]"
         style={{ textWrap: "pretty" }}
       >
+        {/* L'espace en fin de ligne est textuel, pas décoratif : sans lui,
+            `textContent` recolle les trois blocs en « Votre partenaireIA et
+            développementapplicatif ». Il se réduit visuellement à rien, les
+            spans étant en `block`. */}
         {heroLines.map((line, i) => (
           <span key={line} className="rise block" style={{ animationDelay: `${i * 70}ms` }}>
             {line}
+            {i < heroLines.length - 1 ? " " : ""}
           </span>
         ))}
       </h1>
@@ -108,6 +117,11 @@ function BrandCell({
           // Le plafond de 30 px vient de la charte ; `scale` corrige ensuite
           // les marges internes propres à chaque logo.
           style={{ maxHeight: `${30 * (brand.logo.scale ?? 1)}px` }}
+          // La largeur affichée se déduit du ratio intrinsèque et de cette
+          // hauteur plafonnée — environ 83 px pour Colas, 86 pour ORTEC. Sans
+          // elle, le navigateur choisissait des variantes de 640 à 828 px
+          // pour des logos rendus sous 90.
+          sizes={`${Math.ceil((brand.logo.width / brand.logo.height) * 30 * (brand.logo.scale ?? 1))}px`}
           className="w-auto object-contain"
         />
       ) : (
@@ -201,6 +215,14 @@ function OfferCard({ offer }: { offer: (typeof offers)[number] }) {
       <p className="mt-2.5 text-fine leading-[1.58] text-ink-70 sm:mt-3.5 sm:max-w-[52ch] sm:text-body">
         {offer.text}
       </p>
+      {/* `mt-auto` colle le lien en bas : dans une rangée de cartes inégales,
+          les quatre liens restent alignés. */}
+      <Link
+        href={offer.href}
+        className="mt-auto pt-5 text-fine font-medium underline underline-offset-4 hover:text-azure"
+      >
+        {offer.lien}
+      </Link>
     </div>
   );
 }

@@ -1,17 +1,18 @@
+import Link from "next/link";
 import type { Metadata } from "next";
+import { metadonnees } from "@/lib/seo";
 import { Reveal } from "@/components/reveal";
+import { DonneesStructurees } from "@/components/structured-data";
+import { grapheOffres } from "@/lib/structured-data";
 import { Button, Card, Closing, Container, Eyebrow, Facts, PageHead, SectionHead } from "@/components/ui";
 import { comparison, hero, offers, speeds, type Offer } from "@/lib/offers";
 
-export const metadata: Metadata = {
-  title: "Offres",
-  description:
-    "Audit, sprints, accompagnement et formation. Quatre offres qui s'enchaînent ou s'activent séparément, avec un seul interlocuteur du début à la fin.",
-};
+export const metadata: Metadata = metadonnees("/offres");
 
 export default function OffresPage() {
   return (
     <>
+      <DonneesStructurees noeuds={grapheOffres} />
       <PageHead title={hero.title} lead={hero.intro}>
         <Facts items={hero.meta.map((m) => ({ label: m.label, value: m.value }))} />
       </PageHead>
@@ -51,7 +52,7 @@ function OfferBlock({ offer, rang }: { offer: Offer; rang: number }) {
         <p className="font-mono text-mono tracking-[0.12em] text-azure">[ {offer.step} ]</p>
         <h2
           id={offer.slug}
-          className="mt-2.5 text-h2-sm font-semibold leading-[1.05] tracking-[-0.045em] sm:mt-3.5"
+          className="ancre-section mt-2.5 text-h2-sm font-semibold leading-[1.05] tracking-[-0.045em] sm:mt-3.5"
         >
           {offer.name}
         </h2>
@@ -111,6 +112,16 @@ function OfferBlock({ offer, rang }: { offer: Offer; rang: number }) {
                 </li>
               ))}
             </ul>
+            {/* Les livrables listés valent pour l'offre entière ; quand elle a
+                des paliers, ce qui est réellement inclus dépend du palier
+                retenu. La note l'indique là où la liste pourrait laisser
+                croire que tout est compris au premier prix. */}
+            {offer.variants ? (
+              <p className="mt-4 text-finer leading-[1.55] text-ink-55">
+                Le périmètre de l&apos;accompagnement dépend du palier retenu : les formats
+                ci-dessus précisent ce qui est inclus.
+              </p>
+            ) : null}
           </div>
         </Reveal>
       </div>
@@ -137,6 +148,11 @@ function Speeds() {
         ))}
       </div>
       <p className="mt-6 max-w-[70ch] text-fine leading-[1.6] text-ink-55">{speeds.note}</p>
+      <p className="mt-4">
+        <Link href="/realisations" className="text-fine font-medium underline underline-offset-4 hover:text-azure">
+          Voir les projets de mon parcours
+        </Link>
+      </p>
     </section>
   );
 }
@@ -161,7 +177,11 @@ function Comparison() {
                 <dt>
                   <Eyebrow uppercase>Offre recommandée</Eyebrow>
                 </dt>
-                <dd className="mt-1 text-fine font-semibold">{row.offer}</dd>
+                <dd className="mt-1 text-fine font-semibold">
+                  <Link href={row.href} className="underline underline-offset-4 hover:text-azure">
+                    {row.offer}
+                  </Link>
+                </dd>
               </div>
               <div>
                 <dt>
@@ -205,7 +225,9 @@ function Comparison() {
                     i === comparison.rows.length - 1 ? "" : "border-b border-line-soft"
                   }`}
                 >
-                  {row.offer}
+                  <Link href={row.href} className="underline underline-offset-4 hover:text-azure">
+                    {row.offer}
+                  </Link>
                 </td>
                 <td
                   className={`px-5 py-[1.125rem] align-top leading-[1.5] ${
