@@ -60,11 +60,6 @@ function Hero() {
  *
  * La grille de cinq est conservée à partir de `lg`, où les cinq cellules
  * tombent juste et où la charte la prévoit ainsi.
- *
- * La légende est commune aux deux rendus et n'est pas décorative : un mur de
- * logos sous le mot « Références » se lit comme une liste de clients. Ces
- * marques viennent d'un parcours salarié et de projets en agence, ce que la
- * phrase dit explicitement.
  */
 function BrandBand() {
   return (
@@ -93,13 +88,6 @@ function BrandBand() {
           ))}
         </ul>
       </div>
-
-      <Container>
-        <p className="mt-4 max-w-[70ch] text-finer leading-[1.5] text-ink-55 sm:mt-5">
-          Références de mon parcours salarié et de projets menés en agence. Ces marques ne sont pas
-          présentées comme clientes de KELERIA ni comme partenaires.
-        </p>
-      </Container>
     </div>
   );
 }
