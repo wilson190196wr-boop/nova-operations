@@ -4,7 +4,7 @@ import type { CSSProperties } from "react";
 import { Reveal } from "@/components/reveal";
 import { DonneesStructurees } from "@/components/structured-data";
 import { grapheAccueil } from "@/lib/structured-data";
-import { Button, Card, Closing, Container, Eyebrow, SectionHead, Steps } from "@/components/ui";
+import { Card, Closing, Container, Eyebrow, SectionHead, Steps } from "@/components/ui";
 import { alternatives, audiences, brands, heroLines, heroTail, offers, steps } from "@/lib/home";
 
 export default function Home() {
@@ -45,13 +45,6 @@ function Hero() {
         ))}
       </h1>
       <p className="mt-5 text-lead leading-[1.55] text-ink-70 sm:mt-[1.625rem] sm:max-w-[46ch]">{heroTail}</p>
-      {/* Le haut de page n'offrait aucune sortie : le premier appel à l'action
-          n'arrivait qu'en bas, après six sections. */}
-      <div className="mt-7 sm:mt-8">
-        <Button href="/contact" size="lg">
-          Réserver un échange de 45 minutes
-        </Button>
-      </div>
     </Container>
   );
 }

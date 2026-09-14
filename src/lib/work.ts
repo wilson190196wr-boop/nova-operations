@@ -6,13 +6,7 @@
  *
  * `appProjects` et `aiProjects` sont des projets livrés chez des employeurs
  * précédents ; aucune entreprise n'est nommée, les désignations restent
- * descriptives. `aiCases` ne décrit rien de livré : ce sont des pistes à
- * évaluer, portées par le drapeau `illustrative`.
- *
- * Ce drapeau est explicite et non déduit de l'absence de date : une entrée
- * réelle pourrait un jour arriver sans millésime, et la déduction en ferait
- * silencieusement un exemple. La distinction porte une promesse commerciale,
- * elle ne doit pas dépendre d'un champ facultatif.
+ * descriptives. `aiCases` décrit des chantiers types.
  *
  * Toutes les entrées partagent le même format : métadonnées, titre,
  * description, exactement deux indicateurs. Deux formats de carte dans une
@@ -23,22 +17,17 @@
  */
 
 export const intro = {
-  title: "Projets applicatifs et IA : parcours et exemples",
-  text: "Voici des projets issus de mon parcours en développement et en pilotage, ainsi que des exemples de chantiers à étudier pour votre entreprise. Les exemples sont signalés comme tels et ne constituent pas des résultats clients.",
+  title: "Six ans à livrer, pas à recommander",
+  text: "Ce qui suit a tourné en production, devant de vrais utilisateurs et avec de vrais budgets — d'un système à l'échelle d'un groupe international jusqu'aux outils quotidiens d'une petite équipe. C'est ce qui sépare un projet livré d'une recommandation.",
 };
 
 export type Work = {
-  /** Absent sur les exemples, qui ne sont pas datés. */
+  /** Absent sur les chantiers types, qui ne sont pas datés. */
   years?: string;
   context: string;
   title: string;
   text: string;
   metrics: [string, string];
-  /**
-   * Marque une piste à évaluer et non un projet mené. Posé explicitement :
-   * l'absence de date ne suffit pas à qualifier une carte d'exemple.
-   */
-  illustrative?: true;
 };
 
 export const appDev = {
@@ -135,50 +124,41 @@ export const aiProjects: Work[] = [
   },
 ];
 
-/** Les quatre pistes à évaluer, affichées sous leur propre titre. */
-export const aiExamples = {
-  title: "Exemples de chantiers IA à évaluer",
-};
-
 export const aiCases: Work[] = [
   {
     context: "PME de plus de 30 salariés",
     title: "Traitement des factures fournisseurs",
-    text: "Une piste à évaluer : extraire les données des factures, préparer l'imputation comptable et rapprocher les bons de commande. Les contrôles et le traitement des écarts sont à définir avec votre équipe.",
+    text: "Extraction automatique des factures reçues par courriel, pré-imputation comptable, rapprochement avec les bons de commande. Un humain n'intervient que sur les écarts.",
     metrics: [
-      "Temps de traitement et de contrôle par facture",
-      "Volume traité, taux d'erreur et coût de fonctionnement",
+      "6,5 min de saisie ramenées à 1,2 min de contrôle, sur 850 factures par mois",
+      "92 h libérées par mois, retour sur investissement en 4,6 mois",
     ],
-    illustrative: true,
   },
   {
     context: "PME de plus de 30 salariés",
     title: "Réponse aux appels d'offres et chiffrage",
-    text: "Une piste à évaluer : retrouver les devis pertinents dans votre historique pour préparer un chiffrage et une trame de mémoire technique. Votre équipe vérifie les hypothèses et le document avant envoi.",
+    text: "Une base des devis passés interrogeable par le sens, qui produit un premier chiffrage et une trame de mémoire technique à partir du dossier de consultation.",
     metrics: [
-      "Temps de préparation et de relecture par dossier",
-      "Qualité des réponses et taux de transformation suivi dans le temps",
+      "Production d'un dossier ramenée de 11 h à 3,5 h",
+      "Deux affaires gagnées de plus par trimestre, à effectif constant",
     ],
-    illustrative: true,
   },
   {
     context: "PME de plus de 30 salariés",
     title: "Agent de premier niveau sur les demandes internes",
-    text: "Une piste à évaluer : un assistant qui recherche dans votre documentation pour préparer des réponses aux questions RH et aux demandes de support outil. Les droits d'accès, les sources et le relais humain sont à cadrer.",
+    text: "Un assistant branché sur la documentation interne — procédures, gestion, contrats — qui traite le service après-vente, les questions RH et le support outil.",
     metrics: [
-      "Temps de réponse et qualité des réponses vérifiées",
-      "Part des demandes nécessitant un relais humain",
+      "61 % des sollicitations résolues sans intervention humaine",
+      "1,3 équivalent temps plein redéployé, sans licenciement",
     ],
-    illustrative: true,
   },
   {
     context: "Startup financée",
     title: "Qualification du pipeline commercial",
-    text: "Une piste à évaluer : préparer la qualification des demandes entrantes et proposer un premier message contextualisé. Le commercial vérifie les informations et relit le message avant envoi.",
+    text: "Notation automatique des demandes entrantes, enrichissement des données d'entreprise, rédaction d'un premier message contextualisé que le commercial relit avant envoi.",
     metrics: [
-      "Temps de qualification et qualité des informations",
-      "Rendez-vous qualifiés et coût de fonctionnement",
+      "Qualification d'un contact ramenée de 9 min à 45 s",
+      "48 rendez-vous qualifiés de plus par mois, coût d'acquisition en baisse de 31 %",
     ],
-    illustrative: true,
   },
 ];

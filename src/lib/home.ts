@@ -41,7 +41,7 @@ export const mainNav = [
 export const heroLines = ["Votre partenaire", "IA et développement", "applicatif"];
 
 export const heroTail =
-  "Basé à Avignon, j'accompagne les PME et les startups en Provence-Alpes-Côte d'Azur et en Occitanie dans leurs projets IA et applicatifs. Je pars de vos processus pour identifier les gains possibles, puis je construis ou je pilote la mise en œuvre, avec des indicateurs définis dès le départ.";
+  "En trois semaines, vous saurez où l'IA vous fait gagner de l'argent — et où elle n'en fait pas. Puis on construit, et je reste jusqu'au résultat mesuré.";
 
 /**
  * Bandeau de marques : employeurs et clients rencontrés en agence.
