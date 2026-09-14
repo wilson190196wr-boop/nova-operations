@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { calUrl } from "@/lib/booking";
 import { CalEmbed } from "./cal-embed";
 import { ContactForm } from "./contact-form";
 
@@ -76,6 +77,16 @@ export function ContactPanel() {
           <ContactForm />
         </div>
       </div>
+
+      {/* Hors des deux panneaux, donc jamais masqué par l'onglet actif, et
+          hors du squelette du calendrier, donc présent avant même son
+          chargement. C'est la seule façon de réserver qui ne dépende ni de
+          JavaScript ni du script Cal.com. */}
+      <p className="mt-5 border-t border-line-soft pt-4 text-fine text-ink-70">
+        <a href={calUrl} className="underline underline-offset-4 hover:text-azure">
+          Ouvrir le calendrier sur Cal.com
+        </a>
+      </p>
     </div>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useActionState } from "react";
 import { envoyerDemande } from "@/app/actions";
 import { initialContactState } from "@/lib/contact";
@@ -120,11 +121,23 @@ export function ContactForm() {
           defaultChecked={state.values?.consentement === "on"}
           className="mt-[0.15rem] h-5 w-5 shrink-0 accent-azure"
         />
+        {/* La phrase « aucune donnée n'est transmise à des tiers » a été
+            retirée : l'acheminement passe par Brevo, et la prise de rendez-vous
+            par Cal.com. Le consentement ne porte plus que sur le rappel. */}
         <label htmlFor="consentement">
-          J&apos;accepte d&apos;être recontacté par KELERIA au sujet de ma demande. Aucune donnée
-          n&apos;est transmise à des tiers.
+          J&apos;accepte d&apos;être recontacté par KELERIA au sujet de ma demande.
           <FieldError errors={state.errors?.consentement} />
         </label>
+      </p>
+
+      {/* Mention séparée de la case : l'information sur l'usage des données ne
+          doit pas être incluse dans ce que l'on coche. */}
+      <p className="mt-3 text-finer leading-[1.5] text-ink-55">
+        Pour savoir comment vos informations sont utilisées, consultez les{" "}
+        <Link href="/mentions-legales" className="underline underline-offset-4 hover:text-azure">
+          mentions légales
+        </Link>
+        .
       </p>
 
       {state.status === "error" && state.message ? (

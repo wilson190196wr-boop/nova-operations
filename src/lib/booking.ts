@@ -17,6 +17,16 @@
  */
 export const calLink = process.env.NEXT_PUBLIC_CAL_LINK?.trim() || "wilson-rault-vclkvp/45min";
 
+/**
+ * L'adresse publique du même événement, dérivée de `calLink` et non ressaisie :
+ * une seconde constante finirait par désigner un autre créneau après une
+ * modification de l'une des deux.
+ *
+ * Elle sert de porte d'entrée permanente quand l'embed ne peut pas se charger
+ * — script bloqué, JavaScript désactivé, réseau filtré.
+ */
+export const calUrl = `https://cal.com/${calLink.replace(/^\/+/, "")}`;
+
 /** Namespace de l'embed : isole cette instance si plusieurs embeds cohabitent. */
 export const calNamespace = "diagnostic";
 

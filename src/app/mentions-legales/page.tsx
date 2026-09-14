@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
+import { metadonnees } from "@/lib/seo";
 import { Reveal } from "@/components/reveal";
 import { Container, Eyebrow } from "@/components/ui";
 import { A_COMPLETER, articles, lastUpdated, type Article } from "@/lib/legal";
 
-export const metadata: Metadata = {
-  title: "Mentions légales",
-  description:
-    "Éditeur, hébergeur, propriété intellectuelle et traitement des données personnelles du site KELERIA.",
-};
+export const metadata: Metadata = metadonnees("/mentions-legales");
 
 export default function MentionsLegalesPage() {
   return (
@@ -74,20 +71,25 @@ function ArticleBlock({ article, n }: { article: Article; n: number }) {
 }
 
 /**
- * Rend une valeur cliquable quand c'en est une.
+ * Décide, à partir du libellé, si une valeur devient un lien.
  *
- * Le lien est déduit de la valeur plutôt que déclaré dans `legal.ts` : ajouter
- * un champ `href` à chaque ligne obligerait à le renseigner sur les quinze
- * lignes qui n'en ont pas besoin, et à ne pas l'oublier sur les deux qui en
- * ont besoin. Une adresse contient une arobase, un numéro ne contient que des
- * chiffres et des espaces — aucune autre valeur de cette page ne s'y prête.
+ * La version précédente devinait à partir de la valeur : toute chaîne d'au
+ * moins huit caractères faite de chiffres et d'espaces devenait un lien
+ * `tel:`. Un SIRET en compte quatorze — dès qu'il aurait été renseigné, il se
+ * serait affiché comme un numéro de téléphone appelable. Le libellé, lui, dit
+ * sans ambiguïté ce que la valeur représente.
+ *
+ * Tout libellé non listé reste du texte : c'est le comportement sûr.
  */
-function valeurCliquable(value: string) {
-  const href = value.includes("@")
-    ? `mailto:${value}`
-    : /^\+?[\d\s]{8,}$/.test(value)
-      ? `tel:${value.replace(/\s/g, "")}`
-      : null;
+function valeurCliquable(label: string, value: string) {
+  const href =
+    label === "Courriel"
+      ? `mailto:${value}`
+      : label === "Téléphone"
+        ? `tel:${value.replace(/\s/g, "")}`
+        : label === "Site"
+          ? `https://${value.replace(/^https?:\/\//, "")}`
+          : null;
 
   if (!href) return value;
 
@@ -121,7 +123,7 @@ function Rows({ rows }: { rows: { label: string; value: string }[] }) {
               row.value === A_COMPLETER ? "text-[#b23c17]" : ""
             }`}
           >
-            {row.value === A_COMPLETER ? row.value : valeurCliquable(row.value)}
+            {row.value === A_COMPLETER ? row.value : valeurCliquable(row.label, row.value)}
           </dd>
         </div>
       ))}

@@ -41,7 +41,7 @@ export const mainNav = [
 export const heroLines = ["Votre partenaire", "IA et développement", "applicatif"];
 
 export const heroTail =
-  "En trois semaines, vous saurez où l'IA vous fait gagner de l'argent — et où elle n'en fait pas. Puis on construit, et je reste jusqu'au résultat mesuré.";
+  "Basé à Avignon, j'accompagne les PME et les startups en Provence-Alpes-Côte d'Azur et en Occitanie dans leurs projets IA et applicatifs. Je pars de vos processus pour identifier les gains possibles, puis je construis ou je pilote la mise en œuvre, avec des indicateurs définis dès le départ.";
 
 /**
  * Bandeau de marques : employeurs et clients rencontrés en agence.
@@ -95,14 +95,14 @@ export const brands: {
 export const audiences = [
   {
     who: "Les PME de plus de 30 salariés",
-    headline: "Personne ne vient vous dire par où commencer.",
+    headline: "Un interlocuteur pour décider par où commencer.",
     // En prose plutôt qu'en puces : une liste à trois points fait diapositive.
-    text: "Les agences et les ESN ne se déplacent pas pour vous — trop petit, pas assez de jours à vendre. Les cabinets produisent une recommandation, puis s'arrêtent au document. Et vous n'avez pas de DSI : la décision repose sur vous seul.",
+    text: "Vous avez des outils, des équipes et des décisions à prendre, sans toujours disposer d'un responsable technique pour cadrer les besoins. Je vous aide à identifier les priorités, puis à piloter leur mise en œuvre.",
   },
   {
     who: "Les startups sans équipe technique",
     headline: "Aller vite sans porter un CTO à temps plein.",
-    text: "Quatre à six mois de recrutement pour un profil introuvable en région, puis un poste lourd à tenir. En attendant, les décisions techniques se prennent sans personne pour les porter.",
+    text: "Vous devez avancer sur votre produit et vos choix techniques sans constituer immédiatement une équipe complète. Je cadre les besoins, les priorités et les prestataires pour donner un responsable à ces décisions.",
   },
 ];
 
@@ -141,18 +141,26 @@ export const steps = [
 export const offers = [
   {
     name: "Audit",
+    href: "/offres#audit",
+    lien: "Voir le diagnostic ciblé et l'audit complet",
     text: "Ciblé sur un processus en deux semaines, ou complet sur toutes les fonctions en trois à quatre. Cartographie, score de maturité, feuille de route chiffrée.",
   },
   {
     name: "Sprints",
-    text: "Nous mettons en place des quick wins mesurables : solutions sélectionnées sur le marché, automatisation IA, agent IA. Deux semaines maximum par sujet. Au-delà, ce n'est plus un sprint mais un projet.",
+    href: "/offres#sprints",
+    lien: "Voir les sprints d'automatisation et d'IA",
+    text: "Je mets en place des améliorations ciblées : connexion d'outils, automatisation ou assistant IA. Le périmètre, le délai et l'indicateur de résultat sont fixés avant de commencer. Les sujets plus larges sont pilotés comme des projets.",
   },
   {
     name: "Accompagnement",
+    href: "/offres#accompagnement",
+    lien: "Voir l'accompagnement à temps partagé",
     text: "Comité mensuel avec le dirigeant, pilotage des chantiers et des prestataires, maintenance de ce qui tourne, score remis à jour chaque trimestre.",
   },
   {
     name: "Formation",
+    href: "/offres#formation",
+    lien: "Voir la formation liée au diagnostic",
     text: "Vos équipes formées sur vos cas réels, aux outils qu'elles vont vraiment utiliser. Jamais vendue seule : elle suit le diagnostic.",
   },
 ];
@@ -165,22 +173,22 @@ export const offers = [
 export const alternatives = [
   {
     name: "Une agence ou une ESN",
-    text: "Elle exécute un cahier des charges — celui que vous n'avez pas su écrire.",
+    text: "Vous avez un prestataire pour réaliser le projet. Il vous reste à préciser le besoin, arbitrer les priorités et suivre la livraison.",
     highlight: false,
   },
   {
     name: "Un cabinet de conseil",
-    text: "Il produit une recommandation, puis s'arrête au document. Rien n'est livré, rien n'est mesuré, et l'exécution reste entièrement à votre charge.",
+    text: "Vous disposez d'une recommandation. Il vous reste à organiser la mise en œuvre et à mesurer ce qu'elle produit.",
     highlight: false,
   },
   {
     name: "Recruter un directeur technique",
-    text: "Une compétence permanente pour un besoin qui ne l'est pas, quatre à six mois avant qu'elle arrive, et un profil introuvable en région.",
+    text: "Vous cherchez une compétence durable, mais le volume de travail ne justifie pas encore forcément un poste à temps plein.",
     highlight: false,
   },
   {
     name: "Ne rien faire",
-    text: "C'est l'alternative la plus fréquente, et donc mon vrai concurrent. Elle ne coûte rien aujourd'hui et se paie sur toutes les années suivantes.",
+    text: "Le fonctionnement actuel continue. Le diagnostic permet de chiffrer ce que coûtent les tâches et les points de rupture avant de décider quoi changer.",
     highlight: true,
   },
 ];

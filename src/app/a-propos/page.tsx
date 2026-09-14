@@ -1,19 +1,19 @@
 import type { Metadata } from "next";
+import { metadonnees } from "@/lib/seo";
 import Image from "next/image";
 import { Reveal } from "@/components/reveal";
+import { DonneesStructurees } from "@/components/structured-data";
+import { grapheAPropos } from "@/lib/structured-data";
 import { Card, Closing, Container, Facts, SectionHead } from "@/components/ui";
 import { facts, founder, principles, story, turn } from "@/lib/about";
 import { founderPhoto } from "@/lib/photos";
 
-export const metadata: Metadata = {
-  title: "À propos",
-  description:
-    "Wilson Rault, fondateur de KELERIA. Six ans à construire des logiciels puis à diriger ceux qui les construisent, chez Expedia, en agence et chez un éditeur.",
-};
+export const metadata: Metadata = metadonnees("/a-propos");
 
 export default function AProposPage() {
   return (
     <Container>
+      <DonneesStructurees noeuds={grapheAPropos} />
       <Intro />
       <Story />
       <Turn />
@@ -39,6 +39,11 @@ function Intro() {
             width={founderPhoto.width}
             height={founderPhoto.height}
             priority
+            // Sans `sizes`, le navigateur suppose la pleine largeur de la
+            // fenêtre et téléchargeait la variante 1920 pour une figure qui
+            // n'en occupe que 335 sur téléphone. Les paliers suivent la
+            // figure : plafonnée à 360 px sous 1024, puis colonne 4/11.
+            sizes="(max-width: 399px) calc(100vw - 40px), (max-width: 1023px) 360px, (max-width: 1279px) 34vw, 412px"
             className="h-full w-full object-cover"
           />
         </figure>
@@ -51,13 +56,19 @@ function Intro() {
       </Reveal>
 
       <Reveal delay={100}>
+        {/* Le H1 nomme la personne. La citation le suivait en titre : hors
+            contexte — résultat de recherche, partage, lecteur d'écran — elle
+            ne disait ni qui parle ni de quoi traite la page. */}
         <h1
           id="a-propos-title"
           className="text-[clamp(1.875rem,3.6vw,2.875rem)] font-semibold leading-[1.08] tracking-[-0.04em]"
           style={{ textWrap: "pretty" }}
         >
-          {founder.quote}
+          Wilson Rault, fondateur de KELERIA
         </h1>
+        <p className="mt-5 max-w-[46ch] text-lead font-medium leading-[1.4] text-ink">
+          {founder.quote}
+        </p>
         <p className="mt-6 max-w-[60ch] text-lead leading-[1.55] text-ink-70">
           Six ans à construire des logiciels, puis à diriger ceux qui les construisent. Dans un
           groupe américain, dans une agence digitale, puis chez un éditeur. KELERIA est né de ce

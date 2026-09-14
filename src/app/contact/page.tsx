@@ -1,15 +1,12 @@
 import type { Metadata } from "next";
+import { metadonnees } from "@/lib/seo";
 import { ContactPanel } from "@/components/contact-panel";
 import { Reveal } from "@/components/reveal";
 import { Container, Eyebrow, PageHead, SectionHead, Steps } from "@/components/ui";
 import { faq } from "@/lib/faq";
 import { site } from "@/lib/home";
 
-export const metadata: Metadata = {
-  title: "Contact — réserver un échange de 45 minutes",
-  description:
-    "Quarante-cinq minutes avec KELERIA pour décrire votre organisation, vos outils et ce qui vous freine, et savoir s'il y a matière à travailler ensemble. Sans engagement.",
-};
+export const metadata: Metadata = metadonnees("/contact");
 
 /** Les trois temps de l'échange, propres à cette page. */
 const echange = [
@@ -42,7 +39,15 @@ export default function ContactPage() {
       </PageHead>
 
       <Container>
-        <Steps items={echange} />
+        {/* Les trois étapes produisent des H3. Sans H2 parent, ils suivaient
+            directement le H1 et cassaient la hiérarchie du document. Le titre
+            est masqué visuellement, pas retiré : la page ne change pas. */}
+        <section aria-labelledby="echange-title">
+          <h2 id="echange-title" className="sr-only">
+            Comment se déroule notre échange
+          </h2>
+          <Steps items={echange} />
+        </section>
 
         <Reveal className="mt-section">
           <ContactPanel />

@@ -1,12 +1,16 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { CSSProperties } from "react";
 import { Reveal } from "@/components/reveal";
-import { Card, Closing, Container, Eyebrow, SectionHead, Steps } from "@/components/ui";
+import { DonneesStructurees } from "@/components/structured-data";
+import { grapheAccueil } from "@/lib/structured-data";
+import { Button, Card, Closing, Container, Eyebrow, SectionHead, Steps } from "@/components/ui";
 import { alternatives, audiences, brands, heroLines, heroTail, offers, steps } from "@/lib/home";
 
 export default function Home() {
   return (
     <>
+      <DonneesStructurees noeuds={grapheAccueil} />
       <Hero />
       <BrandBand />
       <Container>
@@ -29,13 +33,25 @@ function Hero() {
         className="text-display font-semibold leading-none tracking-[-0.045em] sm:max-w-[22ch] sm:leading-[0.98]"
         style={{ textWrap: "pretty" }}
       >
+        {/* L'espace en fin de ligne est textuel, pas décoratif : sans lui,
+            `textContent` recolle les trois blocs en « Votre partenaireIA et
+            développementapplicatif ». Il se réduit visuellement à rien, les
+            spans étant en `block`. */}
         {heroLines.map((line, i) => (
           <span key={line} className="rise block" style={{ animationDelay: `${i * 70}ms` }}>
             {line}
+            {i < heroLines.length - 1 ? " " : ""}
           </span>
         ))}
       </h1>
       <p className="mt-5 text-lead leading-[1.55] text-ink-70 sm:mt-[1.625rem] sm:max-w-[46ch]">{heroTail}</p>
+      {/* Le haut de page n'offrait aucune sortie : le premier appel à l'action
+          n'arrivait qu'en bas, après six sections. */}
+      <div className="mt-7 sm:mt-8">
+        <Button href="/contact" size="lg">
+          Réserver un échange de 45 minutes
+        </Button>
+      </div>
     </Container>
   );
 }
@@ -51,6 +67,11 @@ function Hero() {
  *
  * La grille de cinq est conservée à partir de `lg`, où les cinq cellules
  * tombent juste et où la charte la prévoit ainsi.
+ *
+ * La légende est commune aux deux rendus et n'est pas décorative : un mur de
+ * logos sous le mot « Références » se lit comme une liste de clients. Ces
+ * marques viennent d'un parcours salarié et de projets en agence, ce que la
+ * phrase dit explicitement.
  */
 function BrandBand() {
   return (
@@ -79,6 +100,13 @@ function BrandBand() {
           ))}
         </ul>
       </div>
+
+      <Container>
+        <p className="mt-4 max-w-[70ch] text-finer leading-[1.5] text-ink-55 sm:mt-5">
+          Références de mon parcours salarié et de projets menés en agence. Ces marques ne sont pas
+          présentées comme clientes de KELERIA ni comme partenaires.
+        </p>
+      </Container>
     </div>
   );
 }
@@ -108,6 +136,11 @@ function BrandCell({
           // Le plafond de 30 px vient de la charte ; `scale` corrige ensuite
           // les marges internes propres à chaque logo.
           style={{ maxHeight: `${30 * (brand.logo.scale ?? 1)}px` }}
+          // La largeur affichée se déduit du ratio intrinsèque et de cette
+          // hauteur plafonnée — environ 83 px pour Colas, 86 pour ORTEC. Sans
+          // elle, le navigateur choisissait des variantes de 640 à 828 px
+          // pour des logos rendus sous 90.
+          sizes={`${Math.ceil((brand.logo.width / brand.logo.height) * 30 * (brand.logo.scale ?? 1))}px`}
           className="w-auto object-contain"
         />
       ) : (
@@ -201,6 +234,14 @@ function OfferCard({ offer }: { offer: (typeof offers)[number] }) {
       <p className="mt-2.5 text-fine leading-[1.58] text-ink-70 sm:mt-3.5 sm:max-w-[52ch] sm:text-body">
         {offer.text}
       </p>
+      {/* `mt-auto` colle le lien en bas : dans une rangée de cartes inégales,
+          les quatre liens restent alignés. */}
+      <Link
+        href={offer.href}
+        className="mt-auto pt-5 text-fine font-medium underline underline-offset-4 hover:text-azure"
+      >
+        {offer.lien}
+      </Link>
     </div>
   );
 }

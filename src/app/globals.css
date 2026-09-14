@@ -307,28 +307,33 @@
   }
 }
 
-/* --- Reveal on scroll --------------------------------------------------- */
+/* --- Apparition au défilement -------------------------------------------
+ * La règle ne masque rien. Elle a longtemps posé `opacity: 0` en attendant
+ * qu'un observateur JavaScript vienne révéler le bloc : sans script, la page
+ * restait présente dans le HTML mais blanche à l'écran. L'apparition est
+ * désormais jouée par `node.animate` depuis le composant, sur les seuls blocs
+ * hors écran, et ne laisse aucun style derrière elle.
+ */
 .reveal {
-  opacity: 0;
-  transform: translate3d(0, 24px, 0);
-  transition:
-    opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: opacity, transform;
-}
-
-.reveal[data-visible="true"] {
   opacity: 1;
   transform: none;
+  will-change: auto;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
   html {
     scroll-behavior: auto;
+  }
+}
+
+/* Cale les titres visés par une ancre sous l'en-tête collant : sans cette
+   marge, `/offres#audit` amène le titre derrière la barre. */
+.ancre-section {
+  scroll-margin-top: 100px;
+}
+
+@media (min-width: 1024px) {
+  .ancre-section {
+    scroll-margin-top: 112px;
   }
 }
