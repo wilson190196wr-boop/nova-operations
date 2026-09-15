@@ -36,9 +36,9 @@ plusieurs endroits. Une offre modifiée change partout : sur l'accueil, sur la
 page Offres et dans les données transmises aux moteurs de recherche.
 
 **Réglages du site** — ce qui est partagé par toutes les pages : le nom, les
-coordonnées, le menu, le pied de page et le texte du bandeau de clôture. Les
-coordonnées servent aussi d'adresse de réception du formulaire : les changer
-change l'endroit où arrivent les demandes.
+coordonnées, le menu, le pied de page, le texte du bandeau de clôture et ceux
+de la page introuvable. Les coordonnées servent aussi d'adresse de réception du
+formulaire : les changer change l'endroit où arrivent les demandes.
 
 Chaque champ porte une description qui dit où il s'affiche et ce qu'il
 contraint. Les messages en orange sont des avertissements : on peut publier
@@ -85,6 +85,35 @@ site est entièrement pré-rendu. Sa configuration est décrite au point 8.
 | Les messages d'erreur du formulaire | Ils sont écrits au plus près des règles qui les produisent : « 20 caractères minimum » est la formulation d'une règle. Les séparer permettrait d'afficher une exigence fausse. |
 | Les libellés d'accessibilité des commandes fixes | Le nom d'un bouton de menu n'est pas du contenu ; le vider serait une régression invisible. Le nom de la liste des marques, lui, est éditable : c'est une liste de contenu. |
 | Classes, couleurs, largeurs, délais d'animation | Plusieurs sont des reproductions volontaires de la maquette, y compris des redondances qui n'en sont pas. |
+
+## 5 bis. La page introuvable
+
+C'est la page servie quand l'adresse demandée n'existe pas : lien périmé,
+adresse mal recopiée, page supprimée. Elle porte l'en-tête, le pied de page et
+la charte du site, et renvoie bien un code 404 aux moteurs de recherche.
+
+Ses textes se modifient dans *Réglages du site → Page introuvable* : surtitre,
+titre, texte, libellé du bouton, libellé de la liste de liens et titre d'onglet.
+Les liens qu'elle propose sont ceux du menu et du pied de page — ils suivent la
+navigation d'eux-mêmes, il n'y a pas de seconde liste à tenir à jour.
+
+Elle ne figure pas dans « Pages » parce qu'elle ne correspond à aucune adresse :
+elle répond à toutes celles qui n'en sont pas une. Pour la même raison, l'onglet
+*Prévisualisation* ne sait pas l'ouvrir — il lui faudrait une adresse. Pour la
+voir, demandez n'importe quelle adresse inexistante du site.
+
+**Si les contenus ont déjà été repris avant l'ajout de cette page**, le champ
+n'existe pas encore : la reprise n'écrit jamais dans un document déjà créé.
+Remplissez-le dans le Studio et publiez. Tant qu'il est vide, la construction du
+site échoue avec un message qui le dit — plutôt qu'une page 404 aux titres
+vides, que personne n'aurait relue.
+
+Une différence assumée : cette page s'affiche dans la police du système, et non
+en Geist. Servie sans passer par aucune mise en page, elle devrait déclarer les
+polices pour son propre compte ; or chaque déclaration produit sa feuille de
+style, et les six autres pages se mettaient alors à en charger deux. Le reste de
+la charte ne bouge pas : couleurs, tailles, graisses, filets et rythme sont les
+mêmes.
 
 ## 6. Ce qui reste à faire, côté contenu
 
@@ -189,9 +218,9 @@ npm run verifier:edition
 ```
 
 La première compare le HTML produit à celui d'avant la mise sous CMS, page par
-page. La seconde rejoue quatre gestes d'éditeur — masquer une section,
-réordonner une liste, modifier un texte, modifier une image — et vérifie que
-chacun produit l'effet attendu.
+page. La seconde rejoue cinq gestes d'éditeur — masquer une section, réordonner
+une liste, modifier un texte, modifier une image, modifier un texte des réglages
+du site — et vérifie que chacun produit l'effet attendu.
 
 ## 10. Quand une page est vide
 

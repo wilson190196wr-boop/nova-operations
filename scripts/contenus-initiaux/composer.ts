@@ -17,6 +17,7 @@
 import { identifiantPage } from "../../src/sanity/routes";
 import { facts, founder, principles, story, turn } from "./about";
 import { faq } from "./faq";
+import { pageIntrouvable } from "./introuvable";
 import {
   alternatives,
   audiences,
@@ -139,6 +140,7 @@ export async function composer(image: ResolveurImage): Promise<Composition> {
     })),
     libelleRendezVous: jsx.chassis.libelleRendezVous,
     cloture: jsx.clotureParDefaut,
+    pageIntrouvable,
     ...(visuelPartage
       ? { imagePartage: { ...visuelPartage, alt: jsx.donneesStructurees.imagePartage.alt } }
       : {}),

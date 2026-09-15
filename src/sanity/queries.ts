@@ -240,6 +240,9 @@ export const REQUETE_PARAMETRES = defineQuery(`*[_type == "parametresSite"] | or
   "navPiedDePage": coalesce(navPiedDePage[]{ _key, libelle, chemin }, []),
   libelleRendezVous,
   "cloture": cloture{ texte, libelleBouton, note },
+  "pageIntrouvable": pageIntrouvable{
+    surtitre, titre, texte, libelleRetour, titreLiens, titreOnglet
+  },
   ${image("imagePartage")},
   descriptionOrganisation,
   "zonesDesservies": coalesce(zonesDesservies, [])
