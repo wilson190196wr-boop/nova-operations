@@ -20,8 +20,11 @@ export function IntroFondateur({ bloc }: { bloc: BlocIntroFondateur }) {
               width={portrait.largeur}
               height={portrait.hauteur}
               priority
-              placeholder={portrait.lqip ? "blur" : undefined}
-              blurDataURL={portrait.lqip ?? undefined}
+              // Pas de `placeholder="blur"`, bien que Sanity fournisse la
+              // vignette : le site n'avait pas cette apparition en fondu, et
+              // l'ajouter serait un changement d'animation, pas une migration.
+              // La vignette reste projetée par la requête (`lqip`) : l'activer
+              // tient en deux lignes le jour où ce sera une décision prise.
               // Sans `sizes`, le navigateur suppose la pleine largeur de la
               // fenêtre et téléchargeait la variante 1920 pour une figure qui
               // n'en occupe que 335 sur téléphone. Les paliers suivent la

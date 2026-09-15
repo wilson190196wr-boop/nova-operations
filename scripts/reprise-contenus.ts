@@ -139,8 +139,15 @@ async function creerSiAbsent(documents: Document[]): Promise<void> {
 
   // Une seule transaction : soit tout le lot passe, soit rien. Un lot à moitié
   // écrit laisserait des pages pointant vers des offres inexistantes.
+  //
+  // `visibility: "sync"` fait attendre que l'écriture soit réellement
+  // interrogeable avant de rendre la main. En `async`, la commande se termine
+  // avant que la donnée soit indexée : une construction lancée dans la foulée
+  // échoue en annonçant des pages introuvables, alors que tout a bien été
+  // écrit. Quelques secondes de plus valent mieux qu'une panne qui accuse la
+  // mauvaise cause.
   const transaction = documents.reduce((tx, doc) => tx.createIfNotExists(doc), client.transaction());
-  await transaction.commit({ visibility: "async" });
+  await transaction.commit({ visibility: "sync" });
 }
 
 /* ---------------------------------------------------------- Exécution */
@@ -157,7 +164,53 @@ async function principal() {
   await creerSiAbsent(references);
   await creerSiAbsent(pages);
 
+  if (APPLIQUER) await verifierLecturePublique([...references, ...pages]);
+
   rapport([...alertes, ...aReprendre]);
+}
+
+/**
+ * Vérifie que ce qui vient d'être écrit est réellement lisible par un visiteur.
+ *
+ * Cette vérification existe parce que la panne qu'elle attrape est muette.
+ * Sanity accorde par défaut au public le droit `_id in path("*")`, qui ne
+ * couvre qu'un identifiant d'un seul segment ; un document dont l'identifiant
+ * contient un point sort de ce droit. L'écriture réussit, le Studio affiche
+ * tout normalement, et seul le site public rend des pages vides.
+ *
+ * On interroge donc l'API sans aucun jeton — exactement comme un visiteur — et
+ * on compare le compte obtenu à celui attendu.
+ */
+async function verifierLecturePublique(ecrits: Document[]): Promise<void> {
+  const sansJeton = createClient({ projectId, dataset, apiVersion, useCdn: false });
+  const ids = ecrits.map((doc) => doc._id);
+
+  let visibles: string[];
+  try {
+    visibles = await sansJeton.fetch<string[]>(`*[_id in $ids]._id`, { ids });
+  } catch (erreur) {
+    console.warn("\n⚠ Vérification de lecture publique impossible :", erreur);
+    return;
+  }
+
+  const invisibles = ids.filter((id) => !visibles.includes(id));
+  if (invisibles.length === 0) {
+    console.log(`\n✓ Lecture publique vérifiée : les ${ids.length} documents sont visibles sans jeton.`);
+    return;
+  }
+
+  const aPoint = invisibles.filter((id) => id.includes("."));
+  console.error(
+    `\n✖ ${invisibles.length} document(s) sur ${ids.length} ne sont PAS lisibles par un visiteur.\n` +
+      "  Le site les verra comme absents et rendra des pages vides.\n" +
+      (aPoint.length
+        ? `  ${aPoint.length} d'entre eux ont un point dans leur identifiant : Sanity y voit un chemin\n` +
+          '  imbriqué, hors du droit de lecture publique « _id in path("*") ».\n' +
+          "  N'élargissez pas ce droit à path(\"**\") : cela exposerait aussi les brouillons.\n"
+        : "  Vérifiez les droits de lecture du jeu de données dans sanity.io/manage.\n") +
+      `  Exemples : ${invisibles.slice(0, 4).join(", ")}`,
+  );
+  process.exitCode = 1;
 }
 
 function rapport(aReprendre: string[]) {

@@ -185,7 +185,7 @@ elles montent un jeu de données local et construisent le site contre lui :
 
 ```bash
 npx tsx scripts/verifier-fidelite.ts <dossier-des-empreintes-html>
-npx tsx scripts/verifier-edition.ts
+npm run verifier:edition
 ```
 
 La première compare le HTML produit à celui d'avant la mise sous CMS, page par
@@ -193,7 +193,30 @@ page. La seconde rejoue quatre gestes d'éditeur — masquer une section,
 réordonner une liste, modifier un texte, modifier une image — et vérifie que
 chacun produit l'effet attendu.
 
-## 10. Générer les types depuis le schéma (facultatif)
+## 10. Quand une page est vide
+
+```bash
+npm run diagnostic
+```
+
+Le script interroge Sanity trois fois : comme le site en direct, comme le site
+via le CDN, et comme un visiteur anonyme. C'est la troisième qui compte — la
+panne la plus fréquente est un document qu'un éditeur connecté voit très bien
+mais que le site public ne peut pas lire.
+
+**Le piège à connaître.** Sanity accorde au public le droit de lecture
+`_id in path("*")`, qui ne couvre qu'un identifiant d'un seul segment. Dans
+Sanity, un point marque un chemin imbriqué : c'est ce qui sépare
+`drafts.article` de `article`. Un document nommé `page.accueil` sort donc du
+droit public — le Studio l'affiche normalement, le site le voit comme absent,
+et aucune erreur ne l'explique.
+
+La tentation est d'élargir le droit à `path("**")`. **Ne le faites pas** : cela
+rendrait aussi `drafts.*` public, donc vos brouillons. Ce sont les identifiants
+qu'il faut garder plats, et le script de reprise refuse désormais d'en produire
+d'autres.
+
+## 11. Générer les types depuis le schéma (facultatif)
 
 Les types de contenu sont aujourd'hui écrits à la main dans
 `src/sanity/types.ts`. Une fois le projet connecté, ils peuvent être dérivés du

@@ -11,7 +11,9 @@
     "reprise:appliquer": "tsx scripts/reprise-contenus.ts --appliquer",
     "typecheck": "tsc --noEmit",
     "sanity:schema": "sanity schema extract --enforce-required-fields",
-    "sanity:types": "sanity typegen generate"
+    "sanity:types": "sanity typegen generate",
+    "diagnostic": "tsx scripts/diagnostic-sanity.ts",
+    "verifier:edition": "tsx scripts/verifier-edition.ts"
   },
   "dependencies": {
     "@calcom/embed-react": "^1.5.3",

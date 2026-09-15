@@ -77,8 +77,31 @@ export function jeton(texte: string): string {
 }
 
 export const idPage = identifiantPage;
-export const idOffre = (slug: string) => `offre.${slug}`;
-export const idRealisation = (titre: string) => `realisation.${jeton(titre)}`;
+export const idOffre = (slug: string) => plat(`offre-${slug}`);
+export const idRealisation = (titre: string) => plat(`realisation-${jeton(titre)}`);
+
+/**
+ * Refuse tout identifiant contenant un point.
+ *
+ * Dans Sanity, le point marque un chemin imbriqué : c'est ce qui sépare
+ * `drafts.article` de `article`. Le droit de lecture publique posé par défaut
+ * est `_id in path("*")` et ne couvre qu'un segment, si bien qu'un document
+ * dont l'identifiant contient un point est invisible au public — le site rend
+ * alors une page vide, sans la moindre erreur pour l'expliquer.
+ *
+ * La vérification est ici plutôt qu'en commentaire parce que la panne est
+ * silencieuse : elle ne se voit ni à la compilation, ni à l'écriture, ni dans
+ * le Studio, mais seulement sur le site en production.
+ */
+function plat(id: string): string {
+  if (id.includes(".")) {
+    throw new Error(
+      `Identifiant invalide : « ${id} ». Un point y marque un chemin imbriqué, ` +
+        "ce qui place le document hors du droit de lecture publique de Sanity.",
+    );
+  }
+  return id;
+}
 
 const cle = (prefixe: string, i: number) => `${prefixe}-${i}`;
 const ref = (id: string, k: string) => ({ _type: "reference" as const, _ref: id, _key: k });

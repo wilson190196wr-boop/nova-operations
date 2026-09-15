@@ -40,7 +40,16 @@ export const ROUTES = [
  * Il sert à trois endroits qui doivent s'accorder : l'arborescence du Studio,
  * la reprise des contenus et la résolution des liens de prévisualisation. Le
  * dériver plutôt que le saisir garantit qu'ils désignent le même document.
+ *
+ * Le séparateur est un tiret, et ce n'est pas une question de goût. Dans
+ * Sanity, un point dans un identifiant marque un chemin imbriqué — c'est ce
+ * qui distingue `drafts.article` de `article`. Or le droit de lecture publique
+ * accordé par défaut est `_id in path("*")`, qui ne couvre qu'un seul segment.
+ * Un document nommé `page.accueil` est donc invisible au public, et le site
+ * affiche une page vide sans qu'aucune erreur ne le signale. Élargir le droit
+ * à `path("**")` réglerait le symptôme et exposerait les brouillons : c'est
+ * l'identifiant qu'il faut garder plat.
  */
 export function identifiantPage(route: string): string {
-  return route === "/" ? "page.accueil" : `page${route.replace(/\//g, ".")}`;
+  return route === "/" ? "page-accueil" : `page-${route.replace(/^\//, "").replace(/\//g, "-")}`;
 }
