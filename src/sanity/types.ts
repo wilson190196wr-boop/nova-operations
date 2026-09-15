@@ -228,6 +228,16 @@ export type Page = {
 
 export type LienNavigation = { _key: string; libelle: string; chemin: string };
 
+/** Les textes de la page servie sur une adresse inconnue. */
+export type TextesPageIntrouvable = {
+  surtitre: string;
+  titre: string;
+  texte: string;
+  libelleRetour: string;
+  titreLiens: string;
+  titreOnglet: string;
+};
+
 export type ParametresSite = {
   nom: string;
   accroche: string;
@@ -239,6 +249,13 @@ export type ParametresSite = {
   navPiedDePage: LienNavigation[];
   libelleRendezVous: string;
   cloture: { texte: string; libelleBouton: string; note: string };
+  /**
+   * `null` sur un jeu de données rempli avant l'ajout de la page introuvable :
+   * la reprise des contenus n'écrase jamais un document existant, donc le
+   * champ n'y apparaît qu'une fois saisi dans le Studio. Le type le dit, pour
+   * que la page qui l'affiche soit obligée de traiter le cas.
+   */
+  pageIntrouvable: TextesPageIntrouvable | null;
   imagePartage: ImageSanity;
   descriptionOrganisation: string;
   zonesDesservies: string[];

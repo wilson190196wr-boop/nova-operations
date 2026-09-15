@@ -6,10 +6,11 @@
  * qu'on attend. Les deux sont nécessaires : un site qui ignorerait le CMS
  * passerait la première haut la main.
  *
- * Quatre gestes d'éditeur sont rejoués sur quatre pages différentes, en une
- * seule construction : masquer une section, réordonner une liste, modifier un
- * texte, modifier le texte alternatif d'une image. Chaque effet est ensuite
- * cherché dans le HTML produit.
+ * Cinq gestes d'éditeur sont rejoués en une seule construction : masquer une
+ * section, réordonner une liste, modifier un texte, modifier le texte
+ * alternatif d'une image, et modifier un texte des réglages du site — celui de
+ * la page introuvable, qui n'appartient à aucune des six pages. Chaque effet
+ * est ensuite cherché dans le HTML produit.
  *
  *   npx tsx scripts/verifier-edition.ts
  */
@@ -59,14 +60,19 @@ const imageSynthetique = async (cheminRelatif: string): Promise<ReferenceImage |
   return { _type: "image", asset: { _type: "reference", _ref: id } };
 };
 
-/* ------------------------------------------------------ Les quatre gestes */
+/* ------------------------------------------------------- Les cinq gestes */
 
 const TEXTE_MODIFIE = "Titre modifié par la vérification d'édition";
 const ALT_MODIFIE = "Texte alternatif modifié par la vérification d'édition";
+/**
+ * Sans apostrophe, à dessein : React échappe `'` en `&#x27;` dans le texte
+ * rendu, et ce titre est cherché tel quel dans le HTML de la page 404.
+ */
+const TITRE_404_MODIFIE = "Titre de page introuvable, posé par la vérification";
 
 type Bloc = { _type: string; [champ: string]: unknown };
 
-function appliquerLesGestes(pages: Document[]) {
+function appliquerLesGestes(pages: Document[], references: Document[]) {
   const page = (route: string) => {
     const doc = pages.find((p) => p.route === route);
     if (!doc) throw new Error(`Page ${route} absente de la composition.`);
@@ -104,7 +110,17 @@ function appliquerLesGestes(pages: Document[]) {
   const altInitial = intro.portrait.alt;
   intro.portrait.alt = ALT_MODIFIE;
 
-  return { ordreInitial, titreInitial, altInitial };
+  // 5. Modifier un texte des réglages du site : le titre de la page
+  //    introuvable. Il ne vit dans aucune des six pages — cette page répond aux
+  //    adresses qui n'en sont pas — et c'est justement ce que ce geste vérifie.
+  const reglages = references.find((doc) => doc._type === "parametresSite") as
+    | (Document & { pageIntrouvable?: { titre: string } })
+    | undefined;
+  if (!reglages?.pageIntrouvable) throw new Error("Textes de la page introuvable introuvables.");
+  const titre404Initial = reglages.pageIntrouvable.titre;
+  reglages.pageIntrouvable.titre = TITRE_404_MODIFIE;
+
+  return { ordreInitial, titreInitial, altInitial, titre404Initial };
 }
 
 /* ------------------------------------------------------ Serveur local */
@@ -189,10 +205,10 @@ async function principal() {
   console.log("\n▷ Vérification des gestes d'édition\n");
 
   const { references, pages } = await composer(imageSynthetique);
-  const attendu = appliquerLesGestes(pages);
+  const attendu = appliquerLesGestes(pages, references);
 
   const { port, arreter } = await demarrerServeur([...references, ...pages, ...assets]);
-  console.log("Construction du site avec les quatre modifications…");
+  console.log("Construction du site avec les cinq modifications…");
   const code = await construire(port);
   arreter();
 
@@ -243,7 +259,15 @@ async function principal() {
     "le nouveau texte alternatif est absent, ou l'ancien subsiste",
   );
 
-  // 5. Les pages non touchées ne bougent pas
+  // 5. Modifier un texte des réglages du site
+  const introuvable = lire("_not-found.html");
+  verifier(
+    "Modifier un texte des réglages change la page introuvable",
+    introuvable.includes(TITRE_404_MODIFIE) && !introuvable.includes(attendu.titre404Initial),
+    "le nouveau titre est absent de la page 404, ou l'ancien subsiste",
+  );
+
+  // 6. Les pages non touchées ne bougent pas
   const contact = lire("contact.html");
   verifier(
     "Une page non modifiée reste inchangée",
@@ -253,7 +277,7 @@ async function principal() {
 
   console.log(
     echecs === 0
-      ? "\n✓ Les cinq vérifications passent : le contenu du CMS pilote bien le rendu.\n"
+      ? "\n✓ Les six vérifications passent : le contenu du CMS pilote bien le rendu.\n"
       : `\n✖ ${echecs} vérification(s) en échec.\n`,
   );
   process.exit(echecs === 0 ? 0 : 1);

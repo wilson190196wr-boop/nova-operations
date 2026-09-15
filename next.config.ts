@@ -13,6 +13,28 @@ import type { NextConfig } from "next";
 const projet = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID?.trim();
 
 const nextConfig: NextConfig = {
+  /**
+   * La page « introuvable » du site, servie sur toute adresse inconnue.
+   *
+   * Le drapeau est nécessaire parce que l'application a deux racines de mise
+   * en page — `(site)` et `studio` — et aucun `app/layout.tsx` au-dessus
+   * d'elles. C'est exactement le cas que la documentation de Next désigne :
+   * sans racine unique, il n'y a aucune mise en page à partir de laquelle
+   * composer un 404 global, et `app/global-not-found.tsx` prend le relais.
+   *
+   * Les deux autres emplacements possibles ont été essayés et écartés, mesure
+   * à l'appui. Un `not-found.tsx` dans le groupe `(site)` n'est jamais servi
+   * sur une adresse inconnue : Next continuait de rendre sa page intégrée.
+   * Un `not-found.tsx` à la racine de `app/` est bien servi, mais sans racine
+   * de mise en page au-dessus de lui : Next l'enveloppe alors dans un `<html>`
+   * nu, sans `lang="fr"`, sans les polices et sans `globals.css`.
+   *
+   * `globalNotFound` est marqué expérimental depuis Next 15.4. La contrepartie
+   * est assumée : la seule autre façon d'obtenir une page 404 aux couleurs du
+   * site serait de réintroduire une mise en page racine commune au site et au
+   * Studio — ce que l'intégration Sanity a précisément défait.
+   */
+  experimental: { globalNotFound: true },
   images: {
     /**
      * Les visuels viennent désormais du CDN de Sanity. Sans cette entrée,

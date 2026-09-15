@@ -17,6 +17,7 @@ export const parametresSite = defineType({
     { name: "identite", title: "Identité", default: true },
     { name: "navigation", title: "Navigation" },
     { name: "cloture", title: "Bandeau de clôture" },
+    { name: "introuvable", title: "Page introuvable" },
     { name: "partage", title: "Partage et moteurs" },
   ],
   fields: [
@@ -160,6 +161,66 @@ export const parametresSite = defineType({
           validation: (Rule) => Rule.required(),
         }),
       ],
+    }),
+
+    /* --- Page introuvable --------------------------------------------- */
+    defineField({
+      name: "pageIntrouvable",
+      title: "Textes de la page introuvable",
+      description:
+        "La page servie sur une adresse qui n'existe pas : lien périmé, adresse mal recopiée, page supprimée. Elle vit ici et non dans « Pages » parce qu'elle ne correspond à aucune adresse : elle répond à toutes celles qui n'en sont pas une. Les liens qu'elle propose sont ceux du menu et du pied de page — ils suivent la navigation d'eux-mêmes, sans seconde liste à tenir à jour.",
+      type: "object",
+      group: "introuvable",
+      options: { collapsible: true, collapsed: false },
+      fields: [
+        defineField({
+          name: "surtitre",
+          title: "Surtitre",
+          description: "Le petit texte en capitales au-dessus du titre.",
+          type: "string",
+          validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+          name: "titre",
+          title: "Titre",
+          description: "Le titre de la page. Il doit dire ce qui s'est passé, pas s'excuser.",
+          type: "string",
+          validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+          name: "texte",
+          title: "Texte",
+          description:
+            "Une phrase, deux au plus : ce qui a pu se passer et où reprendre. Le visiteur cherchait autre chose, il ne restera pas lire.",
+          type: "text",
+          rows: 3,
+          validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+          name: "libelleRetour",
+          title: "Libellé du bouton",
+          description: "Le bouton sombre, qui ramène à l'accueil.",
+          type: "string",
+          validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+          name: "titreLiens",
+          title: "Libellé de la liste de liens",
+          description:
+            "Le mot qui coiffe les liens, sous le bouton. Saisissez-le en casse normale : la mise en petites capitales est faite à l'affichage.",
+          type: "string",
+          validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+          name: "titreOnglet",
+          title: "Titre dans l'onglet du navigateur",
+          description:
+            "Écrit en entier, suffixe compris — comme les titres des six pages. La page porte « noindex » : ce titre n'apparaîtra dans aucun résultat de recherche.",
+          type: "string",
+          validation: (Rule) => Rule.required(),
+        }),
+      ],
+      validation: (Rule) => Rule.required(),
     }),
 
     /* --- Partage et moteurs ------------------------------------------- */
