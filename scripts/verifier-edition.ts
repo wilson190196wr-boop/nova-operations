@@ -91,7 +91,28 @@ function appliquerLesGestes(pages: Document[], references: Document[]) {
     | (Bloc & { offres: { _ref: string }[] })
     | undefined;
   if (!detaillees) throw new Error("Bloc des offres détaillées introuvable.");
-  const ordreInitial = detaillees.offres.map((o) => o._ref);
+
+  /**
+   * L'ordre est relevé en ancres, et non en identifiants.
+   *
+   * L'ancre rendue dans la page est le slug de l'offre ; l'identifiant du
+   * document est composé à partir de ce slug, mais reste une affaire de
+   * stockage. Cette vérification les déduisait l'un de l'autre en retirant un
+   * préfixe `offre.` — elle est devenue silencieusement fausse le jour où les
+   * identifiants sont passés au tiret, et cherchait une ancre qui n'existait
+   * nulle part. Le slug est donc lu sur le document lui-même, à la source.
+   */
+  const ancreParId = new Map(
+    references
+      .filter((doc) => doc._type === "offre")
+      .map((doc) => [doc._id, (doc.slug as { current: string } | undefined)?.current]),
+  );
+  const ordreInitial = detaillees.offres.map((offre) => {
+    const ancre = ancreParId.get(offre._ref);
+    if (!ancre) throw new Error(`Aucune offre nommée « ${offre._ref} » dans la composition.`);
+    return ancre;
+  });
+
   detaillees.offres = [...detaillees.offres].reverse();
 
   // 3. Modifier un texte : le titre de la page Réalisations.
@@ -229,10 +250,10 @@ async function principal() {
 
   // 2. Réordonner
   const offres = lire("offres.html");
-  const positions = attendu.ordreInitial.map((id) => {
-    const ancre = id.replace(/^offre\./, "");
-    return { ancre, position: offres.indexOf(`id="${ancre}"`) };
-  });
+  const positions = attendu.ordreInitial.map((ancre) => ({
+    ancre,
+    position: offres.indexOf(`id="${ancre}"`),
+  }));
   const toutesTrouvees = positions.every((p) => p.position >= 0);
   const inverse =
     toutesTrouvees &&
