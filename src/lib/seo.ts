@@ -1,113 +1,73 @@
 import type { Metadata } from "next";
+import { DIMENSIONS_PARTAGE, urlPartage } from "@/sanity/image";
+import { lirePage, lireParametres } from "@/sanity/lire";
 
 /**
- * Source unique des URL et des métadonnées du site.
+ * L'adresse publique du site, et les métadonnées qui en dérivent.
  *
- * Deux raisons de centraliser. D'abord l'hôte : les redirections publiques
- * envoient tout sur `www`, mais `metadataBase` pointait sur le domaine nu ;
- * chaque URL absolue dérivée désignait donc une adresse qui redirige. Ensuite
- * le sitemap et les canonical doivent énumérer exactement les mêmes six
- * adresses — deux listes séparées divergent au premier ajout de page.
+ * `siteUrl` reste dans le code, et c'est délibéré : ce n'est pas un contenu
+ * mais une donnée de déploiement. Les redirections publiques envoient tout sur
+ * `www` ; une valeur éditable ici permettrait de publier des adresses
+ * canoniques qui redirigent, ou pointent sur un autre domaine, sans que rien
+ * ne se voie sur le site.
+ *
+ * Tout le reste — titre, description, visuel de partage — vient de Sanity.
+ * L'adresse canonique, l'URL Open Graph et l'entrée de plan de site dérivent
+ * de la route et ne sont jamais saisies : trois copies d'une même adresse
+ * finissent par désigner trois pages différentes.
  */
 export const siteUrl = "https://www.keleria.com";
 
-/** Les six routes servies. Le sitemap et les canonical en dérivent tous deux. */
-export const routes = [
-  "/",
-  "/offres",
-  "/realisations",
-  "/a-propos",
-  "/contact",
-  "/mentions-legales",
-] as const;
-
-export type Route = (typeof routes)[number];
-
 /**
  * Construit une URL absolue sans paramètre ni fragment, et sans slash final
- * sur les routes internes — la forme exacte que servent les six pages.
+ * sur les routes internes — la forme exacte que servent les pages.
  */
-export function urlAbsolue(route: Route): string {
+export function urlAbsolue(route: string): string {
   return route === "/" ? siteUrl : `${siteUrl}${route}`;
 }
 
-/** Visuel de partage unique ; les textes, eux, restent propres à chaque page. */
-export const imagePartage = {
-  url: `${siteUrl}/og-keleria.png`,
-  width: 1200,
-  height: 630,
-  alt: "KELERIA — Conseil IA et projets applicatifs",
-};
-
-type Page = { title: string; description: string };
-
 /**
- * Titres et descriptions retenus, page par page.
+ * Métadonnées complètes d'une route : canonique absolue, titre, description,
+ * Open Graph et Twitter.
  *
- * Le titre est écrit en entier plutôt que passé au gabarit `%s · KELERIA` :
- * le gabarit ne s'applique pas au titre par défaut de la racine, et mélanger
- * les deux mécanismes produisait un suffixe tantôt absent, tantôt doublé.
+ * L'URL Open Graph est la canonique elle-même, pour qu'un partage ne désigne
+ * jamais une autre adresse que celle indexée. Le titre est publié tel quel,
+ * suffixe compris, sans passer par un gabarit : le gabarit ne s'applique pas
+ * au titre par défaut de la racine, et mélanger les deux mécanismes produisait
+ * un suffixe tantôt absent, tantôt doublé.
  */
-export const pages: Record<Route, Page> = {
-  "/": {
-    title: "Conseil IA et projets applicatifs en PACA et Occitanie · KELERIA",
-    description:
-      "À Avignon, KELERIA accompagne les PME et startups en PACA et Occitanie : audit IA, développement applicatif et pilotage de projets. Parlons de votre besoin.",
-  },
-  "/offres": {
-    title: "Audit IA, sprints et CTO à temps partagé · KELERIA",
-    description:
-      "Audit IA, sprints, pilotage applicatif, accompagnement mensuel et formation liée au diagnostic. Découvrez les formats et les livrables adaptés à votre projet.",
-  },
-  "/realisations": {
-    title: "Projets applicatifs et IA : parcours et exemples · KELERIA",
-    description:
-      "CRM, ERP, applications mobiles et IA : les projets du parcours de Wilson Rault et des exemples de chantiers à évaluer pour votre entreprise.",
-  },
-  "/a-propos": {
-    title: "Wilson Rault, consultant IA et projets applicatifs · KELERIA",
-    description:
-      "Wilson Rault, fondateur de KELERIA à Avignon : ingénieur des Mines d'Alès, passé par Expedia Group, Glanum et Septeo. Conseil et pilotage de projets.",
-  },
-  "/contact": {
-    title: "Contact — réserver un échange de 45 minutes · KELERIA",
-    description:
-      "Parlez de votre projet IA ou applicatif avec Wilson Rault : rendez-vous de 45 minutes, formulaire ou téléphone. Basé à Avignon, pour les PME et startups.",
-  },
-  "/mentions-legales": {
-    title: "Mentions légales · KELERIA",
-    description:
-      "Éditeur, hébergeur, propriété intellectuelle et traitement des données personnelles du site KELERIA.",
-  },
-};
+export async function metadonnees(route: string): Promise<Metadata> {
+  const [page, parametres] = await Promise.all([lirePage(route), lireParametres()]);
 
-/**
- * Métadonnées complètes d'une route : canonical absolue, titre, description,
- * Open Graph et Twitter. L'URL Open Graph est la canonical elle-même, pour
- * qu'un partage ne désigne jamais une autre adresse que celle indexée.
- */
-export function metadonnees(route: Route): Metadata {
-  const { title, description } = pages[route];
+  const { titre, description } = page.seo;
   const url = urlAbsolue(route);
 
+  // Le visuel propre à la page l'emporte ; à défaut, celui du site.
+  const visuel = page.seo.imagePartage?.url ? page.seo.imagePartage : parametres.imagePartage;
+  const adresseVisuel = urlPartage(visuel);
+
+  const images = adresseVisuel
+    ? [{ url: adresseVisuel, ...DIMENSIONS_PARTAGE, alt: visuel.alt }]
+    : undefined;
+
   return {
-    title,
+    title: titre,
     description,
     alternates: { canonical: url },
     openGraph: {
-      title,
+      title: titre,
       description,
       url,
-      siteName: "KELERIA",
+      siteName: parametres.nom,
       locale: "fr_FR",
       type: "website",
-      images: [imagePartage],
+      images,
     },
     twitter: {
       card: "summary_large_image",
-      title,
+      title: titre,
       description,
-      images: [imagePartage.url],
+      images: adresseVisuel ? [adresseVisuel] : undefined,
     },
   };
 }

@@ -4,6 +4,8 @@ import Link from "next/link";
 import { useActionState } from "react";
 import { envoyerDemande } from "@/app/actions";
 import { initialContactState } from "@/lib/contact";
+import { CHEMIN_MENTIONS_LEGALES } from "@/sanity/routes";
+import type { TextesFormulaire } from "@/sanity/types";
 
 /**
  * Le formulaire de contact.
@@ -11,8 +13,13 @@ import { initialContactState } from "@/lib/contact";
  * Prénom et Nom ne figurent pas dans la maquette, mais ils sont conservés : la
  * validation serveur les exige, ils composent l'objet du courriel et l'adresse
  * de réponse. Supprimer les champs aurait cassé l'envoi.
+ *
+ * Les libellés viennent du CMS, les messages de validation non. Ces derniers
+ * sont écrits au plus près des règles qui les produisent — « 20 caractères
+ * minimum » est la formulation d'un `min(20)` — et les séparer aurait permis
+ * de modifier le message sans la règle, donc d'afficher une exigence fausse.
  */
-export function ContactForm() {
+export function ContactForm({ textes }: { textes: TextesFormulaire }) {
   const [state, formAction, pending] = useActionState(envoyerDemande, initialContactState);
 
   if (state.status === "success") {
@@ -30,11 +37,9 @@ export function ContactForm() {
           </svg>
         </span>
         <h3 className="mt-6 text-[1.375rem] font-semibold tracking-[-0.03em]">
-          Message bien reçu.
+          {textes.succes.titre}
         </h3>
-        <p className="mt-3 max-w-sm text-fine leading-[1.58] text-ink-70">
-          Je vous réponds sous 24 heures ouvrées. Si c&apos;est urgent, appelez-moi.
-        </p>
+        <p className="mt-3 max-w-sm text-fine leading-[1.58] text-ink-70">{textes.succes.texte}</p>
       </div>
     );
   }
@@ -50,7 +55,7 @@ export function ContactForm() {
     <form action={formAction} noValidate>
       <Field
         name="prenom"
-        label="Prénom"
+        label={textes.labelPrenom}
         autoComplete="given-name"
         required
         errors={state.errors?.prenom}
@@ -58,7 +63,7 @@ export function ContactForm() {
       />
       <Field
         name="nom"
-        label="Nom"
+        label={textes.labelNom}
         autoComplete="family-name"
         required
         errors={state.errors?.nom}
@@ -66,7 +71,7 @@ export function ContactForm() {
       />
       <Field
         name="email"
-        label="Email professionnel"
+        label={textes.labelEmail}
         type="email"
         autoComplete="email"
         required
@@ -75,14 +80,14 @@ export function ContactForm() {
       />
       <Field
         name="entreprise"
-        label="Entreprise (facultatif)"
+        label={textes.labelEntreprise}
         autoComplete="organization"
         errors={state.errors?.entreprise}
         defaultValue={state.values?.entreprise}
       />
       <Field
         name="telephone"
-        label="Téléphone (facultatif)"
+        label={textes.labelTelephone}
         type="tel"
         autoComplete="tel"
         errors={state.errors?.telephone}
@@ -91,7 +96,7 @@ export function ContactForm() {
 
       <div className="mt-[1.125rem] grid gap-[0.4375rem]">
         <label htmlFor="message" className="text-finer font-medium">
-          Votre situation en quelques lignes
+          {textes.labelMessage}
         </label>
         <textarea
           id="message"
@@ -121,23 +126,24 @@ export function ContactForm() {
           defaultChecked={state.values?.consentement === "on"}
           className="mt-[0.15rem] h-5 w-5 shrink-0 accent-azure"
         />
-        {/* La phrase « aucune donnée n'est transmise à des tiers » a été
-            retirée : l'acheminement passe par Brevo, et la prise de rendez-vous
-            par Cal.com. Le consentement ne porte plus que sur le rappel. */}
         <label htmlFor="consentement">
-          J&apos;accepte d&apos;être recontacté par KELERIA au sujet de ma demande.
+          {textes.texteConsentement}
           <FieldError errors={state.errors?.consentement} />
         </label>
       </p>
 
       {/* Mention séparée de la case : l'information sur l'usage des données ne
-          doit pas être incluse dans ce que l'on coche. */}
+          doit pas être incluse dans ce que l'on coche. C'est pour cela que la
+          phrase est saisie en trois morceaux — seul le milieu est un lien. */}
       <p className="mt-3 text-finer leading-[1.5] text-ink-55">
-        Pour savoir comment vos informations sont utilisées, consultez les{" "}
-        <Link href="/mentions-legales" className="underline underline-offset-4 hover:text-azure">
-          mentions légales
+        {textes.mentionLegale.avant}{" "}
+        <Link
+          href={CHEMIN_MENTIONS_LEGALES}
+          className="underline underline-offset-4 hover:text-azure"
+        >
+          {textes.mentionLegale.libelleLien}
         </Link>
-        .
+        {textes.mentionLegale.apres}
       </p>
 
       {state.status === "error" && state.message ? (
@@ -154,7 +160,7 @@ export function ContactForm() {
         disabled={pending}
         className="mt-6 inline-flex min-h-[44px] w-full items-center justify-center rounded-full bg-navy px-6 text-fine font-medium text-white transition-colors hover:bg-[#0b1c3d] disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {pending ? "Envoi en cours…" : "Envoyer ma demande"}
+        {pending ? textes.libelleEnvoiEnCours : textes.libelleEnvoi}
       </button>
     </form>
   );

@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Plans de travail temporaires : du code construit, exclu de git par
+    // .git/info/exclude. Sans cette ligne, `npm run lint` analyse leurs
+    // bundles et noie les vrais avertissements sous des dizaines de milliers
+    // de faux.
+    ".claude/**",
   ]),
 ]);
 
