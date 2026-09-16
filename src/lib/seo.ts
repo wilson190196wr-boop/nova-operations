@@ -36,6 +36,30 @@ export function urlAbsolue(route: string): string {
  * au titre par défaut de la racine, et mélanger les deux mécanismes produisait
  * un suffixe tantôt absent, tantôt doublé.
  */
+/**
+ * Les icônes du site, déclarées explicitement plutôt que par la convention de
+ * fichiers de Next.js.
+ *
+ * La convention impose les adresses `/favicon.ico`, `/icon.png` et
+ * `/apple-icon.png`. Or ces trois adresses ont servi six semaines durant
+ * l'icône du gabarit `create-next-app`, et les navigateurs conservent les
+ * favicons dans une base à part, insensible aux en-têtes HTTP : ceux qui ont
+ * visité le site pendant cette période gardent l'ancienne image, quoi que
+ * réponde le serveur. Des adresses neuves n'ont, elles, aucune entrée en
+ * cache nulle part.
+ *
+ * `public/favicon.ico` continue d'exister, mais n'est plus déclaré ici : il ne
+ * sert qu'aux robots qui demandent ce chemin en dur sans lire le HTML.
+ */
+const ICONES = {
+  icon: [
+    { url: "/icones/keleria-32.png", sizes: "32x32", type: "image/png" },
+    { url: "/icones/keleria-16.png", sizes: "16x16", type: "image/png" },
+    { url: "/icones/keleria-256.png", sizes: "256x256", type: "image/png" },
+  ],
+  apple: [{ url: "/icones/keleria-180.png", sizes: "180x180", type: "image/png" }],
+} satisfies Metadata["icons"];
+
 export async function metadonnees(route: string): Promise<Metadata> {
   const [page, parametres] = await Promise.all([lirePage(route), lireParametres()]);
 
@@ -54,6 +78,7 @@ export async function metadonnees(route: string): Promise<Metadata> {
     title: titre,
     description,
     alternates: { canonical: url },
+    icons: ICONES,
     openGraph: {
       title: titre,
       description,
