@@ -60,6 +60,26 @@ const ICONES = {
   apple: [{ url: "/icones/keleria-180.png", sizes: "180x180", type: "image/png" }],
 } satisfies Metadata["icons"];
 
+/**
+ * Le site est retiré des moteurs de recherche, à titre temporaire.
+ *
+ * Pour l'y remettre : passer les deux drapeaux à `true`, ou supprimer ce bloc
+ * et la ligne `robots:` qui l'utilise. Rien d'autre n'est à défaire — en
+ * particulier, `robots.txt` n'a volontairement pas été touché, pour la raison
+ * expliquée ci-dessous.
+ *
+ * `robots.txt` interdit d'*explorer* ; cette balise interdit d'*indexer*. Les
+ * deux se ressemblent et font le contraire l'une de l'autre : un `Disallow`
+ * empêche le robot de charger la page, donc de lire la balise `noindex` qui
+ * s'y trouve. Une page déjà indexée le resterait alors, faute pour le moteur
+ * d'avoir jamais pu constater qu'elle demande à en sortir. Pour être
+ * désindexé, il faut au contraire rester explorable.
+ *
+ * Le plan du site reste publié pour la même raison : il accélère le prochain
+ * passage des robots, donc la prise en compte du retrait.
+ */
+const ROBOTS = { index: false, follow: false } satisfies Metadata["robots"];
+
 export async function metadonnees(route: string): Promise<Metadata> {
   const [page, parametres] = await Promise.all([lirePage(route), lireParametres()]);
 
@@ -79,6 +99,7 @@ export async function metadonnees(route: string): Promise<Metadata> {
     description,
     alternates: { canonical: url },
     icons: ICONES,
+    robots: ROBOTS,
     openGraph: {
       title: titre,
       description,
