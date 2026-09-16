@@ -6,7 +6,7 @@ import { apercuBloc, champMasque } from "../objets/champsBloc";
  * Le parcours, jalon par jalon.
  *
  * L'ordre du tableau est restitué tel quel : aucun tri n'est appliqué à
- * l'affichage. Les périodes sont du texte libre — « 2020 — 2022 », un
+ * l'affichage. Les périodes sont du texte libre — « 2020-2022 », un
  * millésime seul, parfois deux jalons qui se chevauchent — et trier là-dessus
  * produirait un ordre faux plutôt qu'un ordre absent. Le rangement est donc
  * éditorial : c'est en déplaçant les entrées qu'on change la chronologie lue.
@@ -38,7 +38,7 @@ export const blocParcours = defineType({
               name: "periode",
               title: "Période",
               description:
-                "« 2020 — 2022 », ou un millésime seul quand la date de fin n'apporte rien.",
+                "« 2020-2022 », ou un millésime seul quand la date de fin n'apporte rien.",
               type: "string",
               validation: (Rule) => Rule.required(),
             }),

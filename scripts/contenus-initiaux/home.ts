@@ -41,7 +41,7 @@ export const mainNav = [
 export const heroLines = ["Votre partenaire", "IA et développement", "applicatif"];
 
 export const heroTail =
-  "En trois semaines, vous saurez où l'IA vous fait gagner de l'argent — et où elle n'en fait pas. Puis on construit, et je reste jusqu'au résultat mesuré.";
+  "En trois semaines, vous saurez où l'IA vous fait gagner de l'argent, et où elle n'en fait pas. Puis on construit, et je reste jusqu'au résultat mesuré.";
 
 /**
  * Bandeau de marques : employeurs et clients rencontrés en agence.
