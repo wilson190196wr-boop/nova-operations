@@ -56,7 +56,12 @@ function BlocOffre({ offre, rang }: { offre: Offre; rang: number }) {
           <p className="text-fine leading-[1.6] text-ink-70 sm:max-w-[62ch] sm:text-body">
             {offre.description}
           </p>
-          <dl className="mt-6 grid grid-cols-2 gap-4 sm:mt-7 sm:flex sm:flex-wrap sm:gap-7">
+          {/* Grille à deux colonnes à toutes les tailles, et non `flex-wrap` :
+              en flux, le couple passait à la ligne dès que les valeurs
+              s'allongeaient. « Sur devis, à partir de la feuille de route »
+              suffisait à empiler les sprints pendant que les trois autres
+              offres gardaient leurs deux libellés côte à côte. */}
+          <dl className="mt-6 grid grid-cols-2 gap-4 sm:mt-7 sm:gap-7">
             <div>
               <dt>
                 <Eyebrow uppercase>Durée</Eyebrow>
@@ -76,32 +81,7 @@ function BlocOffre({ offre, rang }: { offre: Offre; rang: number }) {
         </Reveal>
 
         <Reveal delay={90}>
-          {offre.variantes.length ? (
-            <div className="grid gap-3 sm:grid-cols-2">
-              {offre.variantes.map((variante) => (
-                <div
-                  key={variante._key}
-                  className={`rounded-tier px-[1.0625rem] py-[0.9375rem] sm:px-5 sm:py-[1.125rem] ${
-                    pair ? "bg-paper sm:bg-sand" : "bg-sand"
-                  }`}
-                >
-                  <h3 className="text-[1.0625rem] font-semibold tracking-[-0.02em]">
-                    {variante.nom}
-                  </h3>
-                  <p className="mt-1 text-[1.0625rem] font-semibold tracking-[-0.02em] text-azure">
-                    {variante.prix}
-                  </p>
-                  <p className="mt-2 text-finer leading-[1.5] text-ink-70">{variante.detail}</p>
-                </div>
-              ))}
-            </div>
-          ) : null}
-
-          <div
-            className={`border-t border-line pt-5 sm:border-0 sm:pt-0 ${
-              offre.variantes.length ? "mt-6" : ""
-            }`}
-          >
+          <div className="border-t border-line pt-5 sm:border-0 sm:pt-0">
             <Eyebrow uppercase className="block">
               Ce que vous obtenez
             </Eyebrow>
@@ -121,13 +101,53 @@ function BlocOffre({ offre, rang }: { offre: Offre; rang: number }) {
                 croire que tout est compris au premier prix. */}
             {offre.variantes.length ? (
               <p className="mt-4 text-finer leading-[1.55] text-ink-55">
-                Le périmètre de l&apos;accompagnement dépend du palier retenu : les formats
-                ci-dessus précisent ce qui est inclus.
+                Le périmètre dépend du format retenu : les encadrés ci-dessous précisent ce qui
+                distingue chacun.
               </p>
             ) : null}
           </div>
         </Reveal>
       </div>
+
+      {/* Les paliers en bandeau, sous les deux colonnes, et non dans celle de
+          droite. Empilés à droite, ils y concentraient toute la variabilité du
+          bloc : la colonne passait de 165 px sans palier à 763 px avec quatre,
+          pendant que celle de gauche restait autour de 320. Le bas des deux
+          colonnes ne tombait jamais ensemble, et l'écart se lisait comme un
+          défaut d'alignement. En bandeau, ils forment une rangée de tarifs —
+          ce qu'ils sont — et les deux colonnes reviennent à des hauteurs
+          comparables.
+
+          Le nombre de colonnes suit le nombre de paliers, que le schéma limite
+          à deux ou quatre : quatre encadrés dans une grille de deux feraient
+          deux rangées inégales, deux dans une grille de quatre laisseraient
+          deux cellules vides. */}
+      {offre.variantes.length ? (
+        <Reveal delay={140}>
+          <div
+            className={`mt-6 grid gap-3 sm:mt-[clamp(1.75rem,3.5vw,3rem)] sm:grid-cols-2 ${
+              offre.variantes.length === 4 ? "lg:grid-cols-4" : ""
+            }`}
+          >
+            {offre.variantes.map((variante) => (
+              <div
+                key={variante._key}
+                className={`rounded-tier px-[1.0625rem] py-[0.9375rem] sm:px-5 sm:py-[1.125rem] ${
+                  pair ? "bg-paper sm:bg-sand" : "bg-sand"
+                }`}
+              >
+                <h3 className="text-[1.0625rem] font-semibold tracking-[-0.02em]">
+                  {variante.nom}
+                </h3>
+                <p className="mt-1 text-[1.0625rem] font-semibold tracking-[-0.02em] text-azure">
+                  {variante.prix}
+                </p>
+                <p className="mt-2 text-finer leading-[1.5] text-ink-70">{variante.detail}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      ) : null}
     </section>
   );
 }
