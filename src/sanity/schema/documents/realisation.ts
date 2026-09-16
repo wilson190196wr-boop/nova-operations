@@ -37,7 +37,7 @@ export const realisation = defineType({
       name: "annees",
       title: "Années",
       description:
-        "« 2023 » ou « 2023 — 2024 ». Laissez vide pour un chantier type : la pastille de date disparaît alors entièrement.",
+        "« 2023 » ou « 2023-2024 ». Laissez vide pour un chantier type : la pastille de date disparaît alors entièrement.",
       type: "string",
     }),
     defineField({

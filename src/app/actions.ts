@@ -128,8 +128,8 @@ export async function envoyerDemande(
         // L'entreprise complète l'objet quand elle est renseignée : sans elle,
         // l'objet resterait le même pour deux homonymes.
         subject: d.entreprise
-          ? `Demande de contact — ${d.prenom} ${d.nom} (${d.entreprise})`
-          : `Demande de contact — ${d.prenom} ${d.nom}`,
+          ? `Demande de contact : ${d.prenom} ${d.nom} (${d.entreprise})`
+          : `Demande de contact : ${d.prenom} ${d.nom}`,
         textContent: [
           `${d.prenom} ${d.nom}`,
           `${d.email}`,
