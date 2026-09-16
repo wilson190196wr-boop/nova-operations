@@ -69,7 +69,7 @@ export const offers: Offer[] = [
     name: "Audit",
     tagline: "Savoir où l'IA et le digital rapportent, et où ils ne rapportent rien.",
     description:
-      "Je regarde vos processus tels qu'ils tournent — pas ceux du manuel — pour chiffrer où partent les heures et la marge. Deux formats, distingués par le périmètre et non par la profondeur.",
+      "Je regarde vos processus tels qu'ils tournent, pas ceux du manuel, pour chiffrer où partent les heures et la marge. Deux formats, distingués par le périmètre et non par la profondeur.",
     duration: "2 à 4 semaines",
     price: "2 500 ou 7 500 € HT",
     variants: [

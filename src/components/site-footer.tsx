@@ -26,7 +26,7 @@ export function SiteFooter() {
         <div>
           <Wordmark tone="light" size="lg" />
           <p className="mt-4 max-w-[34ch] text-fine leading-[1.55] text-on-navy">
-            {site.name} — {site.baseline}
+            {`${site.name}. ${site.baseline}`}
           </p>
         </div>
         <nav

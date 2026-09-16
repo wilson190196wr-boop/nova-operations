@@ -140,7 +140,7 @@ export const articles: Article[] = [
         title: "Vos droits",
         paragraphs: [
           "Vous disposez d'un droit d'accès, de rectification, d'effacement, de limitation, d'opposition et de portabilité sur les données vous concernant. Ces droits s'exercent par courriel à l'adresse indiquée à l'article 1 ; une réponse vous sera apportée dans un délai d'un mois.",
-          "Si la réponse ne vous satisfait pas, vous pouvez introduire une réclamation auprès de la Commission nationale de l'informatique et des libertés — 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07, ou sur cnil.fr.",
+          "Si la réponse ne vous satisfait pas, vous pouvez introduire une réclamation auprès de la Commission nationale de l'informatique et des libertés : 3 place de Fontenoy, TSA 80715, 75334 Paris Cedex 07, ou sur cnil.fr.",
         ],
       },
     ],

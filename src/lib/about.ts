@@ -16,25 +16,25 @@ export const founder = {
 export const facts = [
   { label: "Formation", value: "Ingénieur de l'École des Mines d'Alès" },
   { label: "Parcours", value: "Expedia, Glanum, Septeo" },
-  { label: "Basé à", value: "Avignon — PACA et Occitanie, autres régions selon le projet" },
+  { label: "Basé à", value: "Avignon : PACA et Occitanie, autres régions selon le projet" },
 ];
 
 /** Le récit, dans l'ordre : du code à la direction, puis retour au terrain. */
 export const story = [
   {
-    period: "2020 — 2022",
+    period: "2020-2022",
     place: "Expedia Group, Genève",
     role: "Ingénieur en développement logiciel",
     text: "J'ai passé deux ans sur un projet de machine learning qui générait vingt millions de dollars par an. C'est là que j'ai appris ce que veut dire une valeur mesurée : chaque fonctionnalité était rapportée à ce qu'elle produisait, ou elle ne partait pas en production.",
   },
   {
-    period: "2022 — 2024",
+    period: "2022-2024",
     place: "Agence Glanum, Avignon",
     role: "Chef de projet",
     text: "Une dizaine de projets menés de front : sites, e-commerce, ERP, big data, intelligence artificielle. J'y ai mis en place une méthode de travail et les indicateurs de suivi. J'ai découvert l'écart entre ce qu'un client demande et ce dont il a besoin.",
   },
   {
-    period: "2024 — 2026",
+    period: "2024-2026",
     place: "Agence Glanum, Avignon",
     role: "Directeur de production",
     text: "Douze personnes à diriger, des grands comptes à servir, des sous-traitants à piloter. J'ai été à la tête de la production d'une agence ; je sais donc analyser un besoin, rédiger un cahier des charges, chiffrer un projet, constituer une équipe, livrer et maintenir un projet.",
@@ -67,7 +67,7 @@ export const principles = [
   },
   {
     title: "Aucune commission éditeur",
-    text: "Je ne revends aucune licence et je ne touche rien sur les outils que je recommande — y compris quand je recommande celui que vous payez déjà.",
+    text: "Je ne revends aucune licence et je ne touche rien sur les outils que je recommande, y compris quand je recommande celui que vous payez déjà.",
   },
   {
     title: "L'engagement porte sur le résultat",

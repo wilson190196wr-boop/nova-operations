@@ -20,7 +20,7 @@ export const faq = [
   },
   {
     q: "Comment mesurez-vous le retour sur investissement ?",
-    a: "Sur des indicateurs choisis avec vous dès l'audit — temps passé, délais, marge, qualité — selon ce que le chantier vise. Mesurés avant, mesurés après, et revus en comité.",
+    a: "Sur des indicateurs choisis avec vous dès l'audit (temps passé, délais, marge, qualité), selon ce que le chantier vise. Mesurés avant, mesurés après, et revus en comité.",
   },
   {
     q: "Où intervenez-vous ?",

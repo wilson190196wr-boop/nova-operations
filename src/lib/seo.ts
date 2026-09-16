@@ -36,7 +36,7 @@ export const imagePartage = {
   url: `${siteUrl}/og-keleria.png`,
   width: 1200,
   height: 630,
-  alt: "KELERIA — Conseil IA et projets applicatifs",
+  alt: "KELERIA, conseil IA et projets applicatifs",
 };
 
 type Page = { title: string; description: string };
@@ -70,7 +70,7 @@ export const pages: Record<Route, Page> = {
       "Wilson Rault, fondateur de KELERIA à Avignon : ingénieur des Mines d'Alès, passé par Expedia Group, Glanum et Septeo. Conseil et pilotage de projets.",
   },
   "/contact": {
-    title: "Contact — réserver un échange de 45 minutes · KELERIA",
+    title: "Contact : réserver un échange de 45 minutes · KELERIA",
     description:
       "Parlez de votre projet IA ou applicatif avec Wilson Rault : rendez-vous de 45 minutes, formulaire ou téléphone. Basé à Avignon, pour les PME et startups.",
   },

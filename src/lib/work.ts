@@ -18,7 +18,7 @@
 
 export const intro = {
   title: "Six ans à livrer, pas à recommander",
-  text: "Ce qui suit a tourné en production, devant de vrais utilisateurs et avec de vrais budgets — d'un système à l'échelle d'un groupe international jusqu'aux outils quotidiens d'une petite équipe. C'est ce qui sépare un projet livré d'une recommandation.",
+  text: "Ce qui suit a tourné en production, devant de vrais utilisateurs et avec de vrais budgets, d'un système à l'échelle d'un groupe international jusqu'aux outils quotidiens d'une petite équipe. C'est ce qui sépare un projet livré d'une recommandation.",
 };
 
 export type Work = {
@@ -46,7 +46,7 @@ export const appProjects: Work[] = [
     ],
   },
   {
-    years: "2023 — 2024",
+    years: "2023-2024",
     context: "Industriel, deux sites de production",
     title: "Un ERP déployé sans arrêter la production",
     text: "Cadrage mené avec les équipes atelier et l'administration des ventes, reprise des données, déploiement par lots. Interfaces avec la comptabilité existante plutôt que remplacement intégral.",
@@ -56,7 +56,7 @@ export const appProjects: Work[] = [
     ],
   },
   {
-    years: "2022 — 2023",
+    years: "2022-2023",
     context: "Grand compte de l'industrie",
     title: "Une plateforme de commerce en ligne connectée au stock réel",
     text: "Catalogue, tunnel de commande et paiement, mais surtout la synchronisation avec la gestion. Recette menée avec le service client, qui absorbait jusque-là les écarts de stock.",
@@ -103,7 +103,7 @@ export const ai = {
 
 export const aiProjects: Work[] = [
   {
-    years: "2020 — 2022",
+    years: "2020-2022",
     context: "Grand groupe américain du voyage en ligne",
     title: "Du machine learning en production, vingt millions de dollars par an",
     text: "Développement et maintenance d'un modèle en production, des pipelines de données jusqu'aux interfaces qui l'exposaient. Chaque évolution était rapportée à ce qu'elle produisait.",
@@ -146,7 +146,7 @@ export const aiCases: Work[] = [
   {
     context: "PME de plus de 30 salariés",
     title: "Agent de premier niveau sur les demandes internes",
-    text: "Un assistant branché sur la documentation interne — procédures, gestion, contrats — qui traite le service après-vente, les questions RH et le support outil.",
+    text: "Un assistant branché sur la documentation interne (procédures, gestion, contrats) qui traite le service après-vente, les questions RH et le support outil.",
     metrics: [
       "61 % des sollicitations résolues sans intervention humaine",
       "1,3 équivalent temps plein redéployé, sans licenciement",
