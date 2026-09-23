@@ -1,10 +1,12 @@
 /**
- * Le mot-symbole KELERIA — variante retenue dans la maquette : une coupe en
- * deux poids, `kel` en gras et `eria` en régulier, bas de casse.
+ * Le mot-symbole KELERIA : un seul mot, un seul poids, une seule couleur.
  *
- * Le mot est découpé en deux `span` et non dessiné en SVG : il reste ainsi du
- * texte sélectionnable, lisible par un lecteur d'écran, et il suit la police
- * du site sans second chargement.
+ * Il était composé en deux morceaux, `kel` et `eria`, que distinguaient le
+ * poids puis la couleur. Les deux marques étant tombées, les deux `span`
+ * n'avaient plus rien à porter : le mot est redevenu un mot.
+ *
+ * Il reste du texte et non un tracé SVG : sélectionnable, lisible par un
+ * lecteur d'écran, et il suit la police du site sans second chargement.
  */
 export function Wordmark({
   tone = "dark",
@@ -13,15 +15,13 @@ export function Wordmark({
   tone?: "dark" | "light";
   size?: "md" | "lg";
 }) {
-  const light = tone === "light";
   return (
     <span
-      className={`inline-block whitespace-nowrap leading-none tracking-[-0.05em] ${
+      className={`inline-block whitespace-nowrap font-bold leading-none tracking-[-0.05em] ${
         size === "lg" ? "text-[1.75rem]" : "text-[1.3125rem] sm:text-[1.4375rem]"
-      } ${light ? "text-white" : "text-navy"}`}
+      } ${tone === "light" ? "text-white" : "text-navy"}`}
     >
-      <span className="font-bold">kel</span>
-      <span className={`font-normal ${light ? "text-[#8f9bb5]" : "text-ink-70"}`}>eria</span>
+      keleria
     </span>
   );
 }
