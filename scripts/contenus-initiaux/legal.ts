@@ -37,7 +37,7 @@ export const articles: Article[] = [
       { label: "Adresse", value: A_COMPLETER },
       { label: "SIRET", value: A_COMPLETER },
       { label: "TVA", value: "TVA non applicable, article 293 B du Code général des impôts" },
-      { label: "Courriel", value: "wilson@keleria.com" },
+      { label: "E-mail", value: "wilson@keleria.com" },
       { label: "Téléphone", value: "+33 6 62 90 92 59" },
       { label: "Directeur de la publication", value: "Wilson Rault" },
     ],
@@ -133,7 +133,7 @@ export const articles: Article[] = [
         title: "Destinataires",
         paragraphs: [
           "Wilson Rault est le seul destinataire de vos messages. Aucune donnée n'est vendue, louée ni transmise à des tiers à des fins de prospection.",
-          "Le formulaire utilise Brevo pour l'acheminement des courriels. La réservation d'un rendez-vous utilise Cal.com.",
+          "Les courriels du formulaire transitent par Brevo. La réservation d'un rendez-vous utilise Cal.com.",
         ],
       },
       {

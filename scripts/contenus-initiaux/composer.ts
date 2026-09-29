@@ -545,7 +545,10 @@ function seo(route: string) {
  * n'altère plus.
  */
 function typeDeLien(libelle: string): "aucun" | "courriel" | "telephone" | "site" {
-  if (libelle === "Courriel") return "courriel";
+  // Les deux libellés sont acceptés : « Courriel » était celui d'origine,
+  // « E-mail » celui d'aujourd'hui. Ne reconnaître que le second ferait
+  // perdre le lien mailto: à toute reprise faite depuis une archive.
+  if (libelle === "Courriel" || libelle === "E-mail") return "courriel";
   if (libelle === "Téléphone") return "telephone";
   if (libelle === "Site") return "site";
   return "aucun";
