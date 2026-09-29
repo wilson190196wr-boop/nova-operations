@@ -37,7 +37,7 @@ export const articles: Article[] = [
       { label: "Adresse", value: A_COMPLETER },
       { label: "SIRET", value: A_COMPLETER },
       { label: "TVA", value: "TVA non applicable, article 293 B du Code général des impôts" },
-      { label: "Courriel", value: "wilson@keleria.com" },
+      { label: "E-mail", value: "wilson@keleria.com" },
       { label: "Téléphone", value: "+33 6 62 90 92 59" },
       { label: "Directeur de la publication", value: "Wilson Rault" },
     ],

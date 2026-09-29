@@ -72,7 +72,7 @@ export const contact = {
   titre: "Quarante-cinq minutes pour y voir clair.",
   chapeau:
     "Un échange cadré, sans slide de vente. Vous décrivez votre organisation, vos outils et ce qui vous freine. Je vous dis par où je commencerais, ce que ça suppose, et s'il y a matière à travailler ensemble.",
-  libelleEmail: "Email",
+  libelleEmail: "E-mail",
   libelleTelephone: "Téléphone",
   libelleVille: "Localisation",
   /** Titre lu par les lecteurs d'écran seulement, pour ne pas casser la hiérarchie H1 → H2 → H3. */
@@ -116,7 +116,7 @@ export const panneauContact = {
 export const formulaire = {
   labelPrenom: "Prénom",
   labelNom: "Nom",
-  labelEmail: "Email professionnel",
+  labelEmail: "E-mail professionnel",
   labelEntreprise: "Entreprise (facultatif)",
   labelTelephone: "Téléphone (facultatif)",
   labelMessage: "Votre situation en quelques lignes",
