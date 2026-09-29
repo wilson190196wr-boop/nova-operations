@@ -29,7 +29,7 @@ export const hero = {
  */
 export const speeds = {
   title: "Deux vitesses, un seul interlocuteur",
-  text: "Selon ce que le diagnostic révèle, je construis moi-même ou je fais construire. Dans les deux cas vous gardez un contact, un planning et un budget.",
+  text: "Selon ce que le diagnostic révèle, je construis moi-même ou je fais construire. Dans les deux cas, vous gardez un contact, un planning et un budget.",
   modes: [
     {
       name: "Je construis",
@@ -100,7 +100,7 @@ export const offers: Offer[] = [
     name: "Sprints",
     tagline: "Les quick wins",
     description:
-      "Les chantiers de la feuille de route qui se règlent en semaines. Qu'il s'agisse de la mise en place d'un outil, de la connexion entre vos outils ou d'automatisation IA.",
+      "Les chantiers de la feuille de route qui se règlent en semaines, qu'il s'agisse de la mise en place d'un outil, de la connexion entre vos outils ou d'automatisation IA.",
     duration: "Définie après cadrage",
     price: "Sur devis, à partir de la feuille de route",
     cta: "Parler des sprints",
@@ -120,7 +120,7 @@ export const offers: Offer[] = [
     tagline: "Un directeur technique à temps partagé, chaque mois.",
     description:
       "C'est ce qui distingue une transformation qui tient d'un projet qui retombe six mois après sa livraison. Trois mois pour commencer, puis reconduction tacite avec un mois de préavis.",
-    duration: "3 mois, puis tacite",
+    duration: "3 mois, puis reconduction tacite",
     price: "dès 1 600 € / mois",
     variants: [
       { name: "Suivi", price: "1 600 € / mois", detail: "Comité mensuel et maintenance" },

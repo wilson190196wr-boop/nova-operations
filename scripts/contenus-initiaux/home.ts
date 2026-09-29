@@ -112,12 +112,12 @@ export const steps = [
   {
     n: "01",
     title: "J'analyse",
-    text: "Entretiens avec le dirigeant et le terrain, observation des postes, extraction des données réelles. Une méthode pour mettre en lumière vos réels besoins.",
+    text: "Entretiens avec le dirigeant et le terrain, observation des postes, extraction des données réelles. Une méthode pour mettre en lumière vos besoins réels.",
   },
   {
     n: "02",
     title: "Je chiffre",
-    text: "Combien de fois cette information est-elle saisie, par combien de personnes. Le coût sort de vos chiffres.",
+    text: "Combien de fois cette information est-elle saisie, et par combien de personnes ? Le coût sort de vos chiffres.",
   },
   {
     n: "03",
@@ -188,7 +188,7 @@ export const alternatives = [
   },
   {
     name: "Ne rien faire",
-    text: "Le fonctionnement actuel continue. Le diagnostic permet de chiffrer ce que coûtent les tâches et les points de rupture avant de décider quoi changer.",
+    text: "Le fonctionnement actuel continue. Le diagnostic permet de chiffrer ce que coûtent les tâches et les points de rupture avant de décider ce qu'il faut changer.",
     highlight: true,
   },
 ];

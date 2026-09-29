@@ -95,7 +95,7 @@ export const contact = {
       text: "Un audit, un chantier précis, un simple conseil, ou rien du tout. Sans relance commerciale.",
     },
   ],
-  surtitreFaq: "Avant de nous écrire",
+  surtitreFaq: "Avant de m'écrire",
   titreFaq: "Les réponses aux questions les plus fréquentes.",
 };
 

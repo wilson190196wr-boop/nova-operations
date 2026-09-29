@@ -46,7 +46,7 @@ export const appProjects: Work[] = [
     ],
   },
   {
-    years: "2023-2024",
+    years: "2023–2024",
     context: "Industriel, deux sites de production",
     title: "Un ERP déployé sans arrêter la production",
     text: "Cadrage mené avec les équipes atelier et l'administration des ventes, reprise des données, déploiement par lots. Interfaces avec la comptabilité existante plutôt que remplacement intégral.",
@@ -56,7 +56,7 @@ export const appProjects: Work[] = [
     ],
   },
   {
-    years: "2022-2023",
+    years: "2022–2023",
     context: "Grand compte de l'industrie",
     title: "Une plateforme de commerce en ligne connectée au stock réel",
     text: "Catalogue, tunnel de commande et paiement, mais surtout la synchronisation avec la gestion. Recette menée avec le service client, qui absorbait jusque-là les écarts de stock.",
@@ -78,7 +78,7 @@ export const appProjects: Work[] = [
   {
     years: "2024",
     context: "Réseau de points de vente",
-    title: "Des tableaux de bord branchés sur la gestion, plus sur un tableur",
+    title: "Des tableaux de bord branchés sur la gestion, et non plus sur un tableur",
     text: "Consolidation automatique des chiffres de vente et de stock, actualisée chaque nuit. La direction lisait ses résultats le 15 du mois suivant ; elle les lit désormais le lendemain.",
     metrics: [
       "Résultats disponibles à J+1 au lieu du 15 du mois suivant",
@@ -103,7 +103,7 @@ export const ai = {
 
 export const aiProjects: Work[] = [
   {
-    years: "2020-2022",
+    years: "2020–2022",
     context: "Grand groupe américain du voyage en ligne",
     title: "Du machine learning en production, vingt millions de dollars par an",
     text: "Développement et maintenance d'un modèle en production, des pipelines de données jusqu'aux interfaces qui l'exposaient. Chaque évolution était rapportée à ce qu'elle produisait.",

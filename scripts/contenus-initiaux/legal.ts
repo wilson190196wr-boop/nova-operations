@@ -133,7 +133,7 @@ export const articles: Article[] = [
         title: "Destinataires",
         paragraphs: [
           "Wilson Rault est le seul destinataire de vos messages. Aucune donnée n'est vendue, louée ni transmise à des tiers à des fins de prospection.",
-          "Le formulaire utilise Brevo pour l'acheminement des courriels. La réservation d'un rendez-vous utilise Cal.com.",
+          "Les courriels du formulaire transitent par Brevo. La réservation d'un rendez-vous utilise Cal.com.",
         ],
       },
       {
