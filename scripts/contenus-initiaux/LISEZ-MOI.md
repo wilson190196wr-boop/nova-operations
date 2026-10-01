@@ -15,11 +15,13 @@ dans le Studio, et une retouche ici ferait diverger la référence de la réalit
 
 ## Ces fichiers ne décrivent plus le site
 
-Le 1er octobre 2026, le site a changé de positionnement : les quatre offres ont
-été renommées (Audit devient Diagnostic, Sprints devient Automatisation,
-Accompagnement devient Pilotage) et la quasi-totalité des textes réécrits. La
-reprise a été faite directement dans le jeu de données, et **ces fichiers n'ont
-pas suivi**.
+Le 1er octobre 2026, le site a changé de positionnement — « expert en
+transformation IA et digitale » — et les quatre offres ont été renommées : Audit
+devient Diagnostic, Sprints devient Solutions ciblées, Accompagnement devient
+Pilotage, Formation ne bouge pas. Les URL et les ancres, elles, sont restées.
+
+La quasi-totalité des textes a été réécrite directement dans le jeu de données,
+et **ces fichiers n'ont pas suivi**.
 
 Ils restent la photographie du site de septembre 2026, ce qui est encore utile :
 `verifier-fidelite.ts` et `verifier-edition.ts` s'en servent comme jeu d'essai,
