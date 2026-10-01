@@ -60,6 +60,8 @@ const OFFRE = `{
   prix,
   libelleBouton,
   "variantes": coalesce(variantes[]{ _key, nom, prix, detail }, []),
+  libelleLivrables,
+  introVariantes,
   "livrables": coalesce(livrables, []),
   resumeAccueil,
   libelleLienAccueil
@@ -213,7 +215,8 @@ const BLOCS = `"blocs": coalesce(blocs[masque != true]{
   },
 
   _type == "blocCloture" => {
-    titre
+    titre,
+    texte
   }
 }, [])`;
 

@@ -34,6 +34,8 @@ export type Offre = {
   duree: string;
   prix: string;
   libelleBouton: string;
+  libelleLivrables: string | null;
+  introVariantes: string | null;
   variantes: { _key: string; nom: string; prix: string; detail: string }[];
   livrables: string[];
   resumeAccueil: string;
@@ -194,7 +196,7 @@ export type BlocMentionsLegales = Base<"blocMentionsLegales"> & {
   }[];
 };
 
-export type BlocCloture = Base<"blocCloture"> & { titre: string };
+export type BlocCloture = Base<"blocCloture"> & { titre: string; texte: string | null };
 
 /** Toute section qu'une page peut porter. */
 export type Bloc =

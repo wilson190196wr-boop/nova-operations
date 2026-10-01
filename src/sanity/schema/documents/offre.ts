@@ -141,6 +141,24 @@ export const offre = defineType({
         ).warning(),
     }),
     defineField({
+      name: "libelleLivrables",
+      title: "Intitulé de la liste",
+      description:
+        "Facultatif. « Ce que vous obtenez » par défaut. À changer quand la liste n'énumère pas des livrables garantis mais un périmètre possible : « Ce que la mission peut inclure ».",
+      type: "string",
+      group: "detail",
+    }),
+    defineField({
+      name: "introVariantes",
+      title: "Texte avant les formats",
+      description:
+        "Facultatif, affiché sous la liste et juste avant les encadrés. Il dit ce qui distingue les formats entre eux — le périmètre, le nombre de jours. Sans lui, rien ne s'affiche.",
+      type: "text",
+      rows: 2,
+      group: "detail",
+      hidden: ({ parent }) => !(parent as { variantes?: unknown[] })?.variantes?.length,
+    }),
+    defineField({
       name: "livrables",
       title: "Ce que vous obtenez",
       description: "Une ligne par livrable, à puce azur.",
