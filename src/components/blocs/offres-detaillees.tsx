@@ -83,7 +83,7 @@ function BlocOffre({ offre, rang }: { offre: Offre; rang: number }) {
         <Reveal delay={90}>
           <div className="border-t border-line pt-5 sm:border-0 sm:pt-0">
             <Eyebrow uppercase className="block">
-              Ce que vous obtenez
+              {offre.libelleLivrables ?? "Ce que vous obtenez"}
             </Eyebrow>
             <ul className="mt-4 grid gap-[0.6875rem]">
               {offre.livrables.map((item) => (
@@ -95,15 +95,12 @@ function BlocOffre({ offre, rang }: { offre: Offre; rang: number }) {
                 </li>
               ))}
             </ul>
-            {/* Les livrables listés valent pour l'offre entière ; quand elle a
-                des paliers, ce qui est réellement inclus dépend du palier
-                retenu. La note l'indique là où la liste pourrait laisser
-                croire que tout est compris au premier prix. */}
-            {offre.variantes.length ? (
-              <p className="mt-4 text-finer leading-[1.55] text-ink-55">
-                Le périmètre dépend du format retenu : les encadrés ci-dessous précisent ce qui
-                distingue chacun.
-              </p>
+            {/* Ce qui distingue les formats entre eux se dit maintenant dans
+                l'offre : une phrase écrite pour elle vaut mieux qu'une note
+                générique, qui parlait de « périmètre » là où l'accompagnement
+                se compte en jours. Sans texte saisi, rien ne s'affiche. */}
+            {offre.variantes.length && offre.introVariantes ? (
+              <p className="mt-4 text-finer leading-[1.55] text-ink-55">{offre.introVariantes}</p>
             ) : null}
           </div>
         </Reveal>
